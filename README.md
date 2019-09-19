@@ -3,6 +3,8 @@ Github deployment actions for Magento 2
 
 # usage
 
+Example with M2 project [here](https://github.com/seyuf/magento-actions)
+
 ```
 jobs:
   magento2-build:
