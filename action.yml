@@ -1,0 +1,16 @@
+name: 'Magento 2 actions'
+description: 'test build deploy M2 projects'
+author: 'MAD IT'
+inputs: 
+  php:
+    description: 'version of php to use 7.1 or 7.2'
+    default: '7.1'
+  process:
+    description: 'process to apply to src can be build, static-test, integration-test, deploy'
+    default: 'build'
+  elasticsuite:
+     description: 'your src is using elasticsuite?  1 or 0'
+     default: 0
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
