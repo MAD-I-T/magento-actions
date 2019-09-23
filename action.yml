@@ -13,4 +13,4 @@ inputs:
      default: 0
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://mad1t/magento-actions:latest'
