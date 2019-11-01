@@ -6,7 +6,7 @@ inputs:
     description: 'version of php to use 7.1 or 7.2'
     default: '7.1'
   process:
-    description: 'process to apply to src can be build, static-test, integration-test, deploy'
+    description: 'process to apply to src can be build, static-test, integration-test, unit-test, deploy'
     default: 'build'
   elasticsuite:
      description: 'your src is using elasticsuite?  1 or 0'

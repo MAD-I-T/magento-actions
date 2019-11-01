@@ -19,7 +19,4 @@ fi
 
 bin/magento deploy:mode:set developer
 
-# need review
-apt-get update && apt-get install -y mysql-server
-
-cd dev/tests/integration && ../../../vendor/bin/phpunit -c phpunit.xml.dist
+./vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist
