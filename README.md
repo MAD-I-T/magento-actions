@@ -3,7 +3,7 @@ Github deployment actions for Magento 2
 
 # usage
 
-Example with M2 project [here](https://github.com/seyuf/magento-actions)
+Example with M2 develop branch project [here](https://github.com/seyuf/m2-dev-github-actions)
 
 ```
 jobs:
@@ -33,3 +33,4 @@ jobs:
         process: 'build' # possible values (build, deploy, static-test, integration-test)
         elasticsuite: 1 # to use if you're using elasticsuite modules
 ```
+Example with M2 project using elasticsearch & elasticsuite [here](https://github.com/seyuf/magento-actions)
