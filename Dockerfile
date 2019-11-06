@@ -62,6 +62,7 @@ RUN curl -LO https://getcomposer.org/composer.phar \
 
 COPY LICENSE README.md /
 COPY scripts /opt/scripts
+COPY config /opt/config
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

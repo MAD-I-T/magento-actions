@@ -19,7 +19,14 @@ chmod +x bin/magento
 #
 #bin/magento deploy:mode:set developer
 
-# need review
+
 apt-get update && apt-get install -y mysql-server
+
+if [ $INPUT_ELASTICSUITE = 1 ]
+then
+  yes | cp -rf /opt/config/integration-test-config-es.php dev/tests/integration/etc/install-config-mysql.php
+else
+  yes | cp -rf /opt/config/integration-test-config.php dev/tests/integration/etc/install-config-mysql.php
+fi
 
 cd dev/tests/integration && ../../../vendor/bin/phpunit -c phpunit.xml.dist
