@@ -8,7 +8,7 @@ To use this action your repository must respect similar scaffolding to the follo
 
 ```bash
 ├── .github
-│   └── workflows # directory where the actions workflows are found, see below for an example of main.yml 
+│   └── workflows # directory where the workflows are found, see below for an example of main.yml 
 ├── README.md 
 └── magento # directory where you Magento source files should go
 ```
