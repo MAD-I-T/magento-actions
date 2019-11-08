@@ -1,6 +1,6 @@
 # magento-actions
 Magento 2 CI/CD using github actions
-tests - build - deploy
+tests - phpcs - build - deploy
 
 # usage
 

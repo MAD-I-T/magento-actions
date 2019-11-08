@@ -6,11 +6,17 @@ inputs:
     description: 'version of php to use 7.1 or 7.2'
     default: '7.1'
   process:
-    description: 'process to apply to src can be build, static-test, integration-test, unit-test, deploy'
+    description: 'process to apply to src. Possible values are build, static-test, integration-test, unit-test, phpcs-test, deploy'
     default: 'build'
   elasticsuite:
      description: 'your src is using elasticsuite?  1 or 0'
      default: 0
+  extension:
+    description: 'the third party module to test in app/code.  Vendor or Vendor/MyModule'
+    default: ''
+  standard:
+    description: 'Magento2, PSR2, PSR1, PSR12 etc... see magento-coding-standard'
+    default: 'Magento2'
 runs:
   using: 'docker'
   image: 'docker://mad1t/magento-actions:latest'
