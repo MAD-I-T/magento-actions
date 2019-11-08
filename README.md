@@ -58,3 +58,6 @@ jobs:
 - others see inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
 
 Example with M2 project using elasticsuite & elasticsearch [here](https://github.com/seyuf/magento-actions)
+
+![magento-actions-sample](https://user-images.githubusercontent.com/3765910/68416322-91bb9a00-0194-11ea-967d-9f139b901b9a.png)
+
