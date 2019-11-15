@@ -1,6 +1,6 @@
 name: 'Magento 2 actions'
-description: 'test build deploy M2 projects'
-author: 'MAD IT'
+description: 'Test Build Deploy M2 projects'
+author: 'MAD IT (www.madit.fr)'
 inputs: 
   php:
     description: 'version of php to use 7.1 or 7.2'
@@ -20,3 +20,6 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://mad1t/magento-actions:latest'
+branding:
+  icon: 'arrow-up-circle'
+  color: 'blue'
