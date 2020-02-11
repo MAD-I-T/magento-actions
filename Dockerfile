@@ -60,9 +60,12 @@ RUN curl -LO https://getcomposer.org/composer.phar \
 
 #CMD ["/bin/bash"]
 
+
 COPY LICENSE README.md /
 COPY scripts /opt/scripts
 COPY config /opt/config
 COPY entrypoint.sh /entrypoint.sh
+
+RUN cd /opt/config/php-deployer/ && composer install
 
 ENTRYPOINT ["/entrypoint.sh"]
