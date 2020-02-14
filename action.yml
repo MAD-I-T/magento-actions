@@ -8,7 +8,7 @@ inputs:
   process:
     description: 'Possible values: build, static-test, integration-test, unit-test, phpcs-test, deploy-staging, deploy-production, cleanup-staging, cleanup-production'
     default: 'build'
-  override-settings:
+  override_settings:
       description:  'override config and scripts dirs with your own setup/config, must respect default scalfolding'
       default: false
   elasticsuite:
