@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 echo "post release script"
-ls -thal
 
 if [ ! -s app/etc/env.php ]
 then

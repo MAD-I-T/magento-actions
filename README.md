@@ -216,7 +216,7 @@ with:
  ` image: 'Dockerfile'` 
  
  ### To override the files in default scripts and config directories without cloning
-  use the [override-settings](https://github.com/MAD-I-T/magento-actions/blob/2e31f0c3a49314070f808458a93fa325e4855ffa/action.yml#L11)
+  use the [override_settings](https://github.com/MAD-I-T/magento-actions/blob/2e31f0c3a49314070f808458a93fa325e4855ffa/action.yml#L11)
   You will have to place the dirs in the root of your m2 project next to the magento directory.
  
 ## Set secrets
