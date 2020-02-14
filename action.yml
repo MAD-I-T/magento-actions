@@ -6,11 +6,14 @@ inputs:
     description: 'version of php to use 7.1 or 7.2'
     default: '7.1'
   process:
-    description: 'process to apply to src. Possible values are build, static-test, integration-test, unit-test, phpcs-test, deploy'
+    description: 'Possible values: build, static-test, integration-test, unit-test, phpcs-test, deploy-staging, deploy-production, cleanup-staging, cleanup-production'
     default: 'build'
+  override-settings:
+      description:  'override config and scripts dirs with your own setup/config, must respect default scalfolding'
+      default: false
   elasticsuite:
-     description: 'your src is using elasticsuite?  1 or 0'
-     default: 0
+    description: 'your src is using elasticsuite?  1 or 0'
+    default: 0
   extension:
     description: 'the third party module to test in app/code.  Vendor or Vendor/MyModule'
     default: ''

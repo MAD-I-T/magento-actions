@@ -29,3 +29,5 @@ bin/magento setup:static-content:deploy
 #bin/magento setup:static-content:deploy fr_FR -f -s standard  -t Creativestyle/theme-creativeshop
 
 composer dump-autoload -o
+
+rm app/etc/env.php

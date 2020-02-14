@@ -1,0 +1,11 @@
+Host staging
+  User magento
+  IdentityFile ~/.ssh/id_rsa
+  HostName staging.server
+  Port 12022
+
+Host production
+  User root
+  IdentityFile ~/.ssh/id_rsa
+  HostName prod.server
+  Port 12022
