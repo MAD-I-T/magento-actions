@@ -106,7 +106,7 @@ with:
 - [Integration tests](#integration-testing)
 - [Static testing](#static-test)
 - [Customize the module](#customize-the-action)
-- [Setting the secrets](#)
+- [Setting the secrets](#set-secrets)
 
 ## Code quality check  
 
