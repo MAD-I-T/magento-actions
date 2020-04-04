@@ -62,6 +62,8 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 ![magento-actions-sample](https://user-images.githubusercontent.com/3765910/68416322-91bb9a00-0194-11ea-967d-9f139b901b9a.png)
 
 # zero downtime deployment
+To migrate from standard to zero-downtime deployment using this action.
+One can follow this [tutorial](https://www.madit.fr/r/1PP).
 
 ```
 uses: MAD-I-T/magento-actions@master
