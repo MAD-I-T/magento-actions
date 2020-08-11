@@ -70,7 +70,7 @@ RUN apt-get -y update \
     /usr/share/doc \
     /usr/share/doc-base
 
-RUN curl -LO https://getcomposer.org/composer.phar \
+RUN curl -LO https://getcomposer.org/composer-stable.phar \
     && chmod +x ./composer.phar \
     && mv ./composer.phar /usr/local/bin/composer
 
