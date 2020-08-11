@@ -9,7 +9,7 @@ cd $PROJECT_PATH/magento
 /usr/local/bin/composer install --no-dev --no-progress
 chmod +x bin/magento
 
-mysqladmin -h mysql -u root -pmagento status
+#mysqladmin -h mysql -u root -pmagento status
 
 if [ $INPUT_ELASTICSUITE = 1 ]
 then
