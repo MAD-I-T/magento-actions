@@ -24,6 +24,9 @@ apt-get update && apt-get install -y mysql-server
 
 if [ $INPUT_ELASTICSUITE = 1 ]
 then
+  yes | cp -rf /opt/config/integration-test-config-esuite.php dev/tests/integration/etc/install-config-mysql.php
+elif [ $INPUT_ELASTICSEARCH = 1 ]
+then
   yes | cp -rf /opt/config/integration-test-config-es.php dev/tests/integration/etc/install-config-mysql.php
 else
   yes | cp -rf /opt/config/integration-test-config.php dev/tests/integration/etc/install-config-mysql.php
