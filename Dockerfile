@@ -71,7 +71,7 @@ RUN apt-get -y update \
     /usr/share/doc-base
 
 RUN curl -LO https://getcomposer.org/composer-stable.phar \
-    && mv composer-stable.phar composer.phar\
+    && mv ./composer-stable.phar ./composer.phar \
     && chmod +x ./composer.phar \
     && mv ./composer.phar /usr/local/bin/composer
 
