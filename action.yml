@@ -3,7 +3,7 @@ description: 'Test Build Deploy M2 projects'
 author: 'MAD IT (www.madit.fr)'
 inputs: 
   php:
-    description: 'version of php to use 7.1 or 7.2'
+    description: 'version of php to use 7.1, 7.2 or 7.4'
     default: '7.1'
   process:
     description: 'Possible values: build, static-test, integration-test, unit-test, phpcs-test, deploy-staging, deploy-production, cleanup-staging, cleanup-production'

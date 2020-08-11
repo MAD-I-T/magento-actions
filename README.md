@@ -53,7 +53,7 @@ jobs:
         process: 'build'
 ```
 ##### options
-- `php:` possible values (7.1, 7.2)
+- `php:` possible values (7.1, 7.2, 7.4)
 - `process:` option possible values ('unit-test','static-test', 'integration-test', 'build'...)
 - others see inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
 
@@ -201,7 +201,7 @@ with:
   php: '7.1'
   process: 'build'
 ```
-- `php` : 7.1 or 7.2
+- `php` : 7.1, 7.2 or 7.4
 
 
 ## Customize the action
