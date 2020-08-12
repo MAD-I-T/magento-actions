@@ -220,6 +220,20 @@ with:
  ### To override the files in default scripts and config directories without cloning
   use the [override_settings](https://github.com/MAD-I-T/magento-actions/blob/2e31f0c3a49314070f808458a93fa325e4855ffa/action.yml#L11)
   You will have to place the dirs in the root of your m2 project next to the magento directory.
+  Example of project scafolding to override the action's default configs
+  ```bash
+  ├── .github
+  │   └── workflows # directory where the workflows are found, see below for an example of main.yml 
+  ├── README.md 
+  └── magento # directory where you Magento source files should go
+  └── config # the filenames must be similar to thoses of the action ex: config/integration-test-config.php 
+  └── scripts #  ex: scripts/build.sh to override the build behaviour 
+  ```
+
+## tipycal issues
+   - Do not forget to set or replace the `env.php` file in the `shared` directory
+   - Adding the ssh user to the `http-user` group ex. `www-data` may be required in some instances
+   - Set `WRITE_USE_SUDO` env if you want to launch the deployment script in sudo mode (not necessary in most cases)
  
 ## Set secrets
   It is a good practice not to set credentials like composer auth in the code source (see https://12factor.net).
