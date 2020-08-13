@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-echo "hello your setup is $INPUT_PHP & $INPUT_PROCESS"
+echo "hello your setup is $INPUT_PHP & $INPUT_PROCESS & $INPUT_OVERRIDE_SETTINGS"
 
 update-alternatives --set php /usr/bin/php${INPUT_PHP}
 
