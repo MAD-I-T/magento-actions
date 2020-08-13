@@ -5,7 +5,7 @@
  */
 
 return [
-    'db-host' => 'mysql:3106',
+    'db-host' => 'mysql',
     'db-user' => 'root',
     'db-password' => 'magento',
     'db-name' => 'magento',
@@ -23,3 +23,4 @@ return [
     'elasticsearch-host' => "elasticsearch",
     'elasticsearch-port' => "9200",
 ];
+

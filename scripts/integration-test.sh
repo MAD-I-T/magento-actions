@@ -20,7 +20,7 @@ chmod +x bin/magento
 #bin/magento deploy:mode:set developer
 
 
-apt-get update && apt-get install -y mysql-server
+#apt-get update && apt-get install -y mysql-server
 
 if [ $INPUT_ELASTICSUITE = 1 ]
 then

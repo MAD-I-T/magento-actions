@@ -4,7 +4,7 @@ echo "hello your setup is $INPUT_PHP & $INPUT_PROCESS"
 
 update-alternatives --set php /usr/bin/php${INPUT_PHP}
 
-if [ $INPUT_OVERRIDE_SETTINGS ]
+if [ $INPUT_OVERRIDE_SETTINGS = 1 ]
 then
   cp -R ./config/* /opt/config/
   cp -R ./scripts/* /opt/scripts/
