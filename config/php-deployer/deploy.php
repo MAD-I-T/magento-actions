@@ -24,9 +24,7 @@ set(
 );
 set(
     'shared_dirs', [
-        '{{magento_root}}/pub/media',
-        '{{magento_root}}/var/cache',
-        '{{magento_root}}/var/page_cache',
+        '{{magento_root}}/pub/media'
     ]
 );
 set(
@@ -75,6 +73,17 @@ task(
     'deploy', [
         'deploy:shared',
         'deploy:writable',
+        'deploy:symlink',
+        'deploy:unlock',
+        'cleanup',
+        'success'
+    ]
+);
+
+desc('Deploy release without permission check aka writable_mode');
+task(
+    'deploy:no-permission-check', [
+        'deploy:shared',
         'deploy:symlink',
         'deploy:unlock',
         'cleanup',
