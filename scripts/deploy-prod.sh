@@ -57,8 +57,15 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd 
 
 
 echo '------> Deploying release ...';
+
+DEFAULT_DEPLOYER="deploy"
+if [ $INPUT_DEPLOYER = "no-permission-check" ]
+then
+  DEFAULT_DEPLOYER="deploy:no-permission-check"
+fi
+
 # deploy release
-./vendor/bin/dep deploy production \
+./vendor/bin/dep $DEFAULT_DEPLOYER production \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \

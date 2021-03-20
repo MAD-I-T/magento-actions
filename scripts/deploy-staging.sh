@@ -40,10 +40,6 @@ cd /opt/config/php-deployer
 echo 'Deploying staging ...';
 
 
-#create dirs if not exists first deploy
-
-
-
 echo '------> Deploying bucket ...';
 # deploy bucket
 ./vendor/bin/dep deploy-bucket staging \
@@ -57,8 +53,15 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HO
 
 
 echo '------> Deploying release ...';
+
+DEFAULT_DEPLOYER="deploy"
+if [ $INPUT_DEPLOYER = "no-permission-check" ]
+then
+  DEFAULT_DEPLOYER="deploy:no-permission-check"
+fi
+
 # deploy release
-./vendor/bin/dep deploy staging \
+./vendor/bin/dep $DEFAULT_DEPLOYER staging \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \

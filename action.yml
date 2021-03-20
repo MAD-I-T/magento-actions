@@ -9,8 +9,8 @@ inputs:
     description: 'Possible values: build, static-test, integration-test, unit-test, phpcs-test, deploy-staging, deploy-production, cleanup-staging, cleanup-production'
     default: 'build'
   override_settings:
-      description:  'override config and scripts dirs with your own setup/config, must respect default scalfolding 1 or 0'
-      default: 0
+    description:  'override config and scripts dirs with your own setup/config, must respect default scalfolding 1 or 0'
+    default: 0
   elasticsuite:
     description: 'your src is using elasticsuite?  1 or 0'
     default: 0
@@ -23,6 +23,9 @@ inputs:
   standard:
     description: 'Magento2, PSR2, PSR1, PSR12 etc... see magento-coding-standard'
     default: 'Magento2'
+  deployer:
+    description: 'deployer-php custom configs. Possible values, no-permission-check (there will be no permission check of writable dirs)'
+    default: 'default'
 runs:
   using: 'docker'
   image: 'docker://mad1t/magento-actions:latest'
