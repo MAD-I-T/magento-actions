@@ -73,7 +73,8 @@ RUN apt-get -y update \
 RUN curl -LO https://getcomposer.org/composer-stable.phar \
     && mv ./composer-stable.phar ./composer.phar \
     && chmod +x ./composer.phar \
-    && mv ./composer.phar /usr/local/bin/composer
+    && mv ./composer.phar /usr/local/bin/composer\
+    && /usr/local/bin/composer self-update --1
 
 #CMD ["/bin/bash"]
 
