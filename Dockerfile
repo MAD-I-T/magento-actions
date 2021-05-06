@@ -1,10 +1,24 @@
 FROM debian:stretch
 
+
+
+RUN echo 'deb  http://deb.debian.org/debian  stretch contrib non-free' >> /etc/apt/sources.list
+RUN echo 'deb-src  http://deb.debian.org/debian  stretch contrib non-free' >> /etc/apt/sources.list
+
+
 RUN apt-get -y update \
     && apt-get -y install \
     apt-transport-https \
     ca-certificates \
     wget
+
+
+RUN apt-get -yq install \
+    python-pip\
+    gcc\
+    python-dev
+
+RUN pip install --no-cache-dir --upgrade mwscan
 
 RUN wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
     && sh -c 'echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list'
