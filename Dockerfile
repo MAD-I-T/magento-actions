@@ -100,4 +100,10 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN cd /opt/config/php-deployer/ && composer install
 
+RUN  mkdir /opt/magerun/ \
+    && cd /opt/magerun/ \
+    && curl -sS -O https://files.magerun.net/n98-magerun2-latest.phar \
+    && curl -sS -o n98-magerun2-latest.phar.sha256 https://files.magerun.net/sha256.php?file=n98-magerun2-latest.phar \
+    && shasum -a 256 -c n98-magerun2-latest.phar.sha256
+
 ENTRYPOINT ["/entrypoint.sh"]

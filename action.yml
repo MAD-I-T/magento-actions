@@ -6,7 +6,7 @@ inputs:
     description: 'version of php to use 7.1, 7.2 or 7.4'
     default: '7.1'
   process:
-    description: 'Possible values: build, static-test, integration-test, unit-test, phpcs-test, deploy-staging, deploy-production, cleanup-staging, cleanup-production, security-scan'
+    description: 'Possible values: build, static-test, integration-test, unit-test, phpcs-test, deploy-staging, deploy-production, cleanup-staging, cleanup-production, security-scan-[files|modules]'
     default: 'build'
   override_settings:
     description:  'override config and scripts dirs with your own setup/config, must respect default scalfolding 1 or 0'
