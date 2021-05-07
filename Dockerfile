@@ -90,9 +90,6 @@ RUN curl -LO https://getcomposer.org/composer-stable.phar \
     && mv ./composer.phar /usr/local/bin/composer\
     && /usr/local/bin/composer self-update --1
 
-#CMD ["/bin/bash"]
-
-
 COPY LICENSE README.md /
 COPY scripts /opt/scripts
 COPY config /opt/config
