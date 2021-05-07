@@ -12,5 +12,5 @@ git clone https://github.com/gwillem/magevulndb.git
 
 
 cd $PROJECT_PATH/magento
-/opt/magerun/n98-magerun2-latest.phar dev:module:security
+php /opt/magerun/n98-magerun2-latest.phar dev:module:security
 
