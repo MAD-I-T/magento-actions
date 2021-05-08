@@ -152,12 +152,63 @@ with:
 # Other processes
 
 - [Magento build](#build)
+- [Magento security scanners](#magento-security-scanners)
 - [Code quality check](#code-quality-check)
 - [Unit testing](#unit-testing)
 - [Integration tests](#integration-testing)
 - [Static testing](#static-test)
 - [Customize the module](#customize-the-action)
 - [Setting the secrets](#set-secrets)
+
+## build an artifact
+
+```
+- name: 'launch magento 2.4 build'
+  if: ${{true}}
+  uses: MAD-I-T/magento-actions@master
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.4'
+    process: 'build'
+    elasticsearch: 1
+```
+- `php` : 7.1, 7.2 or 7.4
+
+## Magento security scanners
+
+Security scan actions should and must (in case of the modules scanner) be launched after a build job see example [here](https://github.com/seyuf/m2-dev-github-actions/blob/37b7a822ef09a961b7712d01707be08149770030/.github/workflows/main.yml#L37)
+
+To scan the magento 2 files for common vulnerabilities using mwscan, the job can be set up as follows
+ 
+```
+- name: 'launch security scanner files'
+  if: ${{true}}
+  continue-on-error: true
+  uses: MAD-I-T/magento-actions@master
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.4'
+    process: 'security-scan-files'
+    elasticsearch: 1
+    override_settings: 1
+```
+
+To scan the magento2 installed third parties modules for known vulnerabilities using [sansecio/magevulndb](https://github.com/sansecio/magevulndb), the job can be set up as follows:
+```
+- name: 'launch security scanner modules'
+      if: ${{true}}
+      continue-on-error: true
+      uses: MAD-I-T/magento-actions@master
+      env:
+        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      with:
+        php: '7.4'
+        process: 'security-scan-modules'
+        elasticsearch: 1
+        override_settings: 1
+```
 
 ## Code quality check  
 
@@ -245,22 +296,6 @@ with:
   php: '7.1'
   process: 'static-test'
 ```
-
-## build
-
-```
-- name: 'launch magento 2.4 build'
-  if: ${{true}}
-  uses: MAD-I-T/magento-actions@master
-  env:
-    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-  with:
-    php: '7.4'
-    process: 'build'
-    elasticsearch: 1
-```
-- `php` : 7.1, 7.2 or 7.4
-
 
 ## Customize the action
 

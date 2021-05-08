@@ -12,8 +12,8 @@ git clone https://github.com/gwillem/magevulndb.git
 
 
 cd $PROJECT_PATH/magento
-/usr/local/bin/composer install --no-dev --no-progress
-chmod +x bin/magento
+#/usr/local/bin/composer install --no-dev --no-progress
+#chmod +x bin/magento
 
 php /opt/magerun/n98-magerun2-latest.phar dev:module:security
 
