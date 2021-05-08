@@ -4,6 +4,9 @@ set -e
 
 PROJECT_PATH="$(pwd)"
 
-mwscan $PROJECT_PATH/magento
+cd $PROJECT_PATH/magento
+/usr/local/bin/composer install --no-dev --no-progress
+
+mwscan .
 
 
