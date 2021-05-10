@@ -209,6 +209,11 @@ To scan the magento2 installed third parties modules for known vulnerabilities u
         elasticsearch: 1
         override_settings: 1
 ```
+Example of an output:
+
+![security-risk-amasty](https://user-images.githubusercontent.com/3765910/117654360-f0047700-b195-11eb-8aff-ef05c2c3c231.png)
+
+
 
 ## Code quality check  
 
