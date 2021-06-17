@@ -2,6 +2,11 @@
 Magento 2 CI/CD using github actions
 tests - phpcs - build - deploy
 
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=C-P-vA6aw34"><img src="https://img.youtube.com/vi/C-P-vA6aw34/0.jpg" alt="IMAGE ALT TEXT"></a>
+</div
+
 # usage
 
 To use this action your repository must respect similar scaffolding to the following:
