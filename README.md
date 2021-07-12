@@ -320,7 +320,7 @@ with:
  
  ` image: 'Dockerfile'` 
  
- ### To override the files in default scripts and config directories without cloning
+ ### To override the files in default scripts and config directories without forking
   use the [override_settings](https://github.com/MAD-I-T/magento-actions/blob/2e31f0c3a49314070f808458a93fa325e4855ffa/action.yml#L11)
   You'll also have to create scripts or config dirs in the root of your m2 project.
   [Example](https://github.com/seyuf/m2-dev-github-actions) of project scafolding to override the action's default configs
