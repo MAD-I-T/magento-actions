@@ -80,7 +80,6 @@ RUN apt-get -y update \
     /var/lib/apt/lists/* \
     /tmp/* \
     /var/tmp/* \
-    /usr/share/man \
     /usr/share/doc \
     /usr/share/doc-base
 
