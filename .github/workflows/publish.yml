@@ -1,0 +1,24 @@
+name: publish
+
+on: [push]
+
+jobs:
+  publish-action-docker-image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Building magento-actions docker image
+      run: |
+        docker build . --tag ghcr.io/MAD-I-T/magento-actions:3.3
+        docker push ghcr.io/MAD-I-T/magento-actions:3.3
+        docker tag ghcr.io/MAD-I-T/magento-actions:latest
+        docker push ghcr.io/MAD-I-T/magento-actions:latest
