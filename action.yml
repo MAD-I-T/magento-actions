@@ -28,7 +28,7 @@ inputs:
     default: 'default'
 runs:
   using: 'docker'
-  image: 'docker://mad1t/magento-actions:latest'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.3'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'
