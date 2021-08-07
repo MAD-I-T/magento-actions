@@ -20,5 +20,5 @@ jobs:
       run: |
         docker build . --tag ghcr.io/mad-i-t/magento-actions:3.3
         docker push ghcr.io/mad-i-t/magento-actions:3.3
-        docker tag ghcr.io/mad-i-t/magento-actions:latest
+        docker tag magento-actions:latest ghcr.io/mad-i-t/magento-actions:latest
         docker push ghcr.io/mad-i-t/magento-actions:latest
