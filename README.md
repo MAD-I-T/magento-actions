@@ -4,8 +4,8 @@ tests - phpcs - build - deploy
 
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=C-P-vA6aw34"><img src="https://img.youtube.com/vi/C-P-vA6aw34/0.jpg" alt="IMAGE ALT TEXT"></a>
-</div
+  <a href="https://www.youtube.com/watch?v=C-P-vA6aw34"><img src="https://user-images.githubusercontent.com/3765910/128611467-7fd3aa5a-6df1-4fe5-bfa3-23f01355999d.jpeg" alt="magento zero downtime in video"></a>
+</div>
 
 # usage
 
