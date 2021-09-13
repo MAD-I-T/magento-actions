@@ -4,8 +4,8 @@ tests - phpcs - build - deploy
 
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=C-P-vA6aw34"><img src="https://img.youtube.com/vi/C-P-vA6aw34/0.jpg" alt="IMAGE ALT TEXT"></a>
-</div
+  <a href="https://www.youtube.com/watch?v=C-P-vA6aw34"><img src="https://user-images.githubusercontent.com/3765910/128611467-7fd3aa5a-6df1-4fe5-bfa3-23f01355999d.jpeg" alt="magento zero downtime in video"></a>
+</div>
 
 # usage
 
@@ -156,14 +156,37 @@ with:
   
 # Other processes
 
-- [Magento build](#build)
-- [Magento security scanners](#magento-security-scanners)
 - [Code quality check](#code-quality-check)
+- [Magento build](#build-an-artifact)
+- [Magento security scanners](#magento-security-scanners)
 - [Unit testing](#unit-testing)
 - [Integration tests](#integration-testing)
 - [Static testing](#static-test)
 - [Customize the module](#customize-the-action)
 - [Setting the secrets](#set-secrets)
+
+
+
+
+## Code quality check  
+
+To check some magento module or some code against Magento conding Standard, useful before marketplace submissions
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=4kyj4Rerm9s"><img src="https://user-images.githubusercontent.com/3765910/132560118-50110b43-57a5-4fb2-9725-7994e79451d8.png" alt="check code against magento coding standard using github actions"></a>
+</div>
+
+```
+uses: MAD-I-T/magento-actions@master
+env:
+  COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+with:
+  php: '7.4'
+  process: 'phpcs-test'
+  extension: 'Magento/CatalogSearch'
+  standard: 'Magento2'
+```
+- extension : the module to be tested (Vendor/Name) or Path using repository scaffolding (i.e from see example [here](https://github.com/MAD-I-T/Magento2-AtosSips-Sherlock-LCL/blob/master/.github/workflows/main.yml))
+- standard : the standard for which the conformity must be checked 'Magento2, PSR2, PSR1, PSR12 etc...' see [magento-coding-standard](https://github.com/magento/magento-coding-standard)
 
 ## build an artifact
 
@@ -217,26 +240,6 @@ To scan the magento2 installed third parties modules for known vulnerabilities u
 Example of an output:
 
 ![security-risk-amasty](https://user-images.githubusercontent.com/3765910/117654360-f0047700-b195-11eb-8aff-ef05c2c3c231.png)
-
-
-
-## Code quality check  
-
-To check some magento module, useful before marketplace submissions
-
-
-```
-uses: MAD-I-T/magento-actions@master
-env:
-  COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-with:
-  php: '7.4'
-  process: 'phpcs-test'
-  extension: 'Magento/CatalogSearch'
-  standard: 'Magento2'
-```
-- extension : the module to be tested
-- standard : the standard for which the conformity must be checked 'Magento2, PSR2, PSR1, PSR12 etc...' see [magento-coding-standard](https://github.com/magento/magento-coding-standard)
 
 
 

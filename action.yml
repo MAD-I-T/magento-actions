@@ -18,7 +18,7 @@ inputs:
     description: 'your src is using elasticsearch?  1 or 0'
     default: 0
   extension:
-    description: 'the third party module to test in app/code.  Vendor or Vendor/MyModule'
+    description: 'phpcs check on a Magento module or code base. Possible values, Vendor, Vendor/MyModule or dir path using github repository scaffolding'
     default: ''
   severity:
     description: 'MEQP magento coding standard severity check'
@@ -31,7 +31,7 @@ inputs:
     default: 'default'
 runs:
   using: 'docker'
-  image: 'docker://mad1t/magento-actions:latest'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.3.1'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'

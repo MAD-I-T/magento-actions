@@ -1,5 +1,7 @@
 FROM debian:stretch
 
+LABEL org.opencontainers.image.source="https://github.com/MAD-I-T/magento-actions"
+
 
 
 RUN echo 'deb  http://deb.debian.org/debian  stretch contrib non-free' >> /etc/apt/sources.list
