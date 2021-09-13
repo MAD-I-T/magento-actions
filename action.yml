@@ -20,6 +20,9 @@ inputs:
   extension:
     description: 'the third party module to test in app/code.  Vendor or Vendor/MyModule'
     default: ''
+  severity:
+    description: 'MEQP magento coding standard severity check'
+    default: 1
   standard:
     description: 'Magento2, PSR2, PSR1, PSR12 etc... see magento-coding-standard'
     default: 'Magento2'

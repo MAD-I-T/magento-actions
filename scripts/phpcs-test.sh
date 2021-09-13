@@ -8,5 +8,5 @@ composer create-project magento/magento-coding-standard --stability=dev magento-
 
 cd $PROJECT_PATH/magento-coding-standard
 
-vendor/bin/phpcs --standard=$INPUT_STANDARD $PROJECT_PATH/magento/app/code/$INPUT_EXTENSION
+vendor/bin/phpcs --standard=$INPUT_STANDARD --severity=${$INPUT_SEVERITY:-1} $PROJECT_PATH/magento/app/code/$INPUT_EXTENSION
 
