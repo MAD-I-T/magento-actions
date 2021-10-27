@@ -10,6 +10,9 @@ cd "$PROJECT_PATH/magento"
 chmod +x bin/magento
 
 #mysqladmin -h mysql -u root -pmagento status
+## fix magento error: connection default is not defined
+echo "<?php  return ['db' => [ 'table_prefix' => '', 'connection' => [ 'default' => [ 'host' => 'mysql', 'dbname' => 'magento', 'username' => 'root', 'password' => 'magento', 'model' => 'mysql4', 'engine' => 'innodb', 'initStatements' => 'SET NAMES utf8;', 'active' => '1' ] ]]];" > app/etc/env.php
+## end fix ##
 
 if [ $INPUT_ELASTICSUITE = 1 ]
 then
