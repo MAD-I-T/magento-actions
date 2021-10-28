@@ -51,7 +51,7 @@ Config Example when magento v2.4
      - name: 'launch magento2 unit test step'
        if: ${{true}}
        continue-on-error: true
-       uses: MAD-I-T/magento-actions@master
+       uses: MAD-I-T/magento-actions@v3.4
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
@@ -59,7 +59,7 @@ Config Example when magento v2.4
          process: 'unit-test'
          elasticsearch: 1
      - name: 'launch magento2 build step'
-       uses: MAD-I-T/magento-actions@master
+       uses: MAD-I-T/magento-actions@v3.4
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
