@@ -4,6 +4,8 @@ set -e
 
 PROJECT_PATH="$(pwd)"
 
+echo "currently in $PROJECT_PATH"
+
 cd "$PROJECT_PATH/magento"
 
 /usr/local/bin/composer install --no-dev --no-progress

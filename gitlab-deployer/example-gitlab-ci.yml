@@ -1,0 +1,69 @@
+image: ghcr.io/mad-i-t/magento-actions:3.4
+
+variables:
+  BUCKET_COMMIT: bucket-commit-$CI_COMMIT_SHA.tar.gz
+  MYSQL_ROOT_PASSWORD: magento
+  MYSQL_DATABASE: magento
+  INPUT_PHP: "7.4"
+  INPUT_PROCESS: "cleanup-staging"
+  INPUT_OVERRIDE_SETTINGS: "0"
+  COMPOSER_AUTH: $COMPOSER_AUTH
+  SSH_PRIVATE_KEY: $STAGE_SSH_PRIVATE_KEY
+  SSH_CONFIG: $STAGE_SSH_CONFIG
+  INPUT_DEPLOYER: 0
+
+cache:
+  key: composer
+  paths:
+    - ~/.composer/cache
+
+stages:
+  - build
+  - deploy
+  - cleanup
+
+build-deploy:stage:
+  image:
+    name: ghcr.io/mad-i-t/magento-actions:3.4
+    entrypoint: [""]
+  services:
+    - name: mysql:5.7
+      alias: mysql
+    - name: "docker.elastic.co/elasticsearch/elasticsearch:7.0.1"
+      alias: elasticsearch
+      command: [ "bin/elasticsearch", "-Expack.security.enabled=false", "-Ediscovery.type=single-node" ]
+  variables:
+    BUCKET_COMMIT: bucket-commit-$CI_COMMIT_SHA.tar.gz
+    MYSQL_ROOT_PASSWORD: magento
+    MYSQL_DATABASE: magento
+    INPUT_PROCESS: "build"
+    INPUT_OVERRIDE_SETTINGS: "0"
+  before_script:
+    - ls
+    - pwd
+    - echo "clear build"
+  script:
+    - export INPUT_OVERRIDE_SETTINGS=0
+    - export INPUT_ELASTICSEARCH=1
+    - export INPUT_ELASTICSUITE=0
+    - export USER=$STAGE_USER
+    - export HOST=$STAGE_HOST
+    - export HOST_DEPLOY_PATH=$STAGE_HOST_DEPLOY_PATH
+    - export HOST_DEPLOY_PATH_BUCKET=$STAGE_HOST_DEPLOY_PATH/bucket
+    - curl "http://elasticsearch:9200/_cat/health"
+    - bash /entrypoint.sh
+    - bash /opt/scripts/deploy-staging.sh
+  stage: build
+  environment:
+    name: staging
+    # only:
+  #  - develop
+
+deploy:stage:unlock:
+  script:
+    - ls
+    - pwd
+    - echo "clear unlock"
+    - bash /opt/scripts/cleanup-staging.sh
+  stage: cleanup
+  when: on_failure
