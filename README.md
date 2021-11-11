@@ -153,6 +153,8 @@ with:
  The first deploy will fail, unless/then you must place a valid env.php under dir HOST_DEPLOY_PATH/shared/magento/app/etc/ on the deployment endpoint.
  
  A cleanup task must be launched if the deployment fails ([see here](https://github.com/seyuf/m2-dev-github-actions/blob/b711485a721ca07926140c7cdcfb79e2183cefee/.github/workflows/main.yml#L74))
+ 
+ **To achieve the deployment using gitlab-ci  ([follow this tutorial](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer))**
   
 # Other processes
 
