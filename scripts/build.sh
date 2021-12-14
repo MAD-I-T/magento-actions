@@ -10,6 +10,9 @@ cd "$PROJECT_PATH/magento"
 /usr/local/bin/composer install --dry-run --no-dev --no-progress
 COMPOSER_COMPATIBILITY=$?
 
+
+echo "Composer compatibility: $COMPOSER_COMPATIBILITY"
+
 if [ $COMPOSER_COMPATIBILITY = 0 ]
 then
 	/usr/local/bin/composer install --no-dev --no-progress
