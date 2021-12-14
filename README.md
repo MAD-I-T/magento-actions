@@ -1,6 +1,6 @@
 # magento-actions
 Magento 2 CI/CD using github actions
-tests - phpcs - build - deploy
+tests - phpcs - build - deploy - ([gitlab-ci](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer) supported)
 
 
 <div align="center">
