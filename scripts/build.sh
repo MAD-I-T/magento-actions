@@ -7,8 +7,18 @@ PROJECT_PATH="$(pwd)"
 echo "currently in $PROJECT_PATH"
 
 cd "$PROJECT_PATH/magento"
+/usr/local/bin/composer install --dry-run --no-dev --no-progress
+COMPOSER_COMPATIBILITY=$?
 
-/usr/local/bin/composer install --no-dev --no-progress
+if [ $COMPOSER_COMPATIBILITY = 0 ]
+then
+	/usr/local/bin/composer install --no-dev --no-progress
+else
+  /usr/local/bin/composer self-update --1
+	/usr/local/bin/composer install --no-dev --no-progress
+fi
+
+
 chmod +x bin/magento
 
 #mysqladmin -h mysql -u root -pmagento status
