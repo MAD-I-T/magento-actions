@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
-set -e
-
 PROJECT_PATH="$(pwd)"
 
 echo "currently in $PROJECT_PATH"
 
 cd "$PROJECT_PATH/magento"
-/usr/local/bin/composer install --dry-run --no-dev --no-progress
+
+/usr/local/bin/composer install --dry-run --no-dev --no-progress &> /dev/null
+
 COMPOSER_COMPATIBILITY=$?
 
-
 echo "Composer compatibility: $COMPOSER_COMPATIBILITY"
+
+
+set -e
 
 if [ $COMPOSER_COMPATIBILITY = 0 ]
 then

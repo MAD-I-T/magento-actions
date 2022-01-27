@@ -51,7 +51,7 @@ Config Example when magento v2.4
      - name: 'launch magento2 unit test step'
        if: ${{true}}
        continue-on-error: true
-       uses: MAD-I-T/magento-actions@v3.4
+       uses: MAD-I-T/magento-actions@v3.6
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
@@ -59,7 +59,7 @@ Config Example when magento v2.4
          process: 'unit-test'
          elasticsearch: 1
      - name: 'launch magento2 build step'
-       uses: MAD-I-T/magento-actions@v3.4
+       uses: MAD-I-T/magento-actions@v3.6
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
@@ -92,24 +92,29 @@ jobs:
     - uses: actions/checkout@v1  # pulls your repository, M2 src must be in a magento directory
     - name: 'launch magento2 unit test step'
       if: always()
-      uses: MAD-I-T/magento-actions@v2.0
+      uses: MAD-I-T/magento-actions@master
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
-        php: '7.1'
+        php: '7.2'
         process: 'unit-test'
     - name: 'launch magento2 build step'
-      uses: MAD-I-T/magento-actions@v.2
+      uses: MAD-I-T/magento-actions@v2.0
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
         php: '7.1'
         process: 'build'
 ```
+To use the latest version of the module (experimental features) use the master verion
+
+`uses: MAD-I-T/magento-actions@master`
+
+
 ##### options
 - `php:` possible values (7.1, 7.2, 7.4)
-- `process:` option possible values ('unit-test','static-test', 'integration-test', 'build'...)
-- others see inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
+- `process:` option [possible values](#other-processes) ('security-scan-files','static-test', 'integration-test', 'build'...)
+- see more specific args in the inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
 
 Example with M2 project using elasticsuite & elasticsearch [here](https://github.com/seyuf/magento-actions)
 
@@ -178,14 +183,15 @@ To check some magento module or some code against Magento conding Standard, usef
 </div>
 
 ```
-uses: MAD-I-T/magento-actions@master
-env:
-  COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-with:
-  php: '7.4'
-  process: 'phpcs-test'
-  extension: 'Magento/CatalogSearch'
-  standard: 'Magento2'
+- name: 'test some specific module code quality'
+  uses: MAD-I-T/magento-actions@master
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.4'
+    process: 'phpcs-test'
+    extension: 'Magento/CatalogSearch'
+    standard: 'Magento2'
 ```
 - extension : the module to be tested (Vendor/Name) or Path using repository scaffolding (i.e from see example [here](https://github.com/MAD-I-T/Magento2-AtosSips-Sherlock-LCL/blob/master/.github/workflows/main.yml))
 - standard : the standard for which the conformity must be checked 'Magento2, PSR2, PSR1, PSR12 etc...' see [magento-coding-standard](https://github.com/magento/magento-coding-standard)
@@ -248,13 +254,14 @@ Example of an output:
 ## unit testing
 
 ```
-uses: MAD-I-T/magento-actions@master
-env:
-  COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-with:
-  php: '7.4'
-  process: 'unit-test'
-  elasticsearch: 1
+- name: 'start a unit testing job'
+  uses: MAD-I-T/magento-actions@master
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.4'
+    process: 'unit-test'
+    elasticsearch: 1
 ```
 
 ## integration testing
@@ -304,12 +311,13 @@ steps:
 ## static-test
 
 ```
-uses: MAD-I-T/magento-actions@v2.0
-env:
-  COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-with:
-  php: '7.1'
-  process: 'static-test'
+- name: 'static test your code'
+  uses: MAD-I-T/magento-actions@master
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.2'
+    process: 'static-test'
 ```
 
 ## Customize the action

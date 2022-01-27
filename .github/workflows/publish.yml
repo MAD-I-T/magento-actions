@@ -18,6 +18,6 @@ jobs:
 
     - name: Building magento-actions docker image
       run: |
-        docker build . --tag ghcr.io/mad-i-t/magento-actions:3.6 --tag ghcr.io/mad-i-t/magento-actions:latest
-        docker push ghcr.io/mad-i-t/magento-actions:3.6
+        docker build . --tag ghcr.io/mad-i-t/magento-actions:3.7 --tag ghcr.io/mad-i-t/magento-actions:latest
+        docker push ghcr.io/mad-i-t/magento-actions:3.7
         docker push ghcr.io/mad-i-t/magento-actions:latest
