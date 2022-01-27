@@ -48,9 +48,8 @@ Config Example when magento v2.4
          options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
      steps:
      - uses: actions/checkout@v1 # pulls your repository, M2 src must be in a magento directory
-     - name: 'launch magento2 unit test step'
-       if: ${{true}}
-       continue-on-error: true
+     - name: 'this step will execute all the unit tests available'
+       if: always()
        uses: MAD-I-T/magento-actions@v3.6
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -58,7 +57,17 @@ Config Example when magento v2.4
          php: '7.4'
          process: 'unit-test'
          elasticsearch: 1
-     - name: 'launch magento2 build step'
+     - name: 'this step starts static testing the code'
+       if: always()
+       uses: MAD-I-T/magento-actions@v3.6
+       env:
+         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+       with:
+         php: '7.4'
+         process: 'static-test'
+         elasticsearch: 1
+     - name: 'this step will build an magento artifact'
+       if: always()
        uses: MAD-I-T/magento-actions@v3.6
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -69,7 +78,7 @@ Config Example when magento v2.4
  ```
         
 
- Config Example when magento v2.1 to 2.3
+ Config Example when magento 2.3 & lower
  
 ```
 name: m2-actions-test
@@ -90,15 +99,24 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - uses: actions/checkout@v1  # pulls your repository, M2 src must be in a magento directory
-    - name: 'launch magento2 unit test step'
+    - name: 'this step will execute all the unit tests available'
       if: always()
-      uses: MAD-I-T/magento-actions@master
+      uses: MAD-I-T/magento-actions@v2.0
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
         php: '7.2'
         process: 'unit-test'
-    - name: 'launch magento2 build step'
+     - name: 'this step starts static testing the code'
+      if: always()
+      uses: MAD-I-T/magento-actions@v3.6
+      env:
+        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      with:
+        php: '7.2'
+        process: 'static-test'
+    - name: 'this step will build an magento artifact'
+      if: always()
       uses: MAD-I-T/magento-actions@v2.0
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -106,9 +124,7 @@ jobs:
         php: '7.1'
         process: 'build'
 ```
-To use the latest version of the module (experimental features) use the master verion
-
-`uses: MAD-I-T/magento-actions@master`
+To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
 
 ##### options
@@ -124,21 +140,45 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 To migrate from standard to zero-downtime deployment using this action.
 One can follow this [tutorial](https://www.madit.fr/r/1PP).
 
+**This step must come after a mandatory build step. **
+
+For magento 2.4 
+
 ```
-uses: MAD-I-T/magento-actions@2.0
-env:
-  COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-  BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
-  MYSQL_ROOT_PASSWORD: magento
-  MYSQL_DATABASE: magento
-  HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
-  HOST_DEPLOY_PATH_BUCKET: ${{secrets.STAGE_HOST_DEPLOY_PATH}}/bucket
-  SSH_PRIVATE_KEY: ${{secrets.STAGE_SSH_PRIVATE_KEY}}
-  SSH_CONFIG: ${{secrets.STAGE_SSH_CONFIG}}
-  WRITE_USE_SUDO: false
-with:
-  php: '7.1'
-  process: 'deploy-staging'
+- name: 'launch magento2 zero downtime deploy'
+  uses: MAD-I-T/magento-actions@v3.6
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+    BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
+    MYSQL_ROOT_PASSWORD: magento
+    MYSQL_DATABASE: magento
+    HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
+    HOST_DEPLOY_PATH_BUCKET: ${{secrets.STAGE_HOST_DEPLOY_PATH}}/bucket
+    SSH_PRIVATE_KEY: ${{secrets.STAGE_SSH_PRIVATE_KEY}}
+    SSH_CONFIG: ${{secrets.STAGE_SSH_CONFIG}}
+    WRITE_USE_SUDO: false
+    with:
+      php: '7.4'
+      process: 'deploy-staging'
+```
+
+For magento 2.3 and lower
+```
+- name: 'this step will deploy your build to deployment server'
+  uses: MAD-I-T/magento-actions@v2.0
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+    BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
+    MYSQL_ROOT_PASSWORD: magento
+    MYSQL_DATABASE: magento
+    HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
+    HOST_DEPLOY_PATH_BUCKET: ${{secrets.STAGE_HOST_DEPLOY_PATH}}/bucket
+    SSH_PRIVATE_KEY: ${{secrets.STAGE_SSH_PRIVATE_KEY}}
+    SSH_CONFIG: ${{secrets.STAGE_SSH_CONFIG}}
+    WRITE_USE_SUDO: false
+  with:
+    php: '7.1'
+    process: 'deploy-staging'
 ```
 **The env section and values are mandatory** :
 - `COMPOSER_AUTH`: `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}
@@ -182,26 +222,30 @@ To check some magento module or some code against Magento conding Standard, usef
   <a href="https://www.youtube.com/watch?v=4kyj4Rerm9s"><img src="https://user-images.githubusercontent.com/3765910/132560118-50110b43-57a5-4fb2-9725-7994e79451d8.png" alt="check code against magento coding standard using github actions"></a>
 </div>
 
+For magento 2.4 and 2.3
+
 ```
 - name: 'test some specific module code quality'
-  uses: MAD-I-T/magento-actions@master
+  uses: MAD-I-T/magento-actions@v3.6
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
-    php: '7.4'
+    php: '7.2'
     process: 'phpcs-test'
     extension: 'Magento/CatalogSearch'
     standard: 'Magento2'
+    severity: 10
 ```
 - extension : the module to be tested (Vendor/Name) or Path using repository scaffolding (i.e from see example [here](https://github.com/MAD-I-T/Magento2-AtosSips-Sherlock-LCL/blob/master/.github/workflows/main.yml))
 - standard : the standard for which the conformity must be checked 'Magento2, PSR2, PSR1, PSR12 etc...' see [magento-coding-standard](https://github.com/magento/magento-coding-standard)
 
 ## build an artifact
 
+For magento 2.4.x
+
 ```
-- name: 'launch magento 2.4 build'
-  if: ${{true}}
-  uses: MAD-I-T/magento-actions@master
+- name: 'This step will build an magento artifact'
+  uses: MAD-I-T/magento-actions@v3.6
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -209,6 +253,19 @@ To check some magento module or some code against Magento conding Standard, usef
     process: 'build'
     elasticsearch: 1
 ```
+
+For magento 2.3 or lower
+
+```
+- name: 'This step will build an magento artifact'
+  uses: MAD-I-T/magento-actions@v2.0
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.1'
+    process: 'build'
+```
+
 - `php` : 7.1, 7.2 or 7.4
 
 ## Magento security scanners
@@ -217,11 +274,12 @@ Security scan actions should and must (in case of the modules scanner) be launch
 
 To scan the magento 2 files for common vulnerabilities using mwscan, the job can be set up as follows
  
+For magento 2.4.x
+
 ```
-- name: 'launch security scanner files'
-  if: ${{true}}
-  continue-on-error: true
-  uses: MAD-I-T/magento-actions@master
+- name: 'This step will scan the files for security breach'
+  if: always()
+  uses: MAD-I-T/magento-actions@v3.6
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -231,20 +289,49 @@ To scan the magento 2 files for common vulnerabilities using mwscan, the job can
     override_settings: 1
 ```
 
-To scan the magento2 installed third parties modules for known vulnerabilities using [sansecio/magevulndb](https://github.com/sansecio/magevulndb), the job can be set up as follows:
+For magento 2.3 or lower
+
 ```
-- name: 'launch security scanner modules'
-      if: ${{true}}
-      continue-on-error: true
-      uses: MAD-I-T/magento-actions@master
+- name: 'This step will scan the files for security breach'
+  if: always()
+  uses: MAD-I-T/magento-actions@v2.0
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.1'
+    process: 'security-scan-files'
+```
+
+To scan the magento2 installed third parties modules for known vulnerabilities using [sansecio/magevulndb](https://github.com/sansecio/magevulndb), the job can be set up as follows:
+
+For magento 2.4.x
+
+```
+- name: 'This step will check all modules for security vulnerabilities'
+      if: always()
+      uses: MAD-I-T/magento-actions@v3.6
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
         php: '7.4'
         process: 'security-scan-modules'
         elasticsearch: 1
-        override_settings: 1
 ```
+
+For magento 2.3 or lower
+
+```
+- name: 'This step will check all modules for security vulnerabilities'
+      if: always()
+      uses: MAD-I-T/magento-actions@v2.0
+      env:
+        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      with:
+        php: '7.1'
+        process: 'security-scan-modules'
+```
+
+
 Example of an output:
 
 ![security-risk-amasty](https://user-images.githubusercontent.com/3765910/117654360-f0047700-b195-11eb-8aff-ef05c2c3c231.png)
@@ -253,15 +340,27 @@ Example of an output:
 
 ## unit testing
 
+For magento 2.4.x
 ```
-- name: 'start a unit testing job'
-  uses: MAD-I-T/magento-actions@master
+- name: 'This step will execute all the unit tests available'
+  uses: MAD-I-T/magento-actions@v3.6
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
     php: '7.4'
     process: 'unit-test'
     elasticsearch: 1
+```
+
+For magento 2.3 or lower
+```
+- name: 'This step will execute all the unit tests available'
+  uses: MAD-I-T/magento-actions@v2.0
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    php: '7.1'
+    process: 'unit-test'
 ```
 
 ## integration testing
@@ -299,7 +398,7 @@ steps:
       submodules: recursive
   - name: 'launch magento2 integration test'
     if: ${{false}}
-    uses: MAD-I-T/magento-actions@master
+    uses: MAD-I-T/magento-actions@v3.6
     env:
       COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     with:
@@ -310,9 +409,10 @@ steps:
 
 ## static-test
 
+For magento 2.3 & 2.4
 ```
-- name: 'static test your code'
-  uses: MAD-I-T/magento-actions@master
+- name: 'This step starts static testing the code'
+  uses: MAD-I-T/magento-actions@v3.6
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -322,7 +422,7 @@ steps:
 
 ## Customize the action
 
-### To make all docker build on the runner (no dockerhub image)  
+### To make all docker build on the runner (no usage of an external image)  
  For those cloning ...
  
  Replace in [action.yml](https://github.com/MAD-I-T/magento-actions/blob/2e31f0c3a49314070f808458a93fa325e4855ffa/action.yml#L25)
@@ -334,7 +434,7 @@ steps:
  ` image: 'Dockerfile'` 
  
  ### To override the files in default scripts and config directories without forking
-  use the [override_settings](https://github.com/MAD-I-T/magento-actions/blob/2e31f0c3a49314070f808458a93fa325e4855ffa/action.yml#L11)
+  use the [override_settings](https://github.com/MAD-I-T/magento-actions/blob/2e31f0c3a49314070f808458a93fa325e4855ffa/action.yml#L11) set it to 1
   You'll also have to create scripts or config dirs in the root of your m2 project.
   [Example](https://github.com/seyuf/m2-dev-github-actions) of project scafolding to override the action's default configs
   ```bash
