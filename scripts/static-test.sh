@@ -26,6 +26,9 @@ fi
 
 chmod +x bin/magento
 
+## fix magento error: connection default is not defined
+echo "<?php  return ['db' => [ 'table_prefix' => '', 'connection' => [ 'default' => [ 'host' => 'mysql', 'dbname' => 'magento', 'username' => 'root', 'password' => 'magento', 'model' => 'mysql4', 'engine' => 'innodb', 'initStatements' => 'SET NAMES utf8;', 'active' => '1' ] ]]];" > app/etc/env.php
+## end fix ##
 
 if [ $INPUT_ELASTICSUITE = 1 ]
 then
@@ -40,3 +43,5 @@ fi
 bin/magento deploy:mode:set developer
 
 ./vendor/bin/phpunit -c dev/tests/static/phpunit.xml.dist
+
+rm app/etc/env.php
