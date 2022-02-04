@@ -145,7 +145,7 @@ One can follow this [tutorial](https://www.madit.fr/r/1PP).
 For magento 2.4 
 
 ```
-- name: 'launch magento2 zero downtime deploy'
+- name: 'this step will deploy your build to deployment server - zero downtime'
   uses: MAD-I-T/magento-actions@v3.7
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -160,11 +160,29 @@ For magento 2.4
     with:
       php: '7.4'
       process: 'deploy-staging'
+
+- name: 'unlock php deployer if the deployment fails'
+  if: failure() || cancelled()
+  uses: MAD-I-T/magento-actions@v3.7
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+    BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
+    MYSQL_ROOT_PASSWORD: magento
+    MYSQL_DATABASE: magento
+    HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
+    HOST_DEPLOY_PATH_BUCKET: ${{secrets.STAGE_HOST_DEPLOY_PATH}}/bucket
+    SSH_PRIVATE_KEY: ${{secrets.STAGE_SSH_PRIVATE_KEY}}
+    SSH_CONFIG: ${{secrets.STAGE_SSH_CONFIG}}
+    WRITE_USE_SUDO: false
+  with:
+    php: '7.4'
+    process: 'cleanup-staging'
+
 ```
 
 For magento 2.3 and lower
 ```
-- name: 'this step will deploy your build to deployment server'
+- name: 'this step will deploy your build to deployment server - zero downtime'
   uses: MAD-I-T/magento-actions@v2.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -179,6 +197,24 @@ For magento 2.3 and lower
   with:
     php: '7.1'
     process: 'deploy-staging'
+
+- name: 'unlock php deployer if the deployment fails'
+  if: failure() || cancelled()
+  uses: MAD-I-T/magento-actions@v2.0
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+    BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
+    MYSQL_ROOT_PASSWORD: magento
+    MYSQL_DATABASE: magento
+    HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
+    HOST_DEPLOY_PATH_BUCKET: ${{secrets.STAGE_HOST_DEPLOY_PATH}}/bucket
+    SSH_PRIVATE_KEY: ${{secrets.STAGE_SSH_PRIVATE_KEY}}
+    SSH_CONFIG: ${{secrets.STAGE_SSH_CONFIG}}
+    WRITE_USE_SUDO: false
+  with:
+    php: '7.1'
+    process: 'cleanup-staging'
+
 ```
 **The env section and values are mandatory** :
 - `COMPOSER_AUTH`: `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}
