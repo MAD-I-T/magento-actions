@@ -29,6 +29,9 @@ inputs:
   deployer:
     description: 'deployer-php custom configs. Possible values, no-permission-check (there will be no permission check of writable dirs)'
     default: 'default'
+  composer_version:
+    description: 'force composer version. Possible values 1 or 2'
+    default: 0
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/mad-i-t/magento-actions:3.7'

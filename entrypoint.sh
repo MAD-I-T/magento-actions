@@ -5,6 +5,14 @@ echo "hello your setup is $INPUT_PHP & $INPUT_PROCESS & $INPUT_OVERRIDE_SETTINGS
 
 update-alternatives --set php /usr/bin/php${INPUT_PHP}
 
+
+
+if [ -n "$INPUT_COMPOSER_VERSION" ]
+then
+/usr/local/bin/composer self-update --{$INPUT_COMPOSER_VERSION}
+fi
+
+
 if [ $INPUT_OVERRIDE_SETTINGS = 1 ]
 then
   [ -d config ] && ls ./config/*
