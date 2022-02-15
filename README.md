@@ -31,6 +31,7 @@ Config Example when magento v2.4
  jobs:
    magento2-build:
      runs-on: ubuntu-latest
+     container: ubuntu
      name: 'm2 unit tests & build'
      services:
        mysql:
@@ -87,6 +88,7 @@ on: [push]
 jobs:
   magento2-build:
     runs-on: ubuntu-latest
+    container: ubuntu
     name: 'm2 unit tests & build'
     services:
       mysql:
