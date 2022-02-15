@@ -257,6 +257,7 @@ For magento 2.3 and lower
 One can install magento using github actions. This action will download magento source code and copy it into the current github repository.
 Make sure the repository does not contain the magento directory at the root.
 You will also need to specify the version. Supported versions 2.3.X and 2.4.X
+Or you can simply clone or fork this [repository](https://github.com/seyuf/magento-create-project) and use it as a template.
 
 ```
 name: m2-install-actions
