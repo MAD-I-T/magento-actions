@@ -48,7 +48,7 @@ fi
 
 ls -lath
 
-if [ -z "$INPUT_NO_PUSH" ]
+if [ "$INPUT_NO_PUSH" -ne 1 ]
 then
   mv ./project-community-edition ./magento
   ls -lath ./magento
