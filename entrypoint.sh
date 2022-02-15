@@ -9,7 +9,7 @@ update-alternatives --set php /usr/bin/php${INPUT_PHP}
 
 if [ -n "$INPUT_COMPOSER_VERSION" ]
 then
-/usr/local/bin/composer self-update --{$INPUT_COMPOSER_VERSION}
+  /usr/local/bin/composer self-update --{$INPUT_COMPOSER_VERSION}
 fi
 
 
