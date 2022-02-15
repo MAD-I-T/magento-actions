@@ -9,7 +9,7 @@ tests - phpcs - build - deploy - ([gitlab-ci](https://github.com/MAD-I-T/magento
 
 # usage
 
-To use this action your repository must respect similar scaffolding to the following:
+To use this action your git repository must respect similar scaffolding to the following (or you can use the [install action](#install-magento-action)):
 
 ```bash
 ├── .github
@@ -239,6 +239,7 @@ For magento 2.3 and lower
   
 # Other processes
 
+- [install magento from github actions](#install-magento-action)
 - [Code quality check](#code-quality-check)
 - [Magento build](#build-an-artifact)
 - [Magento security scanners](#magento-security-scanners)
@@ -250,8 +251,30 @@ For magento 2.3 and lower
 
 
 
+## Install magento action
+One can install magento using github actions. This action will download magento source code and copy it into the current github repository.
+Make sure the repository does not contain the magento directory at the root.
+You will also need to specify the version. Supported versions 2.3.X and 2.4.X
 
-## Code quality check  
+```
+name: m2-install-actions
+on: [push]
+jobs:
+  magento2-install:
+    runs-on: ubuntu-latest
+    name: 'magento install & push'      
+    steps:
+    - uses: actions/checkout@v2
+    - name: 'install fresh magento and copy to repo'
+      uses: MAD-I-T/magento-actions@master
+      env:
+        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      with:
+        process: 'create-project'
+        magento_version: 2.3.0
+```
+
+## Code quality check
 
 To check some magento module or some code against Magento conding Standard, useful before marketplace submissions
 <div align="center">
