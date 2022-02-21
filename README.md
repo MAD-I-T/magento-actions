@@ -275,6 +275,7 @@ jobs:
       with:
         process: 'create-project'
         magento_version: 2.3.0
+#       no_push: 1 //uncomment this to prevent files from getting pushed to repo
 ```
 
 
@@ -282,6 +283,7 @@ jobs:
   <a href="https://www.youtube.com/watch?v=cqI79AKN7Gk"><img src="https://user-images.githubusercontent.com/3765910/154555377-2ab4d165-9bbb-42a4-b6cf-22586156477d.png" alt="install magento 2 using github actions"></a>
   <span>Install process in video</scan>
 </div>
+
 
 
 ## Code quality check
@@ -339,7 +341,7 @@ For magento 2.3 or lower
 
 ## Magento security scanners
 
-Security scan actions should and must (in case of the modules scanner) be launched after a build job see example [here](https://github.com/seyuf/m2-dev-github-actions/blob/37b7a822ef09a961b7712d01707be08149770030/.github/workflows/main.yml#L37)
+Security scan actions should and must (in case of the modules scanner) be launched after a build job see example [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L37)
 
 To scan the magento 2 files for common vulnerabilities using mwscan, the job can be set up as follows
  
