@@ -250,6 +250,7 @@ For magento 2.3 and lower
 - [Static testing](#static-test)
 - [Customize the module](#customize-the-action)
 - [Setting the secrets](#set-secrets)
+- [see more on the forum](https://forum.madit.fr/)
 
 
 
