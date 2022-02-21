@@ -410,7 +410,7 @@ Example of an output:
 
 
 ## unit testing
-
+See code sample [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L64)
 For magento 2.4.x
 ```
 - name: 'This step will execute all the unit tests available'
