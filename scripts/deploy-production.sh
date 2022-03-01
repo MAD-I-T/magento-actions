@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#keeping this for backward incommpatibity issues shoud be discarded starting 3.9, use deploy-production instead
 set -e
 
 

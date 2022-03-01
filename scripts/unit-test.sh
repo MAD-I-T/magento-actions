@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 PROJECT_PATH="$(pwd)"
