@@ -285,6 +285,13 @@ jobs:
   <span>Install process in video</scan>
 </div>
 
+To set `${{secrets.COMPOSER_AUTH}}` :
+
+1. Go to `Settings>Secrets`
+2. Create variable `COMPOSER_AUTH`
+3. Add you composer auth as value e.g :
+   `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}`
+
 
 
 ## Code quality check
