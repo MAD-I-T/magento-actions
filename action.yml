@@ -35,12 +35,15 @@ inputs:
   magento_version:
     description: 'the magento version to install i.e 2.4.1'
     default: 0
+  disable_modules:
+    description: 'List of modules to be disabled during install, comma separated e.g: Magento_Sales,Magento_Config'
+    default: ''
   no_push:
     description: 'do not push magento source code to github repo values 0|1'
     default: 0
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.8'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.9'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'
