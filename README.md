@@ -526,6 +526,7 @@ For magento 2.3 & 2.4
   ```
 
 ## tipycal issues
+   - If you're using a self-hosted runner please run it as root user using `sudo ./svc.sh install`
    - Do not forget to set or replace the `env.php` file in the `shared` directory
    - Adding the ssh user to the `http-user` group ex. `www-data` , also check php pool user and group setting rights
    - Set `WRITE_USE_SUDO` env if you want to launch the deployment script in sudo mode (not necessary in most cases)
