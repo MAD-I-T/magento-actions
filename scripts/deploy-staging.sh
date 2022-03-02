@@ -42,7 +42,7 @@ echo 'Deploying staging ...';
 
 echo '------> Deploying bucket ...';
 # deploy bucket
-./vendor/bin/dep deploy-bucket staging \
+php7.4 ./vendor/bin/dep deploy-bucket staging \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
@@ -61,7 +61,7 @@ then
 fi
 
 # deploy release
-./vendor/bin/dep $DEFAULT_DEPLOYER staging \
+php7.4 ./vendor/bin/dep $DEFAULT_DEPLOYER staging \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
