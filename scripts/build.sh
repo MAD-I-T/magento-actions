@@ -52,10 +52,15 @@ fi
 
 #--key=magento \
 
-bin/magento setup:di:compile
-bin/magento deploy:mode:set --skip-compilation production
 
-bin/magento setup:static-content:deploy
+## the switch to production will build static content for all languages declared in config.php
+bin/magento deploy:mode:set production
+
+#or
+
+#bin/magento setup:di:compile
+#bin/magento deploy:mode:set --skip-compilation production
+#bin/magento setup:static-content:deploy
 #bin/magento setup:static-content:deploy en_US  -a adminhtml
 #bin/magento setup:static-content:deploy fr_FR -f -s standard -a adminhtml
 #bin/magento setup:static-content:deploy fr_FR -f -s standard  -t Creativestyle/theme-creativeshop
