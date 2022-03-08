@@ -7,6 +7,16 @@ update-alternatives --set php /usr/bin/php${INPUT_PHP}
 
 
 
+
+if [ $INPUT_PHP = 'auto' ]
+then
+  bash /opt/config/utils/php-compatibility-checker.sh
+else
+  echo "Forcing php to match specified php inputs argument"
+  update-alternatives --set php /usr/bin/php${INPUT_PHP}
+fi
+
+
 if [ "$INPUT_COMPOSER_VERSION" -ne 0 ]
 then
   /usr/local/bin/composer self-update --{$INPUT_COMPOSER_VERSION}
