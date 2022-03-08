@@ -53,10 +53,11 @@ fi
 
 ls -lath
 
+mv ./project-community-edition ./magento
+ls -lath ./magento
+
 if [ "$INPUT_NO_PUSH" -ne 1 ]
 then
-  mv ./project-community-edition ./magento
-  ls -lath ./magento
   git config user.name github-actions
   git config user.email github-actions@github.com
   [ -f magento/.gitignore ] && echo "gitignore exists." || cp /opt/config/templates/gitignore.tpl magento/.gitignore
