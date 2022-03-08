@@ -345,7 +345,9 @@ For magento 2.3 or lower
     process: 'build'
 ```
 
-- `php` : 7.1, 7.2 or 7.4
+- `php` : 7.1, 7.2, 7.3 or 7.4
+
+To build static content for languagages other than en_US see (https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25)
 
 ## Magento security scanners
 
