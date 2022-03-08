@@ -15,6 +15,9 @@ minorVersion=${MAGE_VERSION:4:1}
 if [ -n "$MAGE_VERSION" ]
 then
   case "$majorVersion" in
+    2)
+         update-alternatives --set php /usr/bin/php7.1
+         ;;
     3)case "$minorVersion" in
         4|5|6|7|8)
            echo "switching to php7.3 to match magento version";
