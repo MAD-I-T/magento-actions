@@ -10,6 +10,7 @@ if [ $INPUT_NO_PUSH = 1 ]
 then
   rm -rf ./magento
 fi
+
 majorVersion=${INPUT_MAGENTO_VERSION:2:1}
 minorVersion=${INPUT_MAGENTO_VERSION:4:1}
 
