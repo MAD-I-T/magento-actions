@@ -42,5 +42,4 @@ then
    esac
 else
   echo "No match found"
-  update-alternatives --set php /usr/bin/php7.1
 fi
