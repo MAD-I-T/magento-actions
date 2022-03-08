@@ -6,6 +6,7 @@ MAGE_VERSION=$(grep -ni 'version' magento/composer.json | grep -o -E '\:\ .+' | 
 set -e
 echo "Current magento version is $MAGE_VERSION"
 pwd
+ls -lath magento/composer.json
 
 
 majorVersion=${MAGE_VERSION:2:1}
@@ -41,4 +42,5 @@ then
    esac
 else
   echo "No match found"
+  update-alternatives --set php /usr/bin/php7.1
 fi

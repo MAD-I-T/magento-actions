@@ -3,11 +3,6 @@
 echo "hello your setup is $INPUT_PHP & $INPUT_PROCESS & $INPUT_OVERRIDE_SETTINGS"
 
 
-update-alternatives --set php /usr/bin/php${INPUT_PHP}
-
-
-
-
 if [ $INPUT_PHP = 'auto' ]
 then
   bash /opt/config/utils/php-compatibility-checker.sh
