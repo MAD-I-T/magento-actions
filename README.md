@@ -124,7 +124,7 @@ To use the latest experimental version of the module set the following : (`uses:
 
 If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.9** 
 
-Also, in some custom cases it may be needed to force/specify the php version to use in a job. 
+Also, in some custom cases it may be needed to force/specify the php version to use in the step. 
 This can be done by adding php input (after **with:** option).
 
 ##### options
@@ -347,9 +347,9 @@ To build static content for languagages other than en_US see (https://forum.madi
 
 ## Magento security scanners
 
-***Security scan actions must*** (in case of the modules scanner) be launched ***after a build*** job see example [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L37) as the magerun module needs the ```app/etc/config.php``` file to be present.
+***Security scan actions must*** (in case of the modules scanner) be launched ***after a build*** step see example [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L37) as the magerun module needs the ```app/etc/config.php``` file to be present.
 
-To scan the magento 2 files for common vulnerabilities using mwscan, the job can be set up as follows
+To scan the magento 2 files for common vulnerabilities using mwscan, the job's step can be set up as follows
  
 For magento 2.4.x
 
@@ -379,7 +379,7 @@ For magento 2.3 or lower
     process: 'security-scan-files'
 ```
 
-To scan the magento2 installed third parties modules for known vulnerabilities using [sansecio/magevulndb](https://github.com/sansecio/magevulndb), the job can be set up as follows:
+To scan the magento2 installed third parties modules for known vulnerabilities using [sansecio/magevulndb](https://github.com/sansecio/magevulndb), the job's step can be set up as follows:
 
 For magento 2.4.x 
 
