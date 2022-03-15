@@ -20,8 +20,6 @@ RUN apt-get -yq install \
     gcc\
     python-dev
 
-RUN pip install --no-cache-dir --upgrade mwscan
-
 RUN wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
     && sh -c 'echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list'
 
