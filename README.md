@@ -347,7 +347,7 @@ To build static content for languagages other than en_US see (https://forum.madi
 
 ## Magento security scanners
 
-Security scan actions should and must (in case of the modules scanner) be launched after a build job see example [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L37)
+***Security scan actions must*** (in case of the modules scanner) be launched ***after a build*** job see example [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L37) as the magerun module needs the ```app/etc/config.php``` file to be present.
 
 To scan the magento 2 files for common vulnerabilities using mwscan, the job can be set up as follows
  
@@ -390,7 +390,6 @@ For magento 2.4.x
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
-        php: '7.4'
         process: 'security-scan-modules'
         elasticsearch: 1
 ```
