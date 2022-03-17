@@ -67,7 +67,7 @@ bin/magento deploy:mode:set production
 #bin/magento setup:static-content:deploy fr_FR -f -s standard -a adminhtml
 #bin/magento setup:static-content:deploy fr_FR -f -s standard  -t Creativestyle/theme-creativeshop
 
-composer dump-autoload -o
+#composer dump-autoload -o
 
 
 if [ -n "$INPUT_DISABLE_MODULES"  ]
