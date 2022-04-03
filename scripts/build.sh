@@ -40,6 +40,9 @@ then
   [ -f app/etc/config.php ] && cp app/etc/config.php app/etc/config.php.orig
 fi
 
+
+bash /opt/config/utils/pagebuilder-compatibility-checker.sh
+
 if [ $INPUT_ELASTICSUITE = 1 ]
 then
   bin/magento setup:install --admin-firstname="local" --admin-lastname="local" --admin-email="local@local.com" --admin-user="local" --admin-password="local123" --base-url="http://magento.build/" --backend-frontname="admin" --db-host="mysql" --db-name="magento" --db-user="root" --db-password="magento" --use-secure=0 --use-rewrites=1 --use-secure-admin=0 --session-save="db" --currency="EUR" --language="en_US" --timezone="Europe/Rome" --cleanup-database --skip-db-validation --es-hosts="elasticsearch:9200" --es-user="" --es-pass="" --disable-modules="$INPUT_DISABLE_MODULES"
@@ -72,6 +75,6 @@ bin/magento deploy:mode:set production
 
 if [ -n "$INPUT_DISABLE_MODULES"  ]
 then
-  [ -f app/etc/config.php ] && mv app/etc/config.php.orig app/etc/config.php
+  [ -f app/etc/config.php.orig ] && cat app/etc/config.php.orig > app/etc/config.php
 fi
 rm app/etc/env.php
