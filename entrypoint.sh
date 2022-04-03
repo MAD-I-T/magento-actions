@@ -14,7 +14,7 @@ fi
 
 if [ "$INPUT_COMPOSER_VERSION" -ne 0 ]
 then
-  /usr/local/bin/composer self-update --{$INPUT_COMPOSER_VERSION}
+  /usr/local/bin/composer self-update --${INPUT_COMPOSER_VERSION}
 fi
 
 
