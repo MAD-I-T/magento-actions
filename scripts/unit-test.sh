@@ -54,11 +54,16 @@ else
 fi
 
 
-bin/magento deploy:mode:set developer
+#bin/magento deploy:mode:set developer
 
-bin/magento dev:tests:run unit
+#bin/magento dev:tests:run unit
 
-#./vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist
+if [ -n "$INPUT_UNIT_TEST_SUBSET_PATH" ]
+then
+  ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG "$INPUT_UNIT_TEST_SUBSET_PATH"
+else
+  ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG
+fi
 
 
 if [ -n "$INPUT_DISABLE_MODULES"  ]

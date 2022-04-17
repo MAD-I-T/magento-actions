@@ -41,6 +41,13 @@ inputs:
   no_push:
     description: 'do not push magento source code to github repo values 0|1'
     default: 0
+  unit_test_config:
+    description: 'Unit test custom config path'
+    default: 'dev/tests/unit/phpunit.xml.dist'
+  unit_test_subset_path:
+    description: 'Run restricted unit test subset directory path'
+
+
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/mad-i-t/magento-actions:3.10'
