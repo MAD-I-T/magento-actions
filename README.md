@@ -416,6 +416,7 @@ Example of an output:
 
 ## unit testing
 See code sample [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L64)
+
 For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
 ```
 - name: 'This step will execute all the unit tests available'
@@ -426,6 +427,21 @@ For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
     process: 'unit-test'
     elasticsearch: 1
 ```
+
+Run all unit test of the magento email module
+```
+- name: 'This step will execute specific unit tests in the path dir'
+  uses: MAD-I-T/magento-actions@v3.10
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    process: 'unit-test'
+    elasticsearch: 1
+    unit_test_subset_path: 'vendor/magento/module-email/Test/Unit'
+```
+[See more](https://forum.madit.fr/t/unit-testing-in-magento-2/16) about unit testing in magento2
+![all-tests-succeed](https://user-images.githubusercontent.com/3765910/163733532-9dec8018-5c59-4c0e-bb43-37e88c1fa6c2.png)
+
 
 For magento 2.3 or lower if issues with the preceding sample
 ```
