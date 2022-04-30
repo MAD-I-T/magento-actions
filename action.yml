@@ -46,12 +46,11 @@ inputs:
     default: 'dev/tests/unit/phpunit.xml.dist'
   unit_test_subset_path:
     description: 'Run restricted unit test subset directory path'
-    default: 0
 
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.10'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.11'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'
