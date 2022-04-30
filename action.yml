@@ -46,6 +46,7 @@ inputs:
     default: 'dev/tests/unit/phpunit.xml.dist'
   unit_test_subset_path:
     description: 'Run restricted unit test subset directory path'
+    default: 0
 
 
 runs:
