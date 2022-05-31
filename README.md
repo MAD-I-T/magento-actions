@@ -440,8 +440,12 @@ Run all unit test of the magento email module
     unit_test_subset_path: 'vendor/magento/module-email/Test/Unit'
 ```
 [See more](https://forum.madit.fr/t/unit-testing-in-magento-2/16) about unit testing in magento2
-![all-tests-succeed](https://user-images.githubusercontent.com/3765910/163733532-9dec8018-5c59-4c0e-bb43-37e88c1fa6c2.png)
 
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=kRIzj2Vv5zE"><img src="https://user-images.githubusercontent.com/3765910/171204520-c2a87d86-4c83-44d3-896d-1d59174d1a2e.jpeg" alt="install magento 2 using github actions"></a>
+  <span>Video tutorial</scan>
+</div>
 
 For magento 2.3 or lower if issues with the preceding sample
 ```
