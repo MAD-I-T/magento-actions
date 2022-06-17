@@ -20,7 +20,7 @@ then
 	/usr/local/bin/composer install --prefer-dist --no-progress
 else
   echo "using composer v1"
-  /usr/local/bin/composer self-update --1
+  php7.2 /usr/local/bin/composer self-update --1
 	/usr/local/bin/composer install --prefer-dist --no-progress
 fi
 

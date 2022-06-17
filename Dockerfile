@@ -118,7 +118,7 @@ RUN curl -LO https://getcomposer.org/composer-stable.phar \
     && mv ./composer-stable.phar ./composer.phar \
     && chmod +x ./composer.phar \
     && mv ./composer.phar /usr/local/bin/composer\
-    && /usr/local/bin/composer self-update --2
+    && php7.2 /usr/local/bin/composer self-update --2
 
 COPY LICENSE README.md /
 COPY scripts /opt/scripts
