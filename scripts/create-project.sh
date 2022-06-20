@@ -44,7 +44,8 @@ then
            composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=${INPUT_MAGENTO_VERSION}
            ;;
         0|1|2|3)
-           php7.2 update-alternatives --set php /usr/bin/php7.4
+           php7.2 /usr/local/bin/composer self-update --2
+           update-alternatives --set php /usr/bin/php7.4
            composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=${INPUT_MAGENTO_VERSION}
            ;;
         *) echo "This version $INPUT_MAGENTO_VERSION of magento 2.4.X is not recognized minor $minorVersion" && exit 1 ;;
