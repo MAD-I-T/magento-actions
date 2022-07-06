@@ -4,13 +4,16 @@ LABEL org.opencontainers.image.source="https://github.com/MAD-I-T/magento-action
 
 
 
+RUN apt-get -y update \
+    && apt-get -y install \
+    apt-transport-https
+
 RUN echo 'deb  http://deb.debian.org/debian  stretch contrib non-free' >> /etc/apt/sources.list
 RUN echo 'deb-src  http://deb.debian.org/debian  stretch contrib non-free' >> /etc/apt/sources.list
 
 
 RUN apt-get -y update \
     && apt-get -y install \
-    apt-transport-https \
     ca-certificates \
     wget
 
