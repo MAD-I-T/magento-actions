@@ -46,6 +46,12 @@ inputs:
     default: 'dev/tests/unit/phpunit.xml.dist'
   unit_test_subset_path:
     description: 'Run restricted unit test subset directory path'
+  node_version:
+    description: 'node version for pwa-studio'
+    default: 16
+  version:
+   description: 'generic version to be compounded with other variables e.g pwa-studio-install to specify pwa version'
+
 
 
 runs:
