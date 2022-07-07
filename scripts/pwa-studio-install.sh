@@ -29,6 +29,7 @@ then
   git add ./pwa-studio/.gitignore
   git commit -m 'added pwa-studio gitignore'
   git add ./pwa-studio
+  git add -f ./pwa-studio/.env
   git commit -m "add pwa-studio project to github repo"
   git push
 fi
