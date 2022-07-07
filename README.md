@@ -2,7 +2,7 @@
 Magento & [PWA-Studio]() CI/CD using github actions: 
 
 - tests 
-- coding standard 
+- coding standard checks
 - build 
 - [zero-downtime deploy](#zero-downtime-deployment) 
 - (see also [Gitlab-CI version](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer) supported)
