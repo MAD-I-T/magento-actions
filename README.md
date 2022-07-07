@@ -1,6 +1,6 @@
 # magento-actions
-Magento 2 CI/CD using github actions
-tests - phpcs - build - deploy - ([gitlab-ci](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer) supported)
+Magento & [PWA-Studio]() CI/CD using github actions
+tests - phpcs - build - [zero-downtime deploy](#zero-downtime-deployment) (see also [Gitlab-CI version](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer) supported)
 
 
 <div align="center">
@@ -239,12 +239,14 @@ For magento 2.3 and lower if  issues with the preceding sample
 # Other processes
 
 - [install magento from github actions](#install-magento-action)
+- [install pwa-studio from github actions](#install-pwa-studio-action)
 - [Code quality check](#code-quality-check)
 - [Magento build](#build-an-artifact)
 - [Magento security scanners](#magento-security-scanners)
 - [Unit testing](#unit-testing)
 - [Integration tests](#integration-testing)
 - [Static testing](#static-test)
+- [Zero-downtime deployment](#zero-downtime-deployment)
 - [Customize the module](#customize-the-action)
 - [Setting the secrets](#set-secrets)
 - [see more on the forum](https://forum.madit.fr/)
@@ -252,7 +254,7 @@ For magento 2.3 and lower if  issues with the preceding sample
 
 
 ## Install magento action
-One can install magento using github actions. This action will download magento source code and copy it into the current github repository.
+One can install magento using github actions. This action will download magento source code and copy it into the github repository calling it.
 Make sure the repository does not contain the magento directory at the root.
 You will also need to specify the version. Supported versions 2.2.X, 2.3.X and 2.4.X
 Or you can simply clone or fork this [repository](https://github.com/seyuf/magento-create-project) and use it as a template.
@@ -290,6 +292,28 @@ To set `${{secrets.COMPOSER_AUTH}}` :
    `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}`
 
 
+
+## Install pwa-studio action
+One can install magento using github actions. This action will download the latest release of the magento [pwa-studio project](https://github.com/magento/pwa-studio/releases) source code and copy it into the github repository calling it.
+Or you can simply clone/fork and push the content of this [repository](https://github.com/seyuf/pwa-studio-installer) to bootstrap a new pwa-studio project.
+
+```
+name: pwa-studio-install-actions
+on: [push]
+jobs:
+  magento2-install:
+    runs-on: ubuntu-latest
+    name: 'install & push pwa-studio project'      
+    steps:
+    - uses: actions/checkout@v2
+    - name: 'install fresh  pwa studio code and copy to repo'
+      uses: MAD-I-T/magento-actions@master
+      env:
+        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      with:
+        process: 'pwa-studio-install'
+        #no_push: 1 //uncomment this to prevent files from getting pushed to repo
+```
 
 ## Code quality check
 
