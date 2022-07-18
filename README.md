@@ -1,5 +1,5 @@
 # magento-actions
-Magento & [PWA-Studio]() CI/CD using github actions: 
+Magento & [PWA-Studio](#install-pwa-studio-action) CI/CD using github actions: 
 
 - tests 
 - coding standard checks
@@ -314,9 +314,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: 'install fresh  pwa studio code and copy to repo'
-      uses: MAD-I-T/magento-actions@master
-      env:
-        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      uses: MAD-I-T/magento-actions@v3.12
       with:
         process: 'pwa-studio-install'
         #no_push: 1 //uncomment this to prevent files from getting pushed to repo
