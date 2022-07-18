@@ -47,6 +47,7 @@ task(
         run('mkdir -p temp');
         run('tar xfz {{bucket-commit}} -C temp');
         run('cp -rf temp/magento {{release_path}}');
+        run('cp -rf temp/pwa-studio {{release_path}}');
         run('cp -rf temp/deployer {{deploy_path}}');
         run('mv {{bucket-commit}} {{bucket-commit}}.back');
         run('rm temp -rf');

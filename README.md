@@ -20,7 +20,8 @@ To use this action your git repository must respect similar scaffolding to the f
 ├── .github
 │   └── workflows # directory where the workflows are found, see below for an example of main.yml 
 ├── README.md 
-└── magento # directory where you Magento source files should go
+├── magento # directory where you Magento source files should go 
+└── pwa-studio # optional pwa-studio directory for pwa src code
 ```
 
 Links to full usage samples using Magento official [latest release](https://github.com/seyuf/magento-actions-sample/blob/master/.github/workflows/main.yml) or  the current [develop branch here](https://github.com/seyuf/m2-dev-github-actions).
@@ -263,6 +264,7 @@ One can install magento using github actions. This action will download magento 
 Make sure the repository does not contain the magento directory at the root.
 You will also need to specify the version. Supported versions 2.2.X, 2.3.X and 2.4.X
 Or you can simply clone or fork this [repository](https://github.com/seyuf/magento-create-project) and use it as a template.
+The use of **actions/checkout@v2** is mandatory as v1 is not able to push the src to the repo.
 
 ```
 name: m2-install-actions
