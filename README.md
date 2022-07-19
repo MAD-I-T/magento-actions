@@ -302,7 +302,7 @@ To set `${{secrets.COMPOSER_AUTH}}` :
 
 ## Install pwa-studio action
 One can install magento using github actions. This action will download the latest release of the magento [pwa-studio project](https://github.com/magento/pwa-studio/releases) source code and copy it into the github repository calling it.
-Or you can simply clone/fork and push the content of this [repository](https://github.com/seyuf/pwa-studio-installer) to bootstrap a new pwa-studio project.
+Or you can simply clone/fork and push the content of this [repository](https://github.com/seyuf/pwa-studio-installer) to bootstrap a new pwa-studio project. **actions/checkout@v2** is mandatory (v2 and up), there is also a [video tutorial](https://www.youtube.com/watch?v=Q0o-NLM_rto).
 
 ```
 name: pwa-studio-install-actions
