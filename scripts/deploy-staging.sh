@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+#set -e
 
 
 PROJECT_PATH="$(pwd)"
@@ -31,7 +31,7 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "mkdir 
 
 
 
-tar cfz "$BUCKET_COMMIT" deployer/scripts/staging magento
+tar cfz "$BUCKET_COMMIT" deployer/scripts/staging magento pwa-studio 2> /dev/null
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT" staging:$HOST_DEPLOY_PATH_BUCKET
 
 
@@ -67,4 +67,17 @@ php7.4 ./vendor/bin/dep $DEFAULT_DEPLOYER staging \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
 -o write_use_sudo=$WRITE_USE_SUDO
 
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/current/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/post_release_setup.sh"
+echo "running magento and/or pwa deployer"
+
+if [ -d "$PROJECT_PATH/magento" ]
+then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/current/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/post_release_setup.sh"
+fi
+
+# Run pwa-studio post release script if the directory exists
+if [ -d "$PROJECT_PATH/pwa-studio" ]
+then
+ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/current/pwa-studio/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/post_release_setup_pwa.sh"
+fi
+
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+#set -e
 
 
 PROJECT_PATH="$(pwd)"
@@ -21,39 +21,35 @@ echo "Create artifact and send to server"
 cd $PROJECT_PATH
 
 
-echo "Deploying to production server";
+echo "Deploying to staging server";
 
 mkdir -p deployer/scripts/
-cp -R /opt/config/pipelines/scripts/production deployer/scripts/production
+cp -R /opt/config/pipelines/scripts/staging deployer/scripts/staging
 
 echo 'creating bucket dir'
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "mkdir -p $HOST_DEPLOY_PATH_BUCKET"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "mkdir -p $HOST_DEPLOY_PATH_BUCKET"
 
 
 
-tar cfz "$BUCKET_COMMIT" deployer/scripts/production magento
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT" production:$HOST_DEPLOY_PATH_BUCKET
+tar cfz "$BUCKET_COMMIT" deployer/scripts/staging magento pwa-studio 2> /dev/null
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT" staging:$HOST_DEPLOY_PATH_BUCKET
 
 
 cd /opt/config/php-deployer
 
-echo 'Deploying production ...';
-
-
-#create dirs if not exists first deploy
-
+echo 'Deploying staging ...';
 
 
 echo '------> Deploying bucket ...';
 # deploy bucket
-php7.4 ./vendor/bin/dep deploy-bucket production \
+php7.4 ./vendor/bin/dep deploy-bucket staging \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
 -o write_use_sudo=$WRITE_USE_SUDO
 
 # setup magento
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/release/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/release_setup.sh"
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/release/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/release_setup.sh"
 
 
 echo '------> Deploying release ...';
@@ -65,16 +61,23 @@ then
 fi
 
 # deploy release
-php7.4 ./vendor/bin/dep $DEFAULT_DEPLOYER production \
+php7.4 ./vendor/bin/dep $DEFAULT_DEPLOYER staging \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
 -o write_use_sudo=$WRITE_USE_SUDO
 
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/current/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_setup.sh"
+echo "running magento and/or pwa deployer"
+
+if [ -d "$PROJECT_PATH/magento" ]
+then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/current/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_setup.sh"
+fi
 
 # Run pwa-studio post release script if the directory exists
 if [ -d "$PROJECT_PATH/pwa-studio" ]
 then
  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/current/pwa-studio/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_setup_pwa.sh"
 fi
+
+
