@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+echo "building ....."
+
 chown -R root:root .
 PROJECT_PATH="$(pwd)"
+
+
 
 echo "currently in $PROJECT_PATH"
 
@@ -66,6 +70,7 @@ then
     #bin/magento setup:static-content:deploy en_US  -a adminhtml
     #bin/magento setup:static-content:deploy fr_FR -f -s standard -a adminhtml
     #bin/magento setup:static-content:deploy fr_FR -f -s standard  -t Creativestyle/theme-creativeshop
+
     #composer dump-autoload -o
 
 
@@ -75,12 +80,15 @@ then
     fi
 
     rm app/etc/env.php
-
+else
+ echo "creating empty magento dir for deployment purposes"
+ mkdir magento
 fi
 
 cd $PROJECT_PATH
 
-#launch pwa-studio build if the directory exists
+#launch pwa build if the directory exists
+
 if [ -d "$PROJECT_PATH/pwa-studio" ]
 then
 
@@ -99,3 +107,4 @@ then
   set -x
   ls -talh
 fi
+
