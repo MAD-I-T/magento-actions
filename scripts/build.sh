@@ -87,7 +87,7 @@ fi
 
 cd $PROJECT_PATH
 
-#launch pwa build if the directory exists
+#launch pwa-strudio build if the directory exists
 
 if [ -d "$PROJECT_PATH/pwa-studio" ]
 then
@@ -101,7 +101,6 @@ then
   yarn add  @magento/pwa-buildpack
 
   cd pwa-studio
-  #echo 'yes' | CUSTOM_ORIGIN_EXACT_DOMAIN="mali.pwa" yarn buildpack  create-custom-origin .
   yarn install --update-checksums --frozen-lockfile && echo yes|yarn run build
 
   set -x
