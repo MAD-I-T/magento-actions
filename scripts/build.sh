@@ -101,7 +101,8 @@ then
   yarn add  @magento/pwa-buildpack
 
   cd pwa-studio
-  yarn install --update-checksums --frozen-lockfile && echo yes|yarn run build
+  yarn install --update-checksums --frozen-lockfile
+  yarn run build
 
   set -x
   ls -talh
