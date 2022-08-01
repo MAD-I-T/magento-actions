@@ -54,7 +54,7 @@ Config Example when magento v2.4
            - 9200:9200
          options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
      steps:
-     - uses: actions/checkout@v1 # pulls your repository, M2 src must be in a magento directory
+     - uses: actions/checkout@v2 # pulls your repository, M2 src must be in a magento directory
      - name: 'this step will execute all the unit tests available'
        if: always()
        uses: MAD-I-T/magento-actions@v3.11
@@ -103,7 +103,7 @@ jobs:
           - 3106:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-    - uses: actions/checkout@v1  # pulls your repository, M2 src must be in a magento directory
+    - uses: actions/checkout@v2  # pulls your repository, M2 src must be in a magento directory
     - name: 'this step will execute all the unit tests available'
       if: always()
       uses: MAD-I-T/magento-actions@v3.11
@@ -517,7 +517,7 @@ services:
       - 5672:5672
 
 steps:
-  - uses: actions/checkout@v1
+  - uses: actions/checkout@v2
     with:
       submodules: recursive
   - name: 'launch magento2 integration test'
