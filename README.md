@@ -1,5 +1,5 @@
 # magento-actions
-Magento & [PWA-Studio](#install-pwa-studio-action) CI/CD using github actions: 
+Magento and/or [PWA-Studio](#install-pwa-studio-action) CI/CD using github actions: 
 
 - tests 
 - coding standard checks
