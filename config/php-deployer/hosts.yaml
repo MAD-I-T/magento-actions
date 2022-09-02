@@ -1,0 +1,25 @@
+hosts:
+  staging:
+    config_file: /etc/ssh/ssh_config
+    identity_file: ~/.ssh/id_rsa
+    forward_agent: true
+    ssh_multiplexing: true
+    ssh_arguments:
+      ['-o UserKnownHostsFile=/dev/null', '-o StrictHostKeyChecking=no']
+    labels:
+      stage: staging
+      #remote_user: ci
+    roles:
+      - app
+  production:
+    config_file: /etc/ssh/ssh_config
+    identity_file: ~/.ssh/id_rsa
+    forward_agent: true
+    ssh_multiplexing: true
+    ssh_arguments:
+      ['-o UserKnownHostsFile=/dev/null', '-o StrictHostKeyChecking=no']
+    labels:
+      stage: produtcion
+      #remote_user: ci
+    roles:
+      - app

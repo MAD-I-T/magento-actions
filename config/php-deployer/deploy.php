@@ -6,10 +6,16 @@ use Deployer\Exception\Exception;
 
 require 'recipe/common.php';
 
+
+
+// Servers
+import('hosts.yaml');
+
 set('writable_use_sudo', '{{write_use_sudo}}');
 set('writable_mode', 'chmod'); // chmod, chown, chgrp or acl.
 set('deploy_path', "{{deploy_path_custom}}");
 set('keep_releases', 3);
+
 
 
 // Magento root
@@ -35,8 +41,10 @@ set(
     ]
 );
 
-// Servers
-inventory('hosts.yml');
+
+// Disable uneccessary tasks
+task('deploy:update_code')->disable();
+
 
 // Tasks
 desc('Unpack bucket-commit');
@@ -62,7 +70,7 @@ desc('Deploy bucket');
 task(
     'deploy-bucket', [
         'deploy:info',
-        'deploy:prepare',
+        'deploy:setup',
         'deploy:lock',
         'deploy:release',
         'deploy:unpack-bucket'
@@ -76,19 +84,21 @@ task(
         'deploy:writable',
         'deploy:symlink',
         'deploy:unlock',
-        'cleanup',
-        'success'
+        'deploy:cleanup',
+        'deploy:success'
     ]
 );
 
+
+//task('deploy:writable')->disable();
 desc('Deploy release without permission check aka writable_mode');
 task(
     'deploy:no-permission-check', [
         'deploy:shared',
         'deploy:symlink',
         'deploy:unlock',
-        'cleanup',
-        'success'
+        'deploy:cleanup',
+        'deploy:success'
     ]
 );
 
