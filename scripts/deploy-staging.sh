@@ -2,7 +2,6 @@
 
 #set -e
 
-
 PROJECT_PATH="$(pwd)"
 
 
@@ -29,9 +28,13 @@ cp -R /opt/config/pipelines/scripts/staging deployer/scripts/staging
 echo 'creating bucket dir'
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "mkdir -p $HOST_DEPLOY_PATH_BUCKET"
 
+ARCHIVES="deployer/scripts/staging"
+
+[ -d "pwa-studio" ] && ARCHIVES="$ARCHIVES pwa-studio"
+[ -d "magento" ] && ARCHIVES="$ARCHIVES magento"
 
 
-tar cfz "$BUCKET_COMMIT" deployer/scripts/staging magento pwa-studio 2> /dev/null
+tar cfz "$BUCKET_COMMIT" $ARCHIVES
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT" staging:$HOST_DEPLOY_PATH_BUCKET
 
 
@@ -48,9 +51,11 @@ php7.4 ./vendor/bin/dep deploy-bucket staging \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
 -o write_use_sudo=$WRITE_USE_SUDO
 
-# setup magento
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/release/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/release_setup.sh"
-
+# Run pre-release script in order to setup the server before magento deploy
+if [ -d "$PROJECT_PATH/magento" ]
+then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/release/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/release_setup.sh"
+fi
 
 echo '------> Deploying release ...';
 
@@ -79,5 +84,3 @@ if [ -d "$PROJECT_PATH/pwa-studio" ]
 then
  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/current/pwa-studio/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/post_release_setup_pwa_studio.sh"
 fi
-
-

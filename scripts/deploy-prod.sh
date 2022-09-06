@@ -1,8 +1,6 @@
 #!/bin/bash
 
-#keeping this for backward incommpatibity issues shoud be discarded starting 3.9, use deploy-production instead
-set -e
-
+#set -e
 
 PROJECT_PATH="$(pwd)"
 
@@ -30,19 +28,19 @@ cp -R /opt/config/pipelines/scripts/production deployer/scripts/production
 echo 'creating bucket dir'
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "mkdir -p $HOST_DEPLOY_PATH_BUCKET"
 
+ARCHIVES="deployer/scripts/production"
+
+[ -d "pwa-studio" ] && ARCHIVES="$ARCHIVES pwa-studio"
+[ -d "magento" ] && ARCHIVES="$ARCHIVES magento"
 
 
-tar cfz "$BUCKET_COMMIT" deployer/scripts/production magento
+tar cfz "$BUCKET_COMMIT" $ARCHIVES
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT" production:$HOST_DEPLOY_PATH_BUCKET
 
 
 cd /opt/config/php-deployer
 
 echo 'Deploying production ...';
-
-
-#create dirs if not exists first deploy
-
 
 
 echo '------> Deploying bucket ...';
@@ -53,9 +51,11 @@ php7.4 ./vendor/bin/dep deploy-bucket production \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
 -o write_use_sudo=$WRITE_USE_SUDO
 
-# setup magento
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/release/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/release_setup.sh"
-
+# Run pre-release script in order to setup the server before magento deploy
+if [ -d "$PROJECT_PATH/magento" ]
+then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/release/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/release_setup.sh"
+fi
 
 echo '------> Deploying release ...';
 
@@ -72,4 +72,15 @@ php7.4 ./vendor/bin/dep $DEFAULT_DEPLOYER production \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
 -o write_use_sudo=$WRITE_USE_SUDO
 
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/current/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_setup.sh"
+echo "running magento and/or pwa deployer"
+
+if [ -d "$PROJECT_PATH/magento" ]
+then
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/current/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_setup.sh"
+fi
+
+# Run pwa-studio post release script if the directory exists
+if [ -d "$PROJECT_PATH/pwa-studio" ]
+then
+ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/current/pwa-studio/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_setup_pwa_studio.sh"
+fi

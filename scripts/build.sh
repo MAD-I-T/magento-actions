@@ -80,9 +80,6 @@ then
     fi
 
     rm app/etc/env.php
-else
- echo "creating empty magento dir for deployment purposes"
- mkdir magento
 fi
 
 cd $PROJECT_PATH
@@ -107,4 +104,3 @@ then
   set -x
   ls -talh
 fi
-

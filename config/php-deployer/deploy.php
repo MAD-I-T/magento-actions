@@ -54,9 +54,23 @@ task(
         cd('{{host_bucket_path}}');
         run('mkdir -p temp');
         run('tar xfz {{bucket-commit}} -C temp');
-        run('cp -rf temp/magento {{release_path}}');
-        run('cp -rf temp/pwa-studio {{release_path}}');
-        run('cp -rf temp/deployer {{deploy_path}}');
+
+        if (test('[ -d temp/magento ]')) {
+            info('releasing magento');
+            run('cp -rf temp/magento {{release_path}}');
+        }
+        else info('magento backend release skipped');
+
+        if (test('[ -d temp/pwa-studio ]')) {
+            info('releasing pwa-studio');
+            run('cp -rf temp/pwa-studio {{release_path}}');
+        }else info('pwa-studio release skipped');
+
+        if (test('[ -d temp/deployer ]')) {
+            info('releasing deployer');
+            run('cp -rf temp/deployer {{deploy_path}}');
+        }else info('deployer release skipped');
+
         run('mv {{bucket-commit}} {{bucket-commit}}.back');
         run('rm temp -rf');
     } catch (\Exception $e) {
