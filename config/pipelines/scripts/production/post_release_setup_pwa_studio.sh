@@ -24,4 +24,4 @@ echo "Start the node server monnitored by PM2"
 
 pm2 stop pwa_studio
 pm2 delete pwa_studio
-pm2 start yarn --name pwa_studio -- start
+pm2 start yarn --interpreter bash --name pwa_studio -- start
