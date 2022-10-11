@@ -3,6 +3,12 @@
 
 MAGE_VERSION=$(grep -ni '"version"' magento/composer.json | grep -o -E '\:\ .+' | cut -d' ' -f6 | cut -d',' -f1 | cut -d'"' -f2;);
 
+
+if [ -z "$MAGE_VERSION" ]
+then
+  MAGE_VERSION=$(grep -ni '"version"' ./magento/composer.json | grep -o -E '\:\ .+' | cut -d ' ' -f4 | cut -d',' -f1 | cut -d'"' -f2;);
+fi
+
 set -e
 echo "Current magento version is $MAGE_VERSION"
 pwd
