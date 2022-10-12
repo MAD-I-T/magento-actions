@@ -74,6 +74,7 @@ ls -lath ./magento
 if [ "$INPUT_ENABLE" =  "pwa" ]
 then
   cd magento
+  composer config repositories.magento composer https://repo.magento.com/
   composer require magento/pwa
   cd ..
 fi
