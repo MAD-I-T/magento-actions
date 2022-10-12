@@ -60,6 +60,15 @@ ls -lath
 mv ./project-community-edition ./magento
 ls -lath ./magento
 
+
+if [ "$INPUT_ENABLE" =  "pwa" ]
+  cd magento
+  composer require magento/pwa
+  cd ..
+then
+fi
+
+
 if [ "$INPUT_NO_PUSH" -ne 1 ]
 then
   git config user.name github-actions

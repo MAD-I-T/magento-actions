@@ -38,6 +38,9 @@ inputs:
   disable_modules:
     description: 'List of modules to be disabled during install, comma separated e.g: Magento_Sales,Magento_Config'
     default: ''
+  enable:
+    description: 'enables functionalities when installing magento possible values: pwa'
+    default: ''
   no_push:
     description: 'do not push magento source code to github repo values 0|1'
     default: 0
