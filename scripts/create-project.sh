@@ -62,10 +62,10 @@ ls -lath ./magento
 
 
 if [ "$INPUT_ENABLE" =  "pwa" ]
+then
   cd magento
   composer require magento/pwa
   cd ..
-then
 fi
 
 
