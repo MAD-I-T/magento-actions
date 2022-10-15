@@ -14,7 +14,7 @@ Magento | Mage-os | PWA-Studio CI/CD using github actions:
 
 # usage
 
-To use this action your git repository must respect similar scaffolding to the following (or you can use the [install action](#install-magento-action)):
+To use this action your git repository must respect similar scaffolding to the following (its best to use our  [install action](#install-magento-action) (s) ):
 
 ```bash
 ├── .github
@@ -23,13 +23,11 @@ To use this action your git repository must respect similar scaffolding to the f
 ├── magento # directory where you Magento source files should go 
 └── pwa-studio # optional pwa-studio directory for pwa src code
 ```
-
 Links to full usage samples using Magento official [latest release](https://github.com/seyuf/magento-actions-sample/blob/master/.github/workflows/main.yml) or  the current [develop branch here](https://github.com/seyuf/m2-dev-github-actions).
-Don't forget to deploy your services on a container i.e (`container: ubuntu` below).
 
 ##### main.yml
 
-Config Example when magento v2.4
+Config Example when under magento v2.4.X
  ```
  name: m2-actions-test
  on: [push]
@@ -82,7 +80,7 @@ Config Example when magento v2.4
  ```
         
 
- Config Example when magento 2.3 & lower
+ Config Example when under magento 2.3 & lower
  
 ```
 name: m2-actions-test
@@ -135,12 +133,31 @@ This can be done by adding php input (after **with:** option).
 
 ##### options
 - `php:` possible values (7.1, 7.2, 7.3, 7.4)
+- `composer_version:` possible values (1, 2)
 - `process:` option [possible values](#other-processes) ('security-scan-files','static-test', 'integration-test', 'build'...)
-- see more specific args in the inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
+- see all available args in the inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
 
 Example with M2 project using elasticsuite & elasticsearch [here](https://github.com/seyuf/magento-actions)
 
 ![magento-actions-sample](https://user-images.githubusercontent.com/3765910/68416322-91bb9a00-0194-11ea-967d-9f139b901b9a.png)
+
+# Available processes
+
+- [install magento from github actions (also supports mage-os)](#install-magento-action)
+- [install pwa-studio from github actions](#install-pwa-studio-action)
+- [deploy pwa-studio to prod](#deploy-pwa-studio-action)
+- [Code quality check](#code-quality-check)
+- [Magento build](#build-an-artifact)
+- [Magento security scanners](#magento-security-scanners)
+- [Unit testing](#unit-testing)
+- [Integration tests](#integration-testing)
+- [Static testing](#static-test)
+- [Zero-downtime deployment](#zero-downtime-deployment)
+- [Customize the module](#customize-the-action)
+- [Setting the secrets](#set-secrets)
+- [see more on the forum](https://forum.madit.fr/)
+
+
 
 # zero downtime deployment
 To migrate from standard to zero-downtime deployment using this action.
@@ -242,21 +259,6 @@ For magento 2.3 and lower if  issues with the preceding sample
  
  **To achieve the deployment using gitlab-ci  ([follow this tutorial](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer))**
   
-# Other processes
-
-- [install magento from github actions (also supports mage-os)](#install-magento-action)
-- [install pwa-studio from github actions](#install-pwa-studio-action)
-- [deploy pwa-studio to prod](#deploy-pwa-studio-action)
-- [Code quality check](#code-quality-check)
-- [Magento build](#build-an-artifact)
-- [Magento security scanners](#magento-security-scanners)
-- [Unit testing](#unit-testing)
-- [Integration tests](#integration-testing)
-- [Static testing](#static-test)
-- [Zero-downtime deployment](#zero-downtime-deployment)
-- [Customize the module](#customize-the-action)
-- [Setting the secrets](#set-secrets)
-- [see more on the forum](https://forum.madit.fr/)
 
 
 
@@ -290,7 +292,7 @@ jobs:
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=cqI79AKN7Gk"><img src="https://user-images.githubusercontent.com/3765910/154555377-2ab4d165-9bbb-42a4-b6cf-22586156477d.png" alt="install magento 2 using github actions"></a>
-  <span>Install process in video</scan>
+  <span>Install process in video</span>
 </div>
 
 To set `${{secrets.COMPOSER_AUTH}}` :
