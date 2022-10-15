@@ -1,5 +1,5 @@
 # magento-actions
-Magento and/or [PWA-Studio](#install-pwa-studio-action) CI/CD using github actions: 
+Magento | Mage-os | PWA-Studio CI/CD using github actions: 
 
 - tests 
 - coding standard checks
@@ -244,8 +244,9 @@ For magento 2.3 and lower if  issues with the preceding sample
   
 # Other processes
 
-- [install magento from github actions](#install-magento-action)
+- [install magento from github actions (also supports mage-os)](#install-magento-action)
 - [install pwa-studio from github actions](#install-pwa-studio-action)
+- [deploy pwa-studio to prod](#deploy-pwa-studio-action)
 - [Code quality check](#code-quality-check)
 - [Magento build](#build-an-artifact)
 - [Magento security scanners](#magento-security-scanners)
@@ -265,6 +266,7 @@ Make sure the repository does not contain the magento directory at the root.
 You will also need to specify the version. Supported versions 2.2.X, 2.3.X and 2.4.X
 Or you can simply clone or fork this [repository](https://github.com/seyuf/magento-create-project) and use it as a template.
 The use of **actions/checkout@v2** is mandatory as v1 is not able to push the src to the repo.
+Git issue can occur depending on the linux image used (here ubuntu-latest)
 
 ```
 name: m2-install-actions
@@ -298,6 +300,16 @@ To set `${{secrets.COMPOSER_AUTH}}` :
 3. Add you composer auth as value e.g :
    `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}`
 
+One can also download magento code source from the [mage-os](https://mage-os.org/) repo the advantage of this reside in the absence of the authentification requirement. No need for magento credentials.
+See [this repository](https://github.com/seyuf/mage-os-actions.git).
+```
+    - name: 'install fresh magento from mage-os'
+      #if: ${{false}}
+      uses: MAD-I-T/magento-actions@master
+      with:
+        process: 'install-mage-os'
+        magento_version: 2.4.5  #e.g: 2.4.0, 2.4.3, 2.4.4 nightly
+```
 
 
 ## Install pwa-studio action
@@ -319,6 +331,13 @@ jobs:
         process: 'pwa-studio-install'
         #no_push: 1 //uncomment this to prevent files from getting pushed to repo
 ```
+## Deploy pwa-studio action
+One can also **install and deploy** a standalone PWA-studio website see following video:
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=psEBF5lohLo"><img src="https://user-images.githubusercontent.com/3765910/196008518-dc4cafb9-ce59-44fb-8b2e-9348688cc932.png" alt="check code against magento coding standard using github actions"></a>
+  <span>deploy a pwa-studio website</span>
+</div>
+
 
 ## Code quality check
 
@@ -473,7 +492,7 @@ Run all unit test of the magento email module
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=kRIzj2Vv5zE"><img src="https://user-images.githubusercontent.com/3765910/171204520-c2a87d86-4c83-44d3-896d-1d59174d1a2e.jpeg" alt="install magento 2 using github actions"></a>
-  <span>Video tutorial</scan>
+  <span>Video tutorial</span>
 </div>
 
 For magento 2.3 or lower if issues with the preceding sample
@@ -572,7 +591,7 @@ For magento 2.3 & 2.4
  
 
 <div align="center">
-  <a href="https://youtu.be/kRIzj2Vv5zE"><img src="https://user-images.githubusercontent.com/3765910/166113686-4dfd2482-ff96-48d3-8dda-fb769e891458.png" alt="check code against magento coding standard using github actions"></a> <h6>Video tutorial about overriding</h4>
+  <a href="https://youtu.be/kRIzj2Vv5zE"><img src="https://user-images.githubusercontent.com/3765910/166113686-4dfd2482-ff96-48d3-8dda-fb769e891458.png" alt="check code against magento coding standard using github actions"></a> <h6>Video tutorial about overriding</h6>
 </div>
 
 
@@ -580,6 +599,7 @@ For magento 2.3 & 2.4
   
 
 ## tipycal issues
+   - To not have to constantly restart php-fpm after zero-downtime deployments please configure your http servers correctly [see here](https://forum.madit.fr/t/avoid-reloading-php-fpm-after-zero-downtime-deployments/56).
    - If you're using a self-hosted runner please run it as root user using `sudo ./svc.sh install`
    - Do not forget to set or replace the `env.php` file in the `shared` directory
    - Adding the ssh user to the `http-user` group ex. `www-data` , also check php pool user and group setting rights
