@@ -52,23 +52,7 @@ Config Example when under magento v2.4.X
            - 9200:9200
          options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
      steps:
-     - uses: actions/checkout@v2 # pulls your repository, M2 src must be in a magento directory
-     - name: 'this step will execute all the unit tests available'
-       if: always()
-       uses: MAD-I-T/magento-actions@v3.14
-       env:
-         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-       with:
-         process: 'unit-test'
-         elasticsearch: 1
-     - name: 'this step starts static testing the code'
-       if: always()
-       uses: MAD-I-T/magento-actions@v3.14
-       env:
-         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-       with:
-         process: 'static-test'
-         elasticsearch: 1
+     - uses: actions/checkout@v2
      - name: 'this step will build an magento artifact'
        if: always()
        uses: MAD-I-T/magento-actions@v3.14
@@ -101,21 +85,7 @@ jobs:
           - 3106:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-    - uses: actions/checkout@v2  # pulls your repository, M2 src must be in a magento directory
-    - name: 'this step will execute all the unit tests available'
-      if: always()
-      uses: MAD-I-T/magento-actions@v3.14
-      env:
-        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-      with:
-        process: 'unit-test'
-     - name: 'this step starts static testing the code'
-      if: always()
-      uses: MAD-I-T/magento-actions@v3.14
-      env:
-        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-      with:
-        process: 'static-test'
+    - uses: actions/checkout@v2  
     - name: 'this step will build an magento artifact'
       if: always()
       uses: MAD-I-T/magento-actions@v3.14
@@ -124,6 +94,7 @@ jobs:
       with:
         process: 'build'
 ```
+
 To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
 If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.14** 
