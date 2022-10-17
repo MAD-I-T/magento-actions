@@ -116,5 +116,15 @@ task(
     ]
 );
 
+desc('Deploy release without permission check and pwa only');
+task(
+    'deploy:no-permission-check:pwa-only', [
+        'deploy:symlink',
+        'deploy:unlock',
+        'deploy:cleanup',
+        'deploy:success'
+    ]
+);
+
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');

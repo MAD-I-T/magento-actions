@@ -63,6 +63,10 @@ DEFAULT_DEPLOYER="deploy"
 if [ $INPUT_DEPLOYER = "no-permission-check" ]
 then
   DEFAULT_DEPLOYER="deploy:no-permission-check"
+  if [ ! -d "$PROJECT_PATH/magento" ]
+  then
+    DEFAULT_DEPLOYER="deploy:no-permission-check:pwa-only"
+  fi
 fi
 
 # deploy release
