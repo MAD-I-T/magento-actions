@@ -5,6 +5,7 @@ on: [push]
 jobs:
   publish-action-docker-image:
     runs-on: ubuntu-latest
+    environment: docker-image-builder
 
     steps:
     - uses: actions/checkout@v2
