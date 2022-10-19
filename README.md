@@ -55,7 +55,7 @@ Config Example when under magento v2.4.X
      - uses: actions/checkout@v2
      - name: 'this step will build an magento artifact'
        if: always()
-       uses: MAD-I-T/magento-actions@v3.14
+       uses: MAD-I-T/magento-actions@v3.15
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
@@ -88,7 +88,7 @@ jobs:
     - uses: actions/checkout@v2  
     - name: 'this step will build an magento artifact'
       if: always()
-      uses: MAD-I-T/magento-actions@v3.14
+      uses: MAD-I-T/magento-actions@v3.15
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -97,7 +97,7 @@ jobs:
 
 To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
-If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.14** 
+If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.15** 
 
 Also, in some custom cases it may be needed to force/specify the php version to use in the step. 
 This can be done by adding php input (after **with:** option).
@@ -140,7 +140,7 @@ For magento 2.4 & 2.3
 
 ```
 - name: 'this step will deploy your build to deployment server - zero downtime'
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -157,7 +157,7 @@ For magento 2.4 & 2.3
 
 - name: 'unlock php deployer if the deployment fails'
   if: failure() || cancelled()
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -251,7 +251,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: 'install fresh magento and copy to repo'
-      uses: MAD-I-T/magento-actions@v3.14
+      uses: MAD-I-T/magento-actions@v3.15
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -323,7 +323,7 @@ For magento 2.4 and 2.3
 
 ```
 - name: 'test some specific module code quality'
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -342,7 +342,7 @@ For magento 2.4.x (**remove elasticsearch 1 when building with 2.3.X**)
 
 ```
 - name: 'This step will build an magento artifact'
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -377,7 +377,7 @@ For magento 2.4.x
 ```
 - name: 'This step will scan the files for security breach'
   if: always()
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -407,7 +407,7 @@ For magento 2.4.x
 ```
 - name: 'This step will check all modules for security vulnerabilities'
       if: always()
-      uses: MAD-I-T/magento-actions@v3.14
+      uses: MAD-I-T/magento-actions@v3.15
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -441,7 +441,7 @@ See code sample [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d
 For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
 ```
 - name: 'This step will execute all the unit tests available'
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -452,7 +452,7 @@ For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
 Run all unit test of the magento email module
 ```
 - name: 'This step will execute specific unit tests in the path dir'
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -514,7 +514,7 @@ steps:
       submodules: recursive
   - name: 'launch magento2 integration test'
     if: ${{false}}
-    uses: MAD-I-T/magento-actions@v3.14
+    uses: MAD-I-T/magento-actions@v3.15
     env:
       COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     with:
@@ -528,7 +528,7 @@ steps:
 For magento 2.3 & 2.4 
 ```
 - name: 'This step starts static testing the code'
-  uses: MAD-I-T/magento-actions@v3.14
+  uses: MAD-I-T/magento-actions@v3.15
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
