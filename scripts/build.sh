@@ -60,8 +60,21 @@ then
     #--key=magento \
 
     ## the switch to production will build static content for all languages declared in config.php
-    bin/magento deploy:mode:set production
 
+    if [ -z "$INPUT_LANGS"  ]
+    then
+      bin/magento deploy:mode:set production
+    else
+      bin/magento setup:di:compile
+      bin/magento deploy:mode:set --skip-compilation production
+      # deploy static build for different locales
+      export IFS=","
+      languages="$INPUT_LANGS"
+      for locale in $languages; do
+        bin/magento setup:static-content:deploy $locale
+      done
+      composer dump-autoload -o
+    fi
     #or
 
     #bin/magento setup:di:compile
