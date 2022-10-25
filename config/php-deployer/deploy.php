@@ -14,7 +14,6 @@ import('hosts.yaml');
 set('writable_use_sudo', '{{write_use_sudo}}');
 set('writable_mode', 'chmod'); // chmod, chown, chgrp or acl.
 set('deploy_path', "{{deploy_path_custom}}");
-set('keep_releases', "{{deploy_keep_releases}}");
 set('keep_releases', function(){
     return intval("{{deploy_keep_releases}}");
 });
