@@ -49,6 +49,7 @@ php7.4 ./vendor/bin/dep deploy-bucket production \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
+-o deploy_keep_releases=$INPUT_KEEP_RELEASES \
 -o write_use_sudo=$WRITE_USE_SUDO
 
 # Run pre-release script in order to setup the server before magento deploy
@@ -70,6 +71,7 @@ php7.4 ./vendor/bin/dep $DEFAULT_DEPLOYER production \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
+-o deploy_keep_releases=$INPUT_KEEP_RELEASES \
 -o write_use_sudo=$WRITE_USE_SUDO
 
 echo "running magento and/or pwa deployer"

@@ -20,4 +20,5 @@ php7.4 ./vendor/bin/dep deploy:unlock staging \
 -o bucket-commit=$BUCKET_COMMIT \
 -o host_bucket_path=$HOST_DEPLOY_PATH_BUCKET \
 -o deploy_path_custom=$HOST_DEPLOY_PATH \
+-o deploy_keep_releases=$INPUT_KEEP_RELEASES \
 -o write_use_sudo=$WRITE_USE_SUDO

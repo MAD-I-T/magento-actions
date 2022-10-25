@@ -10,6 +10,9 @@ inputs:
     default: 'build'
   langs:
     description: 'specify build languages multiple values must be comma separated e.g (fr_FR or fr_FR,nl_NL)'
+  keep_releases:
+    description: 'numbers of builds / releases to keep after deployment (rotation). Possible values (int) e.g: 3'
+    default: 3
   override_settings:
     description:  'override config and scripts dirs with your own setup/config, must respect default scalfolding 1 or 0'
     default: 0
