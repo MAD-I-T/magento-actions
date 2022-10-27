@@ -103,8 +103,8 @@ Also, in some custom cases it may be needed to force/specify the php version to 
 This can be done by adding php input (after **with:** option).
 
 ##### options
-- `php:` possible values (7.1, 7.2, 7.3, 7.4)
-- `composer_version:` possible values (1, 2)
+- `php:` [Optional] possible values (7.1, 7.2, 7.3, 7.4, 8.1)
+- `composer_version:` [Optional] possible values (1, 2)
 - `process:` option [possible values](#other-processes) ('security-scan-files','static-test', 'integration-test', 'build'...)
 - see all available args in the inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
 
