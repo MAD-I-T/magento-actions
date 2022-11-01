@@ -108,6 +108,8 @@ This can be done by adding php input (after **with:** option).
 - `process:` option [possible values](#other-processes) ('security-scan-files','static-test', 'integration-test', 'build'...)
 - see all available args in the inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
 
+To use opensearch in place of elasticsearch [see following](https://forum.madit.fr/t/use-magento-actions-with-opensearch/63).
+
 Example with M2 project using elasticsuite & elasticsearch [here](https://github.com/seyuf/magento-actions)
 
 ![magento-actions-sample](https://user-images.githubusercontent.com/3765910/68416322-91bb9a00-0194-11ea-967d-9f139b901b9a.png)
