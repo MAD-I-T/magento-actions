@@ -36,4 +36,6 @@ else
   yes | cp -rf /opt/config/integration-test-config.php dev/tests/integration/etc/install-config-mysql.php
 fi
 
-cd dev/tests/integration && ../../../vendor/bin/phpunit -c phpunit.xml.dist
+cd dev/tests/integration && ../../../vendor/bin/phpunit ${INPUT_TESTSUITE:+'--testsuite'} ${INPUT_TESTSUITE:+"$INPUT_TESTSUITE"} ${INPUT_INTEGRATION_FILTER:+'--filter'} ${INPUT_INTEGRATION_FILTER:+"$INPUT_INTEGRATION_FILTER"} ${INPUT_INTEGRATION_CLASS:+"$INPUT_INTEGRATION_CLASS"}
+
+
