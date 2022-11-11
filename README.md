@@ -55,7 +55,7 @@ Config Example when under magento v2.4.X
      - uses: actions/checkout@v2
      - name: 'this step will build an magento artifact'
        if: always()
-       uses: MAD-I-T/magento-actions@v3.15
+       uses: MAD-I-T/magento-actions@v3.16
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
@@ -88,7 +88,7 @@ jobs:
     - uses: actions/checkout@v2  
     - name: 'this step will build an magento artifact'
       if: always()
-      uses: MAD-I-T/magento-actions@v3.15
+      uses: MAD-I-T/magento-actions@v3.16
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -97,7 +97,7 @@ jobs:
 
 To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
-If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.15** 
+If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.16** 
 
 Also, in some custom cases it may be needed to force/specify the php version to use in the step. 
 This can be done by adding php input (after **with:** option).
@@ -123,11 +123,15 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [Magento build](#build-an-artifact)
 - [Magento security scanners](#magento-security-scanners)
 - [Unit testing](#unit-testing)
+- [Test your magento custom marketplace extensions](https://www.madit.fr/r/test-magento-extensions)
 - [Integration tests](#integration-testing)
 - [Static testing](#static-test)
 - [Zero-downtime deployment](#zero-downtime-deployment)
 - [Customize the module](#customize-the-action)
 - [Setting the secrets](#set-secrets)
+- [Typical issues](#typical-issues)
+- [Use opensearch](#use-opensearch)
+- [Use gitlab instead of github](https://www.madit.fr/r/gitlab-ci-deployer )
 - [see more on the forum](https://forum.madit.fr/)
 
 
@@ -136,13 +140,13 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 To migrate from standard to zero-downtime deployment using this action.
 One can follow this [tutorial](https://www.madit.fr/r/1PP).
 
-**This step must come after a mandatory build step. **
+**This step must come after a mandatory build step.**
 
 For magento 2.4 & 2.3
 
 ```
 - name: 'this step will deploy your build to deployment server - zero downtime'
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -159,7 +163,7 @@ For magento 2.4 & 2.3
 
 - name: 'unlock php deployer if the deployment fails'
   if: failure() || cancelled()
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -174,6 +178,7 @@ For magento 2.4 & 2.3
     process: 'cleanup-staging'
     deployer: 'no-permission-check'
 ```
+Also to keep X number of build artifacts on the server after consecutive deployments. One can use ```keep_releases``` [see here](https://forum.madit.fr/t/magento-actions-limit-the-number-of-kept-releases-on-the-server/60).
 
 For magento 2.3 and lower if  issues with the preceding sample
 ```
@@ -254,7 +259,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: 'install fresh magento and copy to repo'
-      uses: MAD-I-T/magento-actions@v3.15
+      uses: MAD-I-T/magento-actions@v3.16
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -326,7 +331,7 @@ For magento 2.4 and 2.3
 
 ```
 - name: 'test some specific module code quality'
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -341,11 +346,11 @@ For magento 2.4 and 2.3
 
 ## build an artifact
 
-For magento 2.4.x (**remove elasticsearch 1 when building with 2.3.X**)
+For magento 2.4.x (**remove elasticsearch: 1 when building with 2.3.X**)
 
 ```
 - name: 'This step will build an magento artifact'
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -353,7 +358,7 @@ For magento 2.4.x (**remove elasticsearch 1 when building with 2.3.X**)
     elasticsearch: 1
 ```
 
-For magento 2.3 or lower if issues with preceding sample
+For magento <= 2.3  ***if issues with preceding sample***
 
 ```
 - name: 'This step will build an magento artifact'
@@ -365,9 +370,9 @@ For magento 2.3 or lower if issues with preceding sample
     process: 'build'
 ```
 
-- `php` : 7.1, 7.2, 7.3 or 7.4
+- `php` : 7.1, 7.2, 7.3, 7.4 or 8.1
 
-To build static content for languagages other than en_US see (https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25)
+To build static content for languages other than en_US or for [multi-lang support see](https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25)
 
 ## Magento security scanners
 
@@ -380,7 +385,7 @@ For magento 2.4.x
 ```
 - name: 'This step will scan the files for security breach'
   if: always()
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -410,7 +415,7 @@ For magento 2.4.x
 ```
 - name: 'This step will check all modules for security vulnerabilities'
       if: always()
-      uses: MAD-I-T/magento-actions@v3.15
+      uses: MAD-I-T/magento-actions@v3.16
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -444,7 +449,7 @@ See code sample [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d
 For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
 ```
 - name: 'This step will execute all the unit tests available'
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -455,7 +460,7 @@ For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
 Run all unit test of the magento email module
 ```
 - name: 'This step will execute specific unit tests in the path dir'
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -484,7 +489,10 @@ For magento 2.3 or lower if issues with the preceding sample
 
 ## integration testing
 
-Full sample, the integration test will need rabbitmq (this test will take a while to complete ^^)
+Full sample, the integration test will need rabbitmq see below 
+By default all tests in **phpunit.xml** will be run if the file exists. If not tests in **phpunit.xml.dist** will be run instead (the later should take hours to complete ^^).
+
+See all the other integration test [features here](https://forum.madit.fr/t/magento-integration-test/66).
 ```
 magento2-integration-test:
 runs-on: ubuntu-latest
@@ -517,7 +525,7 @@ steps:
       submodules: recursive
   - name: 'launch magento2 integration test'
     if: ${{false}}
-    uses: MAD-I-T/magento-actions@v3.15
+    uses: MAD-I-T/magento-actions@v3.16
     env:
       COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     with:
@@ -531,7 +539,7 @@ steps:
 For magento 2.3 & 2.4 
 ```
 - name: 'This step starts static testing the code'
-  uses: MAD-I-T/magento-actions@v3.15
+  uses: MAD-I-T/magento-actions@v3.16
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -599,3 +607,13 @@ For magento 2.3 & 2.4
   3. Add you composer auth as value e.g :
      `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}`
   4. Use as follows `COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}` in the action definition.
+
+## Use opensearch
+  One may need to use opensearch instead of elasticsearch. 
+  In that case you have to replace the elasticsearch section accordingly see [full sample here](https://forum.madit.fr/t/use-magento-actions-with-opensearch/63) :
+
+       elasticsearch:
+        image: ghcr.io/mad-i-t/magento-opensearch:1.2
+        ports:
+          - 9200:9200
+        options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
