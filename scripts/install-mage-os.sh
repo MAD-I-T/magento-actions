@@ -14,7 +14,7 @@ fi
 
 if [ "$INPUT_MAGENTO_VERSION" = "nightly" ]
 then
-  $INPUT_MAGENTO_VERSION=0.0.0
+  INPUT_MAGENTO_VERSION=0.0.0
 fi
 
 majorVersion=${INPUT_MAGENTO_VERSION:2:1}
