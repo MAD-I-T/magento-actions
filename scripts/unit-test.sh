@@ -62,7 +62,7 @@ if [ -n "$INPUT_UNIT_TEST_SUBSET_PATH" ]
 then
   ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG "$INPUT_UNIT_TEST_SUBSET_PATH"
 else
-  ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG
+  ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG ${INPUT_TESTSUITE:+'--testsuite'} ${INPUT_TESTSUITE:+"$INPUT_TESTSUITE"}
 fi
 
 

@@ -57,10 +57,8 @@ then
       fi
     fi
 
-    #--key=magento \
 
     ## the switch to production will build static content for all languages declared in config.php
-
     if [ -z "$INPUT_LANGS"  ]
     then
       bin/magento deploy:mode:set production
@@ -75,8 +73,8 @@ then
       done
       composer dump-autoload -o
     fi
-    #or
 
+    #or
     #bin/magento setup:di:compile
     #bin/magento deploy:mode:set --skip-compilation production
     #bin/magento setup:static-content:deploy
@@ -98,10 +96,8 @@ fi
 cd $PROJECT_PATH
 
 #launch pwa-strudio build if the directory exists
-
 if [ -d "$PROJECT_PATH/pwa-studio" ]
 then
-
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

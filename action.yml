@@ -50,7 +50,7 @@ inputs:
     description: 'do not push magento source code to github repo values 0|1'
     default: 0
   testsuite:
-    description: 'custom integration testsuite name e.g: "Memory Usage Tests"'
+    description: 'custom testsuite to be ran works for integration and unit testing  e.g: "Memory Usage Tests"'
   integration_filter:
     description: 'integration test filter test in class e.g: testAppReinitializationNoMemoryLeak'
   integration_class:
@@ -70,7 +70,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.16'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.17'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'
