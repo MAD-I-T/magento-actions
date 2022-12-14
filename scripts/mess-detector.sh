@@ -6,6 +6,14 @@ PROJECT_PATH="$(pwd)"
 
 wget -c https://phpmd.org/static/latest/phpmd.phar
 
+
+if [ ! -f $INPUT_RULESET ]
+then
+  echo -e "\e[32mThe ruleset file [$INPUT_RULESET] NOT FOUND\e[0m"
+  echo "Using default magento ruleset dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml"
+  cp /opt/config/defaults/ruleset.xml .
+fi
+
 if [ -n $INPUT_MD_SRC_PATH ]
 then
   	echo -e "\e[32mMess detection initiated\e[0m"
