@@ -4,6 +4,11 @@ set -e
 
 PROJECT_PATH="$(pwd)"
 
+
+echo "currently in $PROJECT_PATH"
+
+cd "$PROJECT_PATH/magento"
+
 wget -c https://phpmd.org/static/latest/phpmd.phar
 
 
