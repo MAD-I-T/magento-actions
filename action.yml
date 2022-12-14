@@ -60,6 +60,11 @@ inputs:
     default: 'dev/tests/unit/phpunit.xml.dist'
   unit_test_subset_path:
     description: 'Run restricted unit test subset directory path'
+  md_src_path:
+    description: 'path to source to be mess detected'
+  ruleset:
+    default: 'dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml'
+    description: 'Ruleset path e.g ruleset path for mess detector'
   node_version:
     description: 'node version for pwa-studio'
     default: 16
