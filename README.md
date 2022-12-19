@@ -4,8 +4,9 @@ Magento | Mage-os | PWA-Studio CI/CD using github actions:
 - tests 
 - coding standard checks
 - build 
+- security checks
 - [zero-downtime deploy](#zero-downtime-deployment) 
-- (see also [Gitlab-CI version](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer))
+- (see also [Gitlab-CI version](https://www.madit.fr/r/gitlab-ci-deployer))
 
 
 <div align="center">
@@ -238,7 +239,7 @@ For magento 2.3 and lower if  issues with the preceding sample
 
  Also one can limit the release history by limiting or increasing the max number of tracked releases on the server ([with the keep_releases input arg](https://forum.madit.fr/t/magento-actions-limit-the-number-of-kept-releases-on-the-server/60))   
 
- **To achieve the deployment using gitlab-ci  ([follow this tutorial](https://github.com/MAD-I-T/magento-actions/tree/master/gitlab-deployer))**
+ **To achieve the deployment using gitlab-ci  ([follow this tutorial](https://www.madit.fr/r/gitlab-ci-deployer))**
 
 
 
