@@ -540,13 +540,11 @@ steps:
 
 Mess detection on magento2 using github actions
 ```
-- name: 'Detect messes in the code'
-  uses: MAD-I-T/magento-actions@v3.17
-  env:
-    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-  with:
-    php: '7.2'
-    process: 'static-test'
+  - name: 'mess detector'
+    uses: MAD-I-T/magento-actions@master
+    with:
+      process: 'mess-detector'
+      md_src_path: '../Madit/Sips2/'
 ```
 Checkout [this sample](https://www.madit.fr/r/mess-detector-magento) to lean how to mess detected your magento module code.
 
