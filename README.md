@@ -120,7 +120,7 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [install magento from github actions (also supports mage-os)](#install-magento-action)
 - [install pwa-studio from github actions](#install-pwa-studio-action)
 - [deploy pwa-studio to prod](#deploy-pwa-studio-action)
-- [Code quality check](#code-quality-check)
+- [Coding standard check](#coding-standard-check)
 - [Magento build](#build-an-artifact)
 - [Magento security scanners](#magento-security-scanners)
 - [Unit testing](#unit-testing)
@@ -322,7 +322,7 @@ One can also **install and deploy** a standalone PWA-studio website see followin
 </div>
 
 
-## Code quality check
+## Coding standard check
 
 To check some magento module or some code against Magento conding Standard, useful before marketplace submissions
 <div align="center">

@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ -n "$GITLAB_USER_NAME" ]
+then
+  which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+  eval $(ssh-agent -s)
+  mkdir -p ~/.ssh
+  echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+  chmod 0600 ~/.ssh/id_rsa
+  echo "StrictHostKeyChecking no " > /root/.ssh/config
+fi
+
 chown -R root:root .
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
@@ -19,12 +29,26 @@ ls -ltah
 
 if [ "$INPUT_NO_PUSH" -ne 1 ]
 then
-  git config user.name github-actions
-  git config user.email github-actions@github.com
+  if [ -n "$GITLAB_USER_NAME" ]
+  then
+    git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
+    git config --global user.name "${GIT_USER_NAME:-$GITLAB_USER_NAME}"
+    git remote rm origin && git remote add origin "git@$GITLAB_URL:${CI_PROJECT_PATH}.git"
+
+  else
+    git config user.name github-actions
+    git config user.email github-actions@github.com
+  fi
   git add ./pwa-studio/.gitignore
   git commit -m 'added pwa-studio gitignore'
   git add ./pwa-studio
   git add -f ./pwa-studio/.env
   git commit -m "add pwa-studio project to github repo"
-  git push
+  if [ -n "$GITLAB_USER_NAME" ]
+  then
+    git remote rm origin && git remote add origin git@gitlab.com:$CI_PROJECT_PATH.git
+    git push origin HEAD:$CI_COMMIT_REF_NAME -o ci.skip
+  else
+    git push
+  fi
 fi
