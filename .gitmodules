@@ -1,0 +1,3 @@
+[submodule "gitlab-deployer"]
+	path = gitlab-deployer
+	url = https://github.com/MAD-I-T/gitlab-ci-magento.git
