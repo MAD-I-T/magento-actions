@@ -6,7 +6,7 @@ Magento | Mage-os | PWA-Studio CI/CD using github actions:
 - build 
 - security checks
 - [zero-downtime deploy](#zero-downtime-deployment) 
-- (see also [Gitlab-CI version](https://www.madit.fr/r/gitlab-ci-deployer))
+- [Gitlab-CI deployer](https://github.com/MAD-I-T/gitlab-ci-magento/)
 
 
 <div align="center">
@@ -133,7 +133,7 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [Setting the secrets](#set-secrets)
 - [Typical issues](#typical-issues)
 - [Use opensearch](#use-opensearch)
-- [Use gitlab instead of github](https://www.madit.fr/r/gitlab-ci-deployer )
+- [Use gitlab instead of github](https://github.com/MAD-I-T/gitlab-ci-magento/)
 - [see more on the forum](https://forum.madit.fr/)
 
 
@@ -239,7 +239,7 @@ For magento 2.3 and lower if  issues with the preceding sample
 
  Also one can limit the release history by limiting or increasing the max number of tracked releases on the server ([with the keep_releases input arg](https://forum.madit.fr/t/magento-actions-limit-the-number-of-kept-releases-on-the-server/60))   
 
- **To achieve the deployment using gitlab-ci  ([follow this tutorial](https://www.madit.fr/r/gitlab-ci-deployer))**
+ **To achieve the deployment using gitlab-ci  ([follow this tutorial](https://github.com/MAD-I-T/gitlab-ci-magento/))**
 
 
 
