@@ -539,7 +539,10 @@ steps:
 ```
 ## Mess detector
 
-Mess detection on magento2 using github actions
+Mess detection on magento2 using github actions.
+
+`ruleset` variable can be used to specify a custom rulset other than the default magento version.
+
 ```
   - name: 'mess detector'
     uses: MAD-I-T/magento-actions@master
