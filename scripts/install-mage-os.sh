@@ -16,6 +16,7 @@ fi
 PROJECT_PATH="$(pwd)"
 
 echo "currently in $PROJECT_PATH"
+git config --global --add safe.directory $(realpath .)
 
 if [ $INPUT_NO_PUSH = 1 ]
 then
