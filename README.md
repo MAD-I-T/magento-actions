@@ -129,7 +129,7 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [Mess detector](#mess-detector)
 - [Static testing](#static-test)
 - [Zero-downtime deployment](#zero-downtime-deployment)
-- [Customize the module](#customize-the-action)
+- [Customize the action](#customize-the-action)
 - [Setting the secrets](#set-secrets)
 - [Typical issues](#typical-issues)
 - [Use opensearch](#use-opensearch)

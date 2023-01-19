@@ -2,6 +2,17 @@
 
 set -e
 
+
+if [ -n "$GITLAB_USER_NAME" ]
+then
+  which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+  eval $(ssh-agent -s)
+  mkdir -p ~/.ssh
+  echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+  chmod 0600 ~/.ssh/id_rsa
+  echo "StrictHostKeyChecking no " > /root/.ssh/config
+fi
+
 PROJECT_PATH="$(pwd)"
 
 echo "currently in $PROJECT_PATH"
@@ -81,12 +92,27 @@ fi
 
 if [ "$INPUT_NO_PUSH" -ne 1 ]
 then
-  git config user.name github-actions
-  git config user.email github-actions@github.com
+
+  if [ -n "$GITLAB_USER_NAME" ]
+  then
+    git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
+    git config --global user.name "${GIT_USER_NAME:-$GITLAB_USER_NAME}"
+    git remote rm origin && git remote add origin "git@$GITLAB_URL:${CI_PROJECT_PATH}.git"
+  else
+    git config user.name github-actions
+    git config user.email github-actions@github.com
+  fi
+
   [ -f magento/.gitignore ] && echo "gitignore exists." || cp /opt/config/templates/gitignore.tpl magento/.gitignore
   git add magento/.gitignore
   git commit -m 'added gitignore'
   git add magento
   git commit -m "add magento project to github repo"
-  git push
+  if [ -n "$GITLAB_USER_NAME" ]
+  then
+    git remote rm origin && git remote add origin git@gitlab.com:$CI_PROJECT_PATH.git
+    git push origin HEAD:$CI_COMMIT_REF_NAME -o ci.skip
+  else
+    git push
+  fi
 fi

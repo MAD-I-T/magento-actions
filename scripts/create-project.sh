@@ -81,6 +81,7 @@ fi
 
 if [ "$INPUT_NO_PUSH" -ne 1 ]
 then
+
   if [ -n "$GITLAB_USER_NAME" ]
   then
     git config --global user.email "${GIT_USER_EMAIL:-$GITLAB_USER_EMAIL}"
@@ -91,6 +92,7 @@ then
     git config user.name github-actions
     git config user.email github-actions@github.com
   fi
+
   [ -f magento/.gitignore ] && echo "gitignore exists." || cp /opt/config/templates/gitignore.tpl magento/.gitignore
   git add magento/.gitignore
   git commit -m 'added gitignore'
