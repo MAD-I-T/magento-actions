@@ -8,7 +8,7 @@ if [ ! -d magento ] && [ -d app/etc ]
 then
   echo 'Magento project found. Reformatting...'
   mkdir magento
-  cp -r ./* magento/
+  cp -r `ls -A | grep -v "magento"` ./magento/
 fi
 
 
@@ -17,5 +17,5 @@ if [ ! -d pwa-studio ] && [ -f upward.yml ]
 then
   echo 'PWA-studio project found. Reformatting...'
   mkdir pwa-studio
-  cp -r ./* pwa-studio/
+  cp -r `ls -A | grep -v "pwa-studio"` ./pwa-studio/
 fi
