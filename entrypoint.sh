@@ -3,6 +3,8 @@
 echo "hello your setup is $INPUT_PHP & $INPUT_PROCESS & $INPUT_OVERRIDE_SETTINGS"
 
 
+bash /opt/config/utils/project-format-checker.sh
+
 if [ $INPUT_PHP = 'auto' ]
 then
   bash /opt/config/utils/php-compatibility-checker.sh
