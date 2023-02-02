@@ -1,9 +1,8 @@
 #!/bin/bash
 
-#set -e
+set -e
 
 PROJECT_PATH="$(pwd)"
-
 
 echo "project path is $PROJECT_PATH";
 
@@ -13,12 +12,9 @@ mkdir ~/.ssh/ && echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_
 ssh-add ~/.ssh/id_rsa
 echo "$SSH_CONFIG" > /etc/ssh/ssh_config && chmod 600 /etc/ssh/ssh_config
 
-
-
 echo "Create artifact and send to server"
 
 cd $PROJECT_PATH
-
 
 echo "Deploying to production server";
 
@@ -33,10 +29,8 @@ ARCHIVES="deployer/scripts/production"
 [ -d "pwa-studio" ] && ARCHIVES="$ARCHIVES pwa-studio"
 [ -d "magento" ] && ARCHIVES="$ARCHIVES magento"
 
-
 tar cfz "$BUCKET_COMMIT" $ARCHIVES
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT" production:$HOST_DEPLOY_PATH_BUCKET
-
 
 cd /opt/config/php-deployer
 

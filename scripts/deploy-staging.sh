@@ -1,9 +1,8 @@
 #!/bin/bash
 
-#set -e
+set -e
 
 PROJECT_PATH="$(pwd)"
-
 
 echo "project path is $PROJECT_PATH";
 
@@ -12,8 +11,6 @@ eval $(ssh-agent -s)
 mkdir ~/.ssh/ && echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 ssh-add ~/.ssh/id_rsa
 echo "$SSH_CONFIG" > /etc/ssh/ssh_config && chmod 600 /etc/ssh/ssh_config
-
-
 
 echo "Create artifact and send to server"
 
@@ -41,7 +38,6 @@ scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT
 cd /opt/config/php-deployer
 
 echo 'Deploying staging ...';
-
 
 echo '------> Deploying bucket ...';
 # deploy bucket
@@ -79,7 +75,6 @@ php7.4 ./vendor/bin/dep $DEFAULT_DEPLOYER staging \
 -o write_use_sudo=$WRITE_USE_SUDO
 
 echo "running magento and/or pwa deployer"
-
 if [ -d "$PROJECT_PATH/magento" ]
 then
   ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "cd $HOST_DEPLOY_PATH/current/magento/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/staging/post_release_setup.sh"
