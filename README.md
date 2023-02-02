@@ -315,7 +315,53 @@ jobs:
         #no_push: 1 //uncomment this to prevent files from getting pushed to repo
 ```
 ## Deploy pwa-studio action
-One can also **install and deploy** a standalone PWA-studio website see following video:
+One can also **install and deploy** a standalone PWA-studio website see the video below:
+```
+      - name: 'install fresh pwa-studio project'
+        uses: MAD-I-T/magento-actions@v3.12
+        if: ${{false}}
+        with:
+          process: 'pwa-studio-install'
+          #no_push: 1
+      - name: 'launch magento2 build'
+        if: ${{false}}
+        #if: always()
+        id: build
+        uses: MAD-I-T/magento-actions@master
+        env:
+          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+        with:
+          process: 'build'
+          elasticsearch: 1
+      - name: 'launch magento2 zero downtime deploy'
+        if: ${{false}}
+        #if: always()
+        uses: MAD-I-T/magento-actions@master
+        env:
+          BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
+          HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
+          HOST_DEPLOY_PATH_BUCKET: ${{secrets.STAGE_HOST_DEPLOY_PATH}}/bucket
+          SSH_PRIVATE_KEY: ${{secrets.STAGE_SSH_PRIVATE_KEY}}
+          SSH_CONFIG: ${{secrets.STAGE_SSH_CONFIG}}
+          WRITE_USE_SUDO: false
+        with:
+         deployer: 'no-permission-check'
+         process: 'deploy-staging'
+        
+      - name: 'unlock deployer if failure'
+        if: ${{false}}
+        #if: failure()
+        uses: MAD-I-T/magento-actions@master
+        env:
+          BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
+          HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
+          HOST_DEPLOY_PATH_BUCKET: ${{secrets.STAGE_HOST_DEPLOY_PATH}}/bucket
+          SSH_PRIVATE_KEY: ${{secrets.STAGE_SSH_PRIVATE_KEY}}
+          SSH_CONFIG: ${{secrets.STAGE_SSH_CONFIG}}
+          WRITE_USE_SUDO: false
+        with:
+          process: 'cleanup-staging'
+```
 <div align="center">
   <a href="https://www.youtube.com/watch?v=psEBF5lohLo"><img src="https://user-images.githubusercontent.com/3765910/196008518-dc4cafb9-ce59-44fb-8b2e-9348688cc932.png" alt="check code against magento coding standard using github actions"></a>
   <span>deploy a pwa-studio website</span>
