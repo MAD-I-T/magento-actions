@@ -5,8 +5,6 @@ echo "building ....."
 chown -R root:root .
 PROJECT_PATH="$(pwd)"
 
-
-
 echo "currently in $PROJECT_PATH"
 
 if [ -d "$PROJECT_PATH/magento" ]

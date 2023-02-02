@@ -4,6 +4,7 @@ set -e
 
 PROJECT_PATH="$(pwd)"
 
+
 echo "project path is $PROJECT_PATH";
 
 which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
@@ -12,9 +13,12 @@ mkdir ~/.ssh/ && echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_
 ssh-add ~/.ssh/id_rsa
 echo "$SSH_CONFIG" > /etc/ssh/ssh_config && chmod 600 /etc/ssh/ssh_config
 
+
+
 echo "Create artifact and send to server"
 
 cd $PROJECT_PATH
+
 
 echo "Deploying to production server";
 
@@ -29,8 +33,10 @@ ARCHIVES="deployer/scripts/production"
 [ -d "pwa-studio" ] && ARCHIVES="$ARCHIVES pwa-studio"
 [ -d "magento" ] && ARCHIVES="$ARCHIVES magento"
 
+
 tar cfz "$BUCKET_COMMIT" $ARCHIVES
 scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$BUCKET_COMMIT" production:$HOST_DEPLOY_PATH_BUCKET
+
 
 cd /opt/config/php-deployer
 
@@ -58,10 +64,6 @@ DEFAULT_DEPLOYER="deploy"
 if [ $INPUT_DEPLOYER = "no-permission-check" ]
 then
   DEFAULT_DEPLOYER="deploy:no-permission-check"
-  if [ ! -d "$PROJECT_PATH/magento" ]
-  then
-    DEFAULT_DEPLOYER="deploy:no-permission-check:pwa-only"
-  fi
 fi
 
 # deploy release
@@ -84,3 +86,5 @@ if [ -d "$PROJECT_PATH/pwa-studio" ]
 then
  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH/current/pwa-studio/ && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_setup_pwa_studio.sh"
 fi
+
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "cd $HOST_DEPLOY_PATH_BUCKET && /bin/bash $HOST_DEPLOY_PATH/deployer/scripts/production/post_release_cleanup.sh"
