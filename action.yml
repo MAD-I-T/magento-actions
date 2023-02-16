@@ -65,6 +65,9 @@ inputs:
   ruleset:
     default: 'dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml'
     description: 'Ruleset path e.g ruleset path for mess detector'
+  exec_path:
+    default: '.'
+    description: 'path to file or directory to exec, scan, etc... (phpstan)'
   node_version:
     description: 'node version for pwa-studio'
     default: 16

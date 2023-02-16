@@ -126,6 +126,7 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [Unit testing](#unit-testing)
 - [Test your magento custom marketplace extensions](https://www.madit.fr/r/test-magento-extensions)
 - [Integration tests](#integration-testing)
+- [Phpstan](#phpstan)
 - [Mess detector](#mess-detector)
 - [Static testing](#static-test)
 - [Zero-downtime deployment](#zero-downtime-deployment)
@@ -583,6 +584,24 @@ steps:
       process: 'integration-test'
       elasticsearch: 1
 ```
+
+## Phpstan
+
+Run phpstan on magento2 using github actions.
+
+`exec_path` variable represents the analyze execution path the default is the RUNNER_WORKSPACE/magento/.
+
+This feature utilizes the popular [bitExpert/phpstan-magento](https://github.com/bitExpert/phpstan-magento) module.
+
+```
+  - name: 'phpstan analyzer'
+    uses: MAD-I-T/magento-actions@master
+    with:
+      process: 'phpstan'
+      exec_path: 'vendor/magento/module-email/' # i.e when standalone third party module github repo ../Madit/Module
+```
+See the following [sample](https://www.madit.fr/r/test-magento-extensions), if you just want to analyze a standalone magento module.
+
 ## Mess detector
 
 Mess detection on magento2 using github actions.
