@@ -600,7 +600,10 @@ This feature utilizes the popular [bitExpert/phpstan-magento](https://github.com
       process: 'phpstan'
       exec_path: 'vendor/magento/module-email/' # i.e when standalone third party module github repo ../Madit/Module
 ```
+You can place a **.neon** file (e.g: phpstan.neon) in the root of the project or in the magento dir with complementary phpstan configs.
+
 See the following [sample](https://www.madit.fr/r/test-magento-extensions), if you just want to analyze a standalone magento module.
+
 
 ## Mess detector
 

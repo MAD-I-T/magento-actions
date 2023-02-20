@@ -32,6 +32,8 @@ composer require --dev phpstan/phpstan
 composer require --dev bitexpert/phpstan-magento
 composer config allow-plugins.phpstan/extension-installer true
 composer require --dev phpstan/extension-installer
+
+cp -rf $PROJECT_PATH/*.neon .
 vendor/bin/phpstan analyse $INPUT_EXEC_PATH
 
 rm -r magento-phpstan
