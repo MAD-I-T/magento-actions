@@ -35,8 +35,10 @@ composer require --dev phpstan/extension-installer
 
 
 
-NEONCONFIG=(`find ./ -maxdepth 1 -name "*.neon"`)
+NEONCONFIG=(`find $PROJECT_PATH -maxdepth 1 -name "*.neon"`)
+NEONEXTENSIONCONFIG=(`find $INPUT_EXEC_PATH -maxdepth 1 -name "*.neon"`)
 [ ${#NEONCONFIG[@]} -gt 0 ] && cp $PROJECT_PATH/*.neon .
+[ ${#NEONEXTENSIONCONFIG[@]} -gt 0 ] && cp $INPUT_EXEC_PATH/*.neon .
 
 
 vendor/bin/phpstan analyse $INPUT_EXEC_PATH
