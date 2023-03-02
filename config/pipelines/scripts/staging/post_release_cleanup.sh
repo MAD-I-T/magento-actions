@@ -8,5 +8,12 @@ echo "cleaning up buckets"
 
 KEEP_RELEASE_NR="NR>$1";
 
+bucketCount=`find . -type f | wc -l`
 
-rm `ls -t | awk $KEEP_RELEASE_NR`
+if [ "$bucketCount" -gt "$1" ];
+then
+    echo "cleaning up buckets"
+    rm `ls -t | awk $KEEP_RELEASE_NR`
+else
+    echo "no cleanup required"
+fi
