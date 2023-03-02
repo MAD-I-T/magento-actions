@@ -33,7 +33,12 @@ composer require --dev bitexpert/phpstan-magento
 composer config allow-plugins.phpstan/extension-installer true
 composer require --dev phpstan/extension-installer
 
-cp -rf $PROJECT_PATH/*.neon .
+
+
+NEONCONFIG=(`find ./ -maxdepth 1 -name "*.neon"`)
+[ ${#NEONCONFIG[@]} -gt 0 ] && cp $PROJECT_PATH/*.neon .
+
+
 vendor/bin/phpstan analyse $INPUT_EXEC_PATH
 
 rm -r magento-phpstan
