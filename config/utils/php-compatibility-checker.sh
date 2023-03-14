@@ -37,6 +37,12 @@ then
       esac ;;
     4)
       case "$minorVersion" in
+        6)
+                 echo "switching to php8.1 to match magento version";
+                 update-alternatives --set php /usr/bin/php8.1
+                 INPUT_ELASTICSEARCH=0
+                 INPUT_OPENSEARCH=1
+                 ;;
         4|5)
            echo "switching to php8.1 to match magento version";
            update-alternatives --set php /usr/bin/php8.1

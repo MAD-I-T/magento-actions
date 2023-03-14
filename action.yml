@@ -22,6 +22,9 @@ inputs:
   elasticsearch:
     description: 'your src is using elasticsearch?  1 or 0'
     default: 0
+  opensearch:
+    description: 'your src is using opensearch?  1 or 0'
+    default: 0
   extension:
     description: 'phpcs check on a Magento module or code base. Possible values, Vendor, Vendor/MyModule or dir path using github repository scaffolding'
     default: ''
