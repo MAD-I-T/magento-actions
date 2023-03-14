@@ -78,7 +78,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.19'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.20'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'
