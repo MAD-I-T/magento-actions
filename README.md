@@ -266,7 +266,7 @@ jobs:
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
-        process: 'create-project'
+        process: 'install-magento'
         magento_version: 2.3.0
 #       no_push: 1 //uncomment this to prevent files from getting pushed to repo
 ```
