@@ -7,7 +7,7 @@ Magento | Mage-os | PWA-Studio CI/CD using github actions:
 - security checks
 - [zero-downtime deploy](#zero-downtime-deployment) 
 - [Gitlab-CI deployer](https://github.com/MAD-I-T/gitlab-ci-magento/)
-
+- [Standalone third party module](https://github.com/MAD-I-T/magento-worldline-sips2/blob/master/.github/workflows/main.yml)
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=C-P-vA6aw34"><img src="https://user-images.githubusercontent.com/3765910/128611467-7fd3aa5a-6df1-4fe5-bfa3-23f01355999d.jpeg" alt="magento zero downtime in video"></a>
@@ -36,7 +36,6 @@ Config Example when under magento v2.4.X
  jobs:
    magento2-build:
      runs-on: ubuntu-latest
-     container: ubuntu
      name: 'm2 unit tests & build'
      services:
        mysql:
@@ -74,7 +73,6 @@ on: [push]
 jobs:
   magento2-build:
     runs-on: ubuntu-latest
-    container: ubuntu
     name: 'm2 unit tests & build'
     services:
       mysql:
@@ -392,6 +390,8 @@ For magento 2.4 and 2.3
 - extension : the module to be tested (Vendor/Name) or Path using repository scaffolding (i.e from see example [here](https://github.com/MAD-I-T/Magento2-AtosSips-Sherlock-LCL/blob/master/.github/workflows/main.yml))
 - standard : the standard for which the conformity must be checked 'Magento2, PSR2, PSR1, PSR12 etc...' see [magento-coding-standard](https://github.com/magento/magento-coding-standard)
 
+Also see standalone third party module use case [here](https://github.com/MAD-I-T/magento-worldline-sips2/blob/master/.github/workflows/main.yml).
+
 ## build an artifact
 
 For magento 2.4.x (**remove elasticsearch: 1 when building with 2.3.X**)
@@ -538,6 +538,8 @@ For magento 2.3 or lower if issues with the preceding sample
     process: 'unit-test'
 ```
 
+Also see standalone third party module use case [here](https://github.com/MAD-I-T/magento-worldline-sips2/blob/master/.github/workflows/main.yml).
+
 ## integration testing
 
 Full sample, the integration test will need rabbitmq see below 
@@ -547,7 +549,6 @@ See all the other integration test [features here](https://forum.madit.fr/t/mage
 ```
 magento2-integration-test:
 runs-on: ubuntu-latest
-container: ubuntu
 name: 'm2 integration test'
 services:
   mysql:
@@ -616,9 +617,12 @@ Mess detection on magento2 using github actions.
     uses: MAD-I-T/magento-actions@v3.19
     with:
       process: 'mess-detector'
-      md_src_path: '../Madit/Sips2/'
+      md_src_path: 'app/code/Madit/Sips2/'
 ```
 Checkout [this sample](https://www.madit.fr/r/mess-detector-magento) to lean how to mess detected your magento module code.
+
+
+Also see standalone third party module use case [here](https://github.com/MAD-I-T/magento-worldline-sips2/blob/master/.github/workflows/main.yml).
 
 ## static-test
 
