@@ -38,6 +38,7 @@ fi
 
 bash /opt/config/utils/pagebuilder-compatibility-checker.sh
 bash /opt/config/utils/common-magento-installer.sh
+source /etc/environment
 
 # copy allure config if m2 >= 2.4.6
 if [ "$INPUT_OPENSEARCH" = "1" ]
