@@ -335,7 +335,6 @@ One can also **install and deploy** a standalone PWA-studio website see the vide
           COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
         with:
           process: 'build'
-          elasticsearch: 1
       - name: 'launch magento2 zero downtime deploy'
         if: ${{false}}
         #if: always()
@@ -407,7 +406,6 @@ For magento 2.4.x (**remove elasticsearch: 1 when building with 2.3.X**)
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
     process: 'build'
-    elasticsearch: 1
 ```
 
 For magento <= 2.3  ***if issues with preceding sample***
@@ -442,8 +440,6 @@ For magento 2.4.x
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
     process: 'security-scan-files'
-    elasticsearch: 1
-    override_settings: 1
 ```
 
 For magento 2.3 or lower
@@ -471,7 +467,6 @@ For magento 2.4.x
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
         process: 'security-scan-modules'
-        elasticsearch: 1
 ```
 
 For magento 2.3 or lower
@@ -501,7 +496,7 @@ See code sample to unit test your custom or a thrid party magento2 module [here]
 
 [See more](https://forum.madit.fr/t/unit-testing-in-magento-2/16) about unit testing in magento2
 
-For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
+For magento 2.4.x  
 ```
 - name: 'This step will execute all the unit tests available'
   uses: MAD-I-T/magento-actions@v3.20
@@ -509,7 +504,6 @@ For magento 2.4.x  (**remove elasticsearch 1 when building with 2.3.X**)
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
     process: 'unit-test'
-    elasticsearch: 1
 ```
 
 Run all unit test of the magento email module
@@ -520,7 +514,6 @@ Run all unit test of the magento email module
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
     process: 'unit-test'
-    elasticsearch: 1
     unit_test_subset_path: 'vendor/magento/module-email/Test/Unit'
 ```
 [See more](https://forum.madit.fr/t/unit-testing-in-magento-2/16) about unit testing in magento2
@@ -709,10 +702,11 @@ For magento 2.3 & 2.4
 ## Use opensearch
   One may need to use opensearch instead of elasticsearch. By adding or replacing elasticsearch service by the following.
 
-Also replace action input `elasticsearch: 1` with `opensearch:1` .
-
        opensearch:
         image: ghcr.io/mad-i-t/magento-opensearch:2.5.0
         ports:
           - 9200:9200
         options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+
+
+Also replace action input `elasticsearch: 1` with `opensearch: 1` .
