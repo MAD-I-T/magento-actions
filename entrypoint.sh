@@ -19,7 +19,7 @@ then
 else
   echo "Forcing search engine to match specified input argument"
   echo "Elastisearch: $INPUT_ELASTICSEARCH"
-  echo "Opensearch: $INPUT_Opensearch"
+  echo "Opensearch: $INPUT_OPENSEARCH"
 fi
 
 
