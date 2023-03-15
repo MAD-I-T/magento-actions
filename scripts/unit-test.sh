@@ -42,7 +42,9 @@ bash /opt/config/utils/common-magento-installer.sh
 # copy allure config if m2 >= 2.4.6
 if [ -n "$INPUT_OPENSEARCH" ]
 then
-  cp -r "$PROJECT_PATH/magento/dev/tests/unit/allure/" .
+  echo "copying allure config from $PROJECT_PATH/magento/dev/tests/unit/allure/"
+  ALLURE_PATH="$PROJECT_PATH/magento/dev/tests/unit/allure"
+  cp -r $ALLURE_PATH .
 fi
 
 if [ -n "$INPUT_UNIT_TEST_SUBSET_PATH" ]
