@@ -28,14 +28,14 @@ chmod +x bin/magento
 
 source /etc/environment
 
-if [ $INPUT_ELASTICSUITE = 1 ]
+if [ "$INPUT_ELASTICSUITE" = "1" ]
 then
   yes | cp -rf /opt/config/integration-test-config-esuite.php dev/tests/integration/etc/install-config-mysql.php
-elif [ $INPUT_ELASTICSEARCH = 1 ]
+elif [ "$INPUT_ELASTICSEARCH" = "1" ]
 then
   yes | cp -rf /opt/config/integration-test-config-es.php dev/tests/integration/etc/install-config-mysql.php
 else
-  if [ $INPUT_OPENSEARCH = 1 ]
+  if [ "$INPUT_OPENSEARCH" = "1" ]
   then
     yes | cp -rf /opt/config/integration-test-config-os.php dev/tests/integration/etc/install-config-mysql.php
   else
