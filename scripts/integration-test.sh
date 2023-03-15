@@ -26,6 +26,8 @@ fi
 
 chmod +x bin/magento
 
+source /etc/environment
+
 if [ $INPUT_ELASTICSUITE = 1 ]
 then
   yes | cp -rf /opt/config/integration-test-config-esuite.php dev/tests/integration/etc/install-config-mysql.php
