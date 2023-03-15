@@ -34,13 +34,11 @@ then
 elif [ $INPUT_ELASTICSEARCH = 1 ]
 then
   yes | cp -rf /opt/config/integration-test-config-es.php dev/tests/integration/etc/install-config-mysql.php
+elif [ $INPUT_OPENSEARCH = 1 ]
+then
+  yes | cp -rf /opt/config/integration-test-config-os.php dev/tests/integration/etc/install-config-mysql.php
 else
-  if [ $INPUT_OPENSEARCH = 1 ]
-  then
-    yes | cp -rf /opt/config/integration-test-config-os.php dev/tests/integration/etc/install-config-mysql.php
-  else
-    yes | cp -rf /opt/config/integration-test-config.php dev/tests/integration/etc/install-config-mysql.php
-  fi
+  yes | cp -rf /opt/config/integration-test-config.php dev/tests/integration/etc/install-config-mysql.php
 fi
 
 cd dev/tests/integration && ../../../vendor/bin/phpunit ${INPUT_TESTSUITE:+'--testsuite'} ${INPUT_TESTSUITE:+"$INPUT_TESTSUITE"} ${INPUT_INTEGRATION_FILTER:+'--filter'} ${INPUT_INTEGRATION_FILTER:+"$INPUT_INTEGRATION_FILTER"} ${INPUT_INTEGRATION_CLASS:+"$INPUT_INTEGRATION_CLASS"}
