@@ -40,7 +40,7 @@ then
     4)
       case "$minorVersion" in
         6)
-                 echo "switching to php8.1 to match magento version";
+                 echo "switching to php8.1 and opensearch to match magento version ";
                  update-alternatives --set php /usr/bin/php8.1;
                  [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=0 \nINPUT_OPENSEARCH=1' >> /etc/environment;
                  ;;
