@@ -39,12 +39,6 @@ fi
 bash /opt/config/utils/pagebuilder-compatibility-checker.sh
 bash /opt/config/utils/common-magento-installer.sh
 
-
-if [ -n "$INPUT_OPENSEARCH" ]
-then
-  cp "$PROJECT_PATH/magento/dev/tests/unit/allure/allure.config.php" .
-fi
-
 if [ -n "$INPUT_UNIT_TEST_SUBSET_PATH" ]
 then
   ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG "$INPUT_UNIT_TEST_SUBSET_PATH"
