@@ -28,31 +28,26 @@ then
         4|5|6|7|8)
            echo "switching to php7.3 to match magento version";
            update-alternatives --set php /usr/bin/php7.3
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         0|1|2|3)
            echo "switching to php7.1 to match magento version";
            update-alternatives --set php /usr/bin/php7.1
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         *) echo "This version $INPUT_MAGENTO_VERSION of magento 2.4.X is not recognized minor $minorVersion" ;;
       esac ;;
     4)
       case "$minorVersion" in
         6)
-                 echo "switching to php8.1 and opensearch to match magento version ";
-                 update-alternatives --set php /usr/bin/php8.1;
-                 [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=0 \nINPUT_OPENSEARCH=1' >> /etc/environment;
-                 ;;
+           echo "switching to php8.1 to match magento version ";
+           update-alternatives --set php /usr/bin/php8.1;
+           ;;
         4|5)
            echo "switching to php8.1 to match magento version";
            update-alternatives --set php /usr/bin/php8.1;
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         0|1|2|3)
            echo "switching to php7.4 to match magento version";
            update-alternatives --set php /usr/bin/php7.4;
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         *) echo "This version $MAGE_VERSION of magento 2.4.X is not recognized minor $minorVersion";;
       esac ;;

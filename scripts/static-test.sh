@@ -39,6 +39,16 @@ fi
 
 bash /opt/config/utils/pagebuilder-compatibility-checker.sh
 bash /opt/config/utils/common-magento-installer.sh
+source /etc/environment
+
+
+# copy allure config if m2 >= 2.4.6
+if [ "$INPUT_OPENSEARCH" = "1" ]
+then
+  echo "copying allure config from $PROJECT_PATH/magento/dev/tests/static/allure/"
+  ALLURE_PATH="$PROJECT_PATH/magento/dev/tests/static/allure"
+  cp -r $ALLURE_PATH .
+fi
 
 bin/magento deploy:mode:set developer
 
