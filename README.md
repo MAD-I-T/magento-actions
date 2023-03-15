@@ -28,7 +28,43 @@ Links to full usage samples using Magento official [latest release](https://gith
 
 ##### main.yml
 
-Config Example when under magento v2.4.X
+Choose elastic search or opensearch depending on your magento version:
+
+Config sample when using magento v2.4.6 and upper
+ ```
+ name: m2-actions-test
+ on: [push]
+ 
+ jobs:
+   magento2-build:
+     runs-on: ubuntu-latest
+     name: 'm2 unit tests & build'
+     services:
+       mysql:
+         image: docker://mysql:8.0
+         env:
+           MYSQL_ROOT_PASSWORD: magento
+           MYSQL_DATABASE: magento
+         ports:
+           - 3306:3306
+         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+       opensearch:
+         image: ghcr.io/mad-i-t/magento-opensearch:2.5.0
+         ports:
+           - 9200:9200
+         options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+     steps:
+     - uses: actions/checkout@v3
+     - name: 'this step will build an magento artifact'
+       if: always()
+       uses: MAD-I-T/magento-actions@v3.20
+       env:
+         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+       with:
+         process: 'build'
+ ```
+
+Config Example using magento v2.4.5 and under
  ```
  name: m2-actions-test
  on: [push]
@@ -51,13 +87,8 @@ Config Example when under magento v2.4.X
          ports:
            - 9200:9200
          options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
-       opensearch:
-         image: ghcr.io/mad-i-t/magento-opensearch:2.5.0
-         ports:
-           - 9200:9200
-         options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
      steps:
-     - uses: actions/checkout@v2
+     - uses: actions/checkout@v3
      - name: 'this step will build an magento artifact'
        if: always()
        uses: MAD-I-T/magento-actions@v3.20
@@ -65,38 +96,7 @@ Config Example when under magento v2.4.X
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
          process: 'build'
- ```
-        
-
- Config Example when under magento 2.3 & lower
- 
-```
-name: m2-actions-test
-on: [push]
-
-jobs:
-  magento2-build:
-    runs-on: ubuntu-latest
-    name: 'm2 unit tests & build'
-    services:
-      mysql:
-        image: docker://mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: magento
-          MYSQL_DATABASE: magento
-        ports:
-          - 3106:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    steps:
-    - uses: actions/checkout@v2  
-    - name: 'this step will build an magento artifact'
-      if: always()
-      uses: MAD-I-T/magento-actions@v3.20
-      env:
-        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-      with:
-        process: 'build'
-```
+ ```       
 
 To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
@@ -542,7 +542,8 @@ Also see standalone third party module use case [here](https://github.com/MAD-I-
 Full sample, the integration test will need rabbitmq see below 
 By default all tests in **phpunit.xml** will be run if the file exists. If not tests in **phpunit.xml.dist** will be run instead (the later should take hours to complete ^^).
 
-See all the other integration test [features here](https://forum.madit.fr/t/magento-integration-test/66).
+Uncomment and replace elasticsearch by opensearch when magento version is >= 2.4.6
+
 ```
 magento2-integration-test:
 runs-on: ubuntu-latest
@@ -559,11 +560,11 @@ services:
     ports:
       - 9200:9200
     options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
-  opensearch:
-     image: ghcr.io/mad-i-t/magento-opensearch:2.5.0
-     ports:
-       - 9200:9200
-     options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+  #opensearch:
+  #   image: ghcr.io/mad-i-t/magento-opensearch:2.5.0
+  #   ports:
+  #     - 9200:9200
+  #   options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
   rabbitmq:
     image: docker://rabbitmq:3.8-alpine
     env:
@@ -575,17 +576,16 @@ services:
 
 steps:
   - uses: actions/checkout@v3
-    with:
-      submodules: recursive
   - name: 'launch magento2 integration test'
     if: ${{false}}
     uses: MAD-I-T/magento-actions@v3.20
     env:
       COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     with:
-      php: '8.1'
       process: 'integration-test'
 ```
+
+See all the other integration test [features here](https://forum.madit.fr/t/magento-integration-test/66).
 
 ## Phpstan
 
