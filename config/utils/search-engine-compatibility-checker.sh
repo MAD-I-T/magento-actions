@@ -27,11 +27,11 @@ then
     3)case "$minorVersion" in
         4|5|6|7|8)
            echo "switching search engine to elasticsearch";
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
+           [ -z $INPUT_OPENSEARCH  -a  -z  $INPUT_ELASTICSEARCH ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         0|1|2|3)
            echo "switching search engine to elasticsearch";
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
+           [ -z $INPUT_OPENSEARCH  -a  -z  $INPUT_ELASTICSEARCH ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         *) echo "This version $INPUT_MAGENTO_VERSION of magento 2.4.X is not recognized minor $minorVersion" ;;
       esac ;;
@@ -39,15 +39,15 @@ then
       case "$minorVersion" in
         6)
            echo "switching search engine to opensearch";
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=0 \nINPUT_OPENSEARCH=1' >> /etc/environment;
+           [ -z $INPUT_OPENSEARCH  -a  -z  $INPUT_ELASTICSEARCH ] && echo $'INPUT_ELASTICSEARCH=0 \nINPUT_OPENSEARCH=1' >> /etc/environment;
            ;;
         4|5)
            echo "switching search engine to elasticsearch";
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
+           [ -z $INPUT_OPENSEARCH  -a  -z  $INPUT_ELASTICSEARCH ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         0|1|2|3)
            echo "switching search engine to elasticsearch";
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
+           [ -z $INPUT_OPENSEARCH  -a  -z  $INPUT_ELASTICSEARCH ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         *) echo "This version $MAGE_VERSION of magento 2.4.X is not recognized minor $minorVersion";;
       esac ;;
