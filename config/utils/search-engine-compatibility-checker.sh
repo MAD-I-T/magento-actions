@@ -26,8 +26,8 @@ then
          ;;
     3)case "$minorVersion" in
         5|6|7|8)
-           echo "switching search engine to elasticsearch";
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
+           echo "No search engine selected for it manually if needed";
+           #[ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         0|1|2|3|4)
            echo "No search engine selected for it manually if needed";
