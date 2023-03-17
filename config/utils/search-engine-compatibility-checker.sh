@@ -25,13 +25,12 @@ then
          echo "No search engine needed";
          ;;
     3)case "$minorVersion" in
-        4|5|6|7|8)
+        5|6|7|8)
            echo "switching search engine to elasticsearch";
            [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
-        0|1|2|3)
-           echo "switching search engine to elasticsearch";
-           [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
+        0|1|2|3|4)
+           echo "No search engine selected for it manually if needed";
            ;;
         *) echo "This version $INPUT_MAGENTO_VERSION of magento 2.4.X is not recognized minor $minorVersion" ;;
       esac ;;
