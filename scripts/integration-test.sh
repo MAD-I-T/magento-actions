@@ -28,16 +28,32 @@ chmod +x bin/magento
 
 source /etc/environment
 
+#auto-detect search engine
+opensearch_status=$(curl --write-out %{http_code} --silent --output /dev/null opensearch:9200)
+SEARCHENGINE=""
+if [ "$opensearch_status" = "200" ]
+then
+  SEARCHENGINE="opensearch"
+else
+  SEARCHENGINE="elasticsearch"
+fi
+
+export SEARCHENGINE
+
+
 if [ "$INPUT_ELASTICSUITE" = "1" ]
 then
-  yes | cp -rf /opt/config/integration-test-config-esuite.php dev/tests/integration/etc/install-config-mysql.php
+  #yes | cp -rf /opt/config/integration-test-config-esuite.php dev/tests/integration/etc/install-config-mysql.php
+  envsubst < /opt/config/integration-test-config-esuite.php | tee  dev/tests/integration/etc/install-config-mysql.php
 elif [ "$INPUT_ELASTICSEARCH" = "1" ]
 then
-  yes | cp -rf /opt/config/integration-test-config-es.php dev/tests/integration/etc/install-config-mysql.php
+  #yes | cp -rf /opt/config/integration-test-config-es.php dev/tests/integration/etc/install-config-mysql.php
+  envsubst < /opt/config/integration-test-config-es.php | tee  dev/tests/integration/etc/install-config-mysql.php
 else
   if [ "$INPUT_OPENSEARCH" = "1" ]
   then
-    yes | cp -rf /opt/config/integration-test-config-os.php dev/tests/integration/etc/install-config-mysql.php
+    #yes | cp -rf /opt/config/integration-test-config-os.php dev/tests/integration/etc/install-config-mysql.php
+    envsubst < /opt/config/integration-test-config-os.php | tee  dev/tests/integration/etc/install-config-mysql.php
   else
     yes | cp -rf /opt/config/integration-test-config.php dev/tests/integration/etc/install-config-mysql.php
   fi

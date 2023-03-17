@@ -21,6 +21,6 @@ return [
     'amqp-user' => 'magento',
     'amqp-password' => 'magento',
     'search-engine' => 'opensearch',
-    'opensearch-host' => 'opensearch',
+    'opensearch-host' => '$SEARCHENGINE',
     'opensearch-port' => 9200,
 ];
