@@ -30,7 +30,7 @@ Links to full usage samples using Magento official [latest release](https://gith
 
 Choose elastic search or opensearch depending on your magento version:
 
-Config sample when using magento v2.4.6 and upper
+Config sample when using magento v2.4.X
  ```
  name: m2-actions-test
  on: [push]
@@ -64,39 +64,35 @@ Config sample when using magento v2.4.6 and upper
          process: 'build'
  ```
 
-Config Example using magento v2.4.5 and under
- ```
- name: m2-actions-test
- on: [push]
+ Config Example when under magento 2.3 & lower
  
- jobs:
-   magento2-build:
-     runs-on: ubuntu-latest
-     name: 'm2 unit tests & build'
-     services:
-       mysql:
-         image: docker://mysql:8.0
-         env:
-           MYSQL_ROOT_PASSWORD: magento
-           MYSQL_DATABASE: magento
-         ports:
-           - 3306:3306
-         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-       elasticsearch:
-         image: docker://elasticsearch:7.1.0
-         ports:
-           - 9200:9200
-         options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
-     steps:
-     - uses: actions/checkout@v3
-     - name: 'this step will build an magento artifact'
-       if: always()
-       uses: MAD-I-T/magento-actions@v3.20
-       env:
-         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-       with:
-         process: 'build'
- ```       
+```
+name: m2-actions-test
+on: [push]
+
+jobs:
+  magento2-build:
+    runs-on: ubuntu-latest
+    name: 'm2 unit tests & build'
+    services:
+      mysql:
+        image: docker://mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: magento
+          MYSQL_DATABASE: magento
+        ports:
+          - 3106:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+    - uses: actions/checkout@v2  
+    - name: 'this step will build an magento artifact'
+      if: always()
+      uses: MAD-I-T/magento-actions@v3.19
+      env:
+        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      with:
+        process: 'build'
+```
 
 To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
