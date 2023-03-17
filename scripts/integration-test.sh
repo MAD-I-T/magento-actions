@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+
+opensearch_status=$(curl --write-out %{http_code} --silent --output /dev/null opensearch:9200)
+
 PROJECT_PATH="$(pwd)"
 
 echo "currently in $PROJECT_PATH"
@@ -29,7 +32,6 @@ chmod +x bin/magento
 source /etc/environment
 
 #auto-detect search engine
-opensearch_status=$(curl --write-out %{http_code} --silent --output /dev/null opensearch:9200)
 SEARCHENGINE=""
 if [ "$opensearch_status" = "200" ]
 then
