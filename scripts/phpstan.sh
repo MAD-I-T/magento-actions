@@ -43,6 +43,8 @@ NEONEXTENSIONCONFIG=(`find $INPUT_EXEC_PATH -maxdepth 1 -name "*.neon"`)
 
 vendor/bin/phpstan analyse $INPUT_EXEC_PATH
 
+cd $PROJECT_PATH
+
 rm -r magento-phpstan
 
 
