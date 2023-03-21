@@ -41,11 +41,11 @@ then
            echo $'INPUT_ELASTICSEARCH=0 \nINPUT_OPENSEARCH=1' >> /etc/environment;
            ;;
         4|5)
-           echo "switching search engine to elasticsearch";
+           echo "switching search engine to elasticsearch if needed";
            [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         0|1|2|3)
-           echo "switching search engine to elasticsearch";
+           echo "switching search engine to elasticsearch if needed";
            [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
         *) echo "This version $MAGE_VERSION of magento 2.4.X is not recognized minor $minorVersion";;
