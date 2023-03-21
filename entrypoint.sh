@@ -13,14 +13,10 @@ else
   update-alternatives --set php /usr/bin/php${INPUT_PHP}
 fi
 
-if [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ]
-then
-  bash /opt/config/utils/search-engine-compatibility-checker.sh
-else
-  echo "Forcing search engine to match specified input argument"
-  echo "Elastisearch: $INPUT_ELASTICSEARCH"
-  echo "Opensearch: $INPUT_OPENSEARCH"
-fi
+echo "Input search engine specifications"
+echo "Elasticsearch: $INPUT_ELASTICSEARCH"
+echo "Opensearch: $INPUT_OPENSEARCH"
+bash /opt/config/utils/search-engine-compatibility-checker.sh
 
 
 if [ "$INPUT_COMPOSER_VERSION" -ne 0 ]
