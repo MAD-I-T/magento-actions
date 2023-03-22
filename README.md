@@ -132,7 +132,6 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [Customize the action](#customize-the-action)
 - [Setting the secrets](#set-secrets)
 - [Typical issues](#typical-issues)
-- [Use opensearch](#use-opensearch)
 - [Use gitlab instead of github](https://github.com/MAD-I-T/gitlab-ci-magento/)
 - [see more on the forum](https://forum.madit.fr/)
 
@@ -697,13 +696,18 @@ For magento 2.3 & 2.4
   4. Use as follows `COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}` in the action definition.
 
 ## Use opensearch
-  One may need to use opensearch instead of elasticsearch. By adding or replacing elasticsearch service by the following.
+  Issues with opensearch ? One may need to use opensearch instead of elasticsearch. By adding or replacing elasticsearch service by the following.
 
-       opensearch:
-        image: ghcr.io/mad-i-t/magento-opensearch:2.5.0
+      opensearch:
+        image: opensearchproject/opensearch:1.2.1
         ports:
           - 9200:9200
-        options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+        options: -e="discovery.type=single-node" -e "plugins.security.disabled=true"  -e "plugins.security.ssl.http.enabled=false" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
 
+### Issues with elasticsearch and opensearch compatibilities
+Since v3.20 the search engine detection is automatic and depends on your [magento version](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/system-requirements.html).
+Nonetheless, a service with an alias`opensearch` or `elasticsearch` must be set. 
 
-Also replace action input `elasticsearch: 1` with `opensearch: 1` .
+In many cases, it is recommended to remove inputs such as `elasticsearch: 1` or `opensearch: 1` unless you want to force these params.
+
+Also, `elasticsearch: 0` or `opensearch: 0`  can be used to forcefully to disable search engine detecting/usage (Not recommended).
