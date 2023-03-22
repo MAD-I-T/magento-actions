@@ -7,7 +7,7 @@ Magento | Mage-os | PWA-Studio CI/CD using github actions:
 - security checks
 - [zero-downtime deploy](#zero-downtime-deployment) 
 - [Gitlab-CI deployer](https://github.com/MAD-I-T/gitlab-ci-magento/)
-- [Standalone third party module](https://github.com/MAD-I-T/magento-worldline-sips2/blob/master/.github/workflows/main.yml)
+- [Standalone third party module e.g](https://github.com/MAD-I-T/magento-worldline-sips2/blob/master/.github/workflows/main.yml)
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=C-P-vA6aw34"><img src="https://user-images.githubusercontent.com/3765910/128611467-7fd3aa5a-6df1-4fe5-bfa3-23f01355999d.jpeg" alt="magento zero downtime in video"></a>
