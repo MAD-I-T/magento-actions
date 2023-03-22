@@ -49,10 +49,10 @@ Config sample when using magento v2.4.X
            - 3306:3306
          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
        opensearch:
-        image: opensearchproject/opensearch:1.2.1
-        ports:
-          - 9200:9200
-        options: -e="discovery.type=single-node" -e "plugins.security.disabled=true"  -e "plugins.security.ssl.http.enabled=false" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+         image: opensearchproject/opensearch:1.2.1
+         ports:
+           - 9200:9200
+         options: -e="discovery.type=single-node" -e "plugins.security.disabled=true"  -e "plugins.security.ssl.http.enabled=false" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
       
      steps:
      - uses: actions/checkout@v3
