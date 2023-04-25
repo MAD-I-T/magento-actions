@@ -46,7 +46,7 @@ then
 
 
     ## the switch to production will build static content for all languages declared in config.php
-    if [ -z "$INPUT_LANGS"  ]
+    if [ -z "$INPUT_LANGS"  ] && [ -z "$INPUT_THEMES"  ]
     then
       bin/magento deploy:mode:set production
     else
@@ -56,9 +56,14 @@ then
       export IFS=","
       magento_themes=${$INPUT_THEMES:+ $( echo $T |  sed 's/ / -t /g')" -t Magento/backend"}
       languages="$INPUT_LANGS"
-      for locale in $languages; do
-        bin/magento setup:static-content:deploy $magento_themes $locale
-      done
+      if [ -n "$languages"  ]
+      then
+        for locale in $languages; do
+          bin/magento setup:static-content:deploy $magento_themes $locale
+        done
+      else
+          bin/magento setup:static-content:deploy $magento_themes
+      fi
       composer dump-autoload -o
     fi
 
