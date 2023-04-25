@@ -54,9 +54,10 @@ then
       bin/magento deploy:mode:set --skip-compilation production
       # deploy static build for different locales
       export IFS=","
+      magento_themes=${$INPUT_THEMES:+ $( echo $T |  sed 's/ / -t /g')" -t Magento/backend"}
       languages="$INPUT_LANGS"
       for locale in $languages; do
-        bin/magento setup:static-content:deploy $locale
+        bin/magento setup:static-content:deploy $magento_themes $locale
       done
       composer dump-autoload -o
     fi
