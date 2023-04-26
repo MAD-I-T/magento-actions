@@ -59,24 +59,15 @@ then
       if [ -n "$languages"  ]
       then
         for locale in $languages; do
+          echo "bin/magento setup:static-content:deploy $magento_themes $locale"
           bin/magento setup:static-content:deploy $magento_themes $locale
         done
       else
+          echo "bin/magento setup:static-content:deploy $magento_themes"
           bin/magento setup:static-content:deploy $magento_themes
       fi
       composer dump-autoload -o
     fi
-
-    #or
-    #bin/magento setup:di:compile
-    #bin/magento deploy:mode:set --skip-compilation production
-    #bin/magento setup:static-content:deploy
-    #bin/magento setup:static-content:deploy en_US  -a adminhtml
-    #bin/magento setup:static-content:deploy fr_FR -f -s standard -a adminhtml
-    #bin/magento setup:static-content:deploy fr_FR -f -s standard  -t Creativestyle/theme-creativeshop
-
-    #composer dump-autoload -o
-
 
     if [ -n "$INPUT_DISABLE_MODULES"  ]
     then

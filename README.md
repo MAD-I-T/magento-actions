@@ -418,7 +418,9 @@ For magento <= 2.3  ***if issues with preceding sample***
 
 - `php` : 7.1, 7.2, 7.3, 7.4 or 8.1
 
-To build static content for languages other than en_US or for [multi-lang support see](https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25)
+Use langs input to build static content for languages other than en_US or for [multi-lang support see](https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25/2?u=madit).
+
+Use themes input to build static content for specific theme(s) only instead of all by default [more on multi-theme support](https://www.madit.fr/r/theme-builder-hyva).
 
 ## Magento security scanners
 
