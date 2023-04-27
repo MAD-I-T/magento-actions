@@ -44,10 +44,12 @@ then
     bash /opt/config/utils/pagebuilder-compatibility-checker.sh
     bash /opt/config/utils/common-magento-installer.sh
 
+    ## Build static contents
+    bash /opt/config/utils/custom-theme-builder.sh
 
-    ## the switch to production will build static content for all languages declared in config.php
     if [ -z "$INPUT_LANGS"  ] && [ -z "$INPUT_THEMES"  ]
     then
+      ## the switch to production will build static content for all languages declared in config.php
       bin/magento deploy:mode:set production
     else
       bin/magento setup:di:compile
