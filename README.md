@@ -691,7 +691,7 @@ For magento 2.3 & 2.4
   It is a good practice not to set credentials like composer auth in the code source (see https://12factor.net).
   So it is advised to use github secret instead of fill the value in the main.yml of your workflow. 
   Example for `COMPOSER_AUTH`:
-  1. Go to `Settings>Secrets`
+  1. Go to `Settings>Secrets>Repository secrets`
   2. Create variable `COMPOSER_AUTH`
   3. Add you composer auth as value e.g :
      `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}`
