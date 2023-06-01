@@ -129,6 +129,7 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [Mess detector](#mess-detector)
 - [Static testing](#static-test)
 - [Zero-downtime deployment](#zero-downtime-deployment)
+- [For local docker devbox](https://github.com/MAD-I-T/magento-devbox)
 - [Customize the action](#customize-the-action)
 - [Setting the secrets](#set-secrets)
 - [Typical issues](#typical-issues)
