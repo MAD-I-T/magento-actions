@@ -103,7 +103,7 @@ Also, in some custom cases it may be needed to force/specify the php version to 
 This can be done by adding php input (after **with:** option).
 
 ##### options
-- `php:` [Optional] possible values (7.1, 7.2, 7.3, 7.4, 8.1)
+- `php:` [Optional] possible values (7.1, 7.2, 7.3, 7.4, 8.1, 8.2)
 - `composer_version:` [Optional] possible values (1, 2)
 - `process:` option [possible values](#other-processes) ('security-scan-files','static-test', 'integration-test', 'build'...)
 - see all available args in the inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
@@ -417,7 +417,7 @@ For magento <= 2.3  ***if issues with preceding sample***
     process: 'build'
 ```
 
-- `php` : 7.1, 7.2, 7.3, 7.4 or 8.1
+- `php` : 7.1, 7.2, 7.3, 7.4, 8.1 or 8.2
 
 Use langs input to build static content for languages other than en_US or for [multi-lang support see](https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25/2?u=madit).
 
