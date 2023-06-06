@@ -38,8 +38,8 @@ then
     4)
       case "$minorVersion" in
         6)
-           echo "switching to php8.1 to match magento version ";
-           update-alternatives --set php /usr/bin/php8.1;
+           echo "switching to php8.2 to match magento version ";
+           update-alternatives --set php /usr/bin/php8.2;
            ;;
         4|5)
            echo "switching to php8.1 to match magento version";
