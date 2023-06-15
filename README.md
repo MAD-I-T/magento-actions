@@ -248,8 +248,6 @@ One can install magento using github actions. This action will download magento 
 Make sure the repository does not contain the magento directory at the root.
 You will also need to specify the version. Supported versions 2.2.X, 2.3.X and 2.4.X
 Or you can simply clone or fork this [repository](https://github.com/seyuf/magento-create-project) and use it as a template.
-The use of **actions/checkout@v2** is mandatory as v1 is not able to push the src to the repo.
-Git issue can occur depending on the linux image used (here ubuntu-latest)
 
 ```
 name: m2-install-actions
@@ -259,7 +257,7 @@ jobs:
     runs-on: ubuntu-latest
     name: 'magento install & push'      
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: 'install fresh magento and copy to repo'
       uses: MAD-I-T/magento-actions@v3.22
       env:
@@ -276,9 +274,11 @@ jobs:
   <span>Install process in video</span>
 </div>
 
+One can use our **[magento-devbox](https://github.com/MAD-I-T/magento-devbox)** as local dev env. Linux and mac os supported.
+
 To set `${{secrets.COMPOSER_AUTH}}` :
 
-1. Go to `Settings>Secrets`
+1. Go to `Settings>Secrets>Repository secrets`
 2. Create variable `COMPOSER_AUTH`
 3. Add you composer auth as value e.g :
    `{"http-basic":{"repo.magento.com": {"username": "xxxxxxxxxxxxxx", "password": "xxxxxxxxxxxxxx"}}}`
@@ -293,6 +293,7 @@ See [this repository](https://github.com/seyuf/mage-os-actions.git).
         process: 'install-mage-os'
         magento_version: 2.4.5  #e.g: 2.4.0, 2.4.3, 2.4.4 nightly
 ```
+
 
 
 ## Install pwa-studio action
