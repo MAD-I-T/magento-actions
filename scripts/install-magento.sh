@@ -17,10 +17,16 @@ PROJECT_PATH="$(pwd)"
 echo "currently in $PROJECT_PATH"
 git config --global --add safe.directory $(realpath .)
 
-
 if [ $INPUT_NO_PUSH = 1 ]
 then
   rm -rf ./magento
+fi
+
+if [ -d "$PROJECT_PATH/magento" ]
+then
+  echo "An magento project already exists."
+  echo "Please consider deleting the magento directory first."
+  exit 1
 fi
 
 majorVersion=${INPUT_MAGENTO_VERSION:2:1}

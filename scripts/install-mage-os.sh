@@ -2,7 +2,6 @@
 
 set -e
 
-
 if [ -n "$GITLAB_USER_NAME" ]
 then
   which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
@@ -23,6 +22,12 @@ then
   rm -rf ./magento
 fi
 
+if [ -d "$PROJECT_PATH/magento" ]
+then
+  echo "An magento project already exists."
+  echo "Please consider deleting the magento directory first."
+  exit 1
+fi
 
 if [ "$INPUT_MAGENTO_VERSION" = "nightly" ]
 then

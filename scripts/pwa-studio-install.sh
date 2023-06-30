@@ -10,6 +10,22 @@ then
   echo "StrictHostKeyChecking no " > /root/.ssh/config
 fi
 
+PROJECT_PATH="$(pwd)"
+
+echo "currently in $PROJECT_PATH"
+
+if [ $INPUT_NO_PUSH = 1 ]
+then
+  rm -rf ./pwa-studio
+fi
+
+if [ -d "$PROJECT_PATH/pwa-studio" ]
+then
+  echo "An PWA studio project already exists."
+  echo "Please consider deleting the pwa-studio directory first."
+  exit 1
+fi
+
 chown -R root:root .
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
