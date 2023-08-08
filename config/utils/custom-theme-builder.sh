@@ -5,7 +5,7 @@ IS_NODE_SET=0
 for file in app/design/frontend/*/*; do
   if [ -d "$file/web/tailwind" ]
   then
-    if [ IS_NODE_SET = 0 ]
+    if [ $IS_NODE_SET = 0 ]
     then
       curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
       export NVM_DIR="$HOME/.nvm"
