@@ -14,7 +14,7 @@ for file in app/design/frontend/*/*; do
       IS_NODE_SET=1
     fi
     mkdir -p "$file/web/css/"
-    npm --prefix "$file/web/tailwind" install
+    npm --prefix "$file/web/tailwind" ci
     npm --prefix "$file/web/tailwind" run build-prod
     # cleanup
     rm -rf "$file/web/tailwind/node_modules/"
