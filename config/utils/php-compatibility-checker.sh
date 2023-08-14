@@ -37,7 +37,7 @@ then
       esac ;;
     4)
       case "$minorVersion" in
-        6)
+        6|7)
            echo "switching to php8.2 to match magento version ";
            update-alternatives --set php /usr/bin/php8.2;
            ;;

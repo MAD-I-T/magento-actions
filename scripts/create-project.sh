@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+
+echo "create-project IS DEPRECATED CONSIDER USING install-magento INSTEAD"
 if [ -n "$GITLAB_USER_NAME" ]
 then
   which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
@@ -49,7 +51,7 @@ then
         *) echo "This version $INPUT_MAGENTO_VERSION of magento 2.4.X is not recognized minor $minorVersion" && exit 1 ;;
       esac ;;
     4)case "$minorVersion" in
-        6)
+        6|7)
            php7.2 /usr/local/bin/composer self-update --2
            update-alternatives --set php /usr/bin/php8.2
            composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=${INPUT_MAGENTO_VERSION}
