@@ -675,7 +675,8 @@ For magento 2.3 & 2.4
 
 ## Typical issues
    - To not have to constantly restart php-fpm after zero-downtime deployments please configure your http servers correctly [see here](https://forum.madit.fr/t/avoid-reloading-php-fpm-after-zero-downtime-deployments/56).
-   - If you're using a self-hosted runner please run it as root user using `sudo ./svc.sh install`
+   - If you're using a self-hosted runner please run it as root user using `sudo ./svc.sh install root`
+   - Composer install may override files outside `vendor` directory to prevent this please [adjust you deploy-strategy](https://forum.madit.fr/t/prevent-composer-install-from-overriding-files-outside-vendor-dir/102)
    - Do not forget to set or replace the `env.php` file in the `shared` directory
    - Adding the ssh user to the `http-user` group ex. `www-data` , also check php pool user and group setting rights
    - Set `WRITE_USE_SUDO` env if you want to launch the deployment script in sudo mode (not necessary in most cases)
