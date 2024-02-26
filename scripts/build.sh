@@ -51,23 +51,29 @@ then
     then
       ## the switch to production will build static content for all languages declared in config.php
       bin/magento deploy:mode:set production
+      composer dump-autoload -o
     else
       bin/magento setup:di:compile
       bin/magento deploy:mode:set --skip-compilation production
       # deploy static build for different locales
       export IFS=","
       magento_themes=${INPUT_THEMES:+${INPUT_THEMES//,/' '}""}
-      magento_themes=${INPUT_THEMES:+"-t "${magento_themes// /' -t '}" -t Magento/backend"}
+      magento_themes_array=($magento_themes)
+      #magento_themes=${INPUT_THEMES:+"-t "${magento_themes// /' -t '}" -t Magento/backend"}
       languages="$INPUT_LANGS"
       if [ -n "$languages"  ]
       then
         for locale in $languages; do
-          echo "bin/magento setup:static-content:deploy $magento_themes $locale"
-          bin/magento setup:static-content:deploy $magento_themes $locale
+          for theme in $magento_themes_array; do
+            echo "bin/magento setup:static-content:deploy -t $theme $locale"
+            bin/magento setup:static-content:deploy -t $theme $locale
+	  done
         done
       else
-          echo "bin/magento setup:static-content:deploy $magento_themes"
-          bin/magento setup:static-content:deploy $magento_themes
+          for theme in $magento_themes_array; do
+            echo "bin/magento setup:static-content:deploy $theme"
+            bin/magento setup:static-content:deploy $theme
+	  done
       fi
       composer dump-autoload -o
     fi
