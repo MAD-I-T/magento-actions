@@ -10,3 +10,6 @@ KEEP_RELEASE_NR="NR>$1";
 
 
 rm -f `ls -t | awk $KEEP_RELEASE_NR`
+
+cd ../releases/
+rm -rf `ls -t | awk $KEEP_RELEASE_NR`
