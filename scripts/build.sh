@@ -77,7 +77,7 @@ then
             bin/magento setup:static-content:deploy $theme
 	  done
       fi
-      #composer dump-autoload -o
+      composer dump-autoload -o
     fi
 
     if [ -n "$INPUT_DISABLE_MODULES"  ]
