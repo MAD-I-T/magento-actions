@@ -2,6 +2,7 @@
 
 echo "building ....."
 
+
 chown -R root:root .
 PROJECT_PATH="$(pwd)"
 
@@ -57,25 +58,26 @@ then
       bin/magento deploy:mode:set --skip-compilation production
       # deploy static build for different locales
       export IFS=","
-      magento_themes=${INPUT_THEMES:+${INPUT_THEMES//,/' '}""}
+      magento_themes=${INPUT_THEMES:+${INPUT_THEMES//' '/,}",Magento/backend"}
       magento_themes_array=($magento_themes)
-      #magento_themes=${INPUT_THEMES:+"-t "${magento_themes// /' -t '}" -t Magento/backend"}
       languages="$INPUT_LANGS"
       if [ -n "$languages"  ]
       then
         for locale in $languages; do
-          for theme in $magento_themes_array; do
+          for theme in "${magento_themes_array[@]}" 
+          do
             echo "bin/magento setup:static-content:deploy -t $theme $locale"
             bin/magento setup:static-content:deploy -t $theme $locale
 	  done
         done
       else
-          for theme in $magento_themes_array; do
+          for theme in "${magento_themes_array[@]}" 
+          do
             echo "bin/magento setup:static-content:deploy $theme"
             bin/magento setup:static-content:deploy $theme
 	  done
       fi
-      composer dump-autoload -o
+      #composer dump-autoload -o
     fi
 
     if [ -n "$INPUT_DISABLE_MODULES"  ]
