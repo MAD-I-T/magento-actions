@@ -249,6 +249,8 @@ Make sure the repository does not contain the magento directory at the root.
 You will also need to specify the version. Supported versions 2.2.X, 2.3.X and 2.4.X
 Or you can simply clone or fork this [repository](https://github.com/seyuf/magento-create-project) and use it as a template.
 
+**This feature requires read & write permissions to the repository. This is set through settings > actions > general > workflows permissions**
+
 ```
 name: m2-install-actions
 on: [push]
@@ -299,6 +301,8 @@ See [this repository](https://github.com/seyuf/mage-os-actions.git).
 ## Install pwa-studio action
 One can install magento using github actions. This action will download the latest release of the magento [pwa-studio project](https://github.com/magento/pwa-studio/releases) source code and copy it into the github repository calling it.
 Or you can simply clone/fork and push the content of this [repository](https://github.com/seyuf/pwa-studio-installer) to bootstrap a new pwa-studio project. **actions/checkout@v2** is mandatory (v2 and up), there is also a [video tutorial](https://www.youtube.com/watch?v=Q0o-NLM_rto).
+
+**This feature requires read & write permissions to the repository. This is set through settings > actions > general > workflows permissions**
 
 ```
 name: pwa-studio-install-actions
