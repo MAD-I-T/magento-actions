@@ -52,6 +52,12 @@ inputs:
   no_push:
     description: 'do not push magento source code to github repo values 0|1'
     default: 0
+  magento_only:
+    description: 'apply the process on magento code only (i.e magento dir)'
+    default: 0
+  pwa_studio_only:
+    description: 'apply the process on pwa studio code only (i.e pwa-studio dir)'
+    default: 0
   testsuite:
     description: 'custom testsuite to be ran works for integration and unit testing  e.g: "Memory Usage Tests"'
   integration_filter:
