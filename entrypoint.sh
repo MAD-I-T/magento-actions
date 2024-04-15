@@ -25,6 +25,8 @@ then
   php7.2 /usr/local/bin/composer self-update --${INPUT_COMPOSER_VERSION}
 fi
 
+# for compatibility with older versions
+cp /opt/scripts/deploy-production.sh /opt/scripts/deploy-prod.sh
 
 if [ $INPUT_OVERRIDE_SETTINGS = 1 ]
 then

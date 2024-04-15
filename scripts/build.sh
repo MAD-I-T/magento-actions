@@ -7,6 +7,10 @@ chown -R root:root .
 PROJECT_PATH="$(pwd)"
 
 echo "currently in $PROJECT_PATH"
+[ $INPUT_PWA_STUDIO_ONLY = 1 ] && rm -rf  $PROJECT_PATH/magento
+[ $INPUT_MAGENTO_ONLY = 1 ] && rm -rf  $PROJECT_PATH/pwa-studio
+
+echo "currently in $PROJECT_PATH"
 
 if [ -d "$PROJECT_PATH/magento" ]
 then
