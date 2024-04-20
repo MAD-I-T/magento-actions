@@ -496,43 +496,41 @@ Uncomment and replace elasticsearch by opensearch when magento version is >= 2.4
 
 ```
 magento2-integration-test:
-runs-on: ubuntu-latest
-name: 'm2 integration test'
-services:
-  mysql:
-    image: docker://mysql:8
-    env:
-      MYSQL_ROOT_PASSWORD: magento
-      MYSQL_DATABASE: magento
-    options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5 -e MYSQL_ROOT_PASSWORD=magento -e MYSQL_USER=magento -e MYSQL_PASSWORD=magento -e MYSQL_DATABASE=magento --entrypoint sh mysql:8 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
-  elasticsearch:
-    image: docker://elasticsearch:7.1.0
-    ports:
-      - 9200:9200
-    options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
-  #opensearch:
-  #   image: ghcr.io/mad-i-t/magento-opensearch:2.5.0
-  #   ports:
-  #     - 9200:9200
-  #   options: -e="discovery.type=single-node" -e "plugins.security.disabled=true" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
-  rabbitmq:
-    image: docker://rabbitmq:3.8-alpine
-    env:
-      RABBITMQ_DEFAULT_USER: "magento"
-      RABBITMQ_DEFAULT_PASS: "magento"
-      RABBITMQ_DEFAULT_VHOST: "/"
-    ports:
-      - 5672:5672
+  runs-on: ubuntu-latest
+  name: 'm2 integration test'
+  services:
+    mysql:
+      image: docker://mysql:8.0
+      env:
+        MYSQL_ROOT_PASSWORD: magento
+        MYSQL_DATABASE: magento
+      ports:
+        - 3306:3306
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-steps:
-  - uses: actions/checkout@v4
-  - name: 'launch magento2 integration test'
-    if: ${{false}}
-    uses: MAD-I-T/magento-actions@v3.28
-    env:
-      COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-    with:
-      process: 'integration-test'
+    opensearch:
+      image: opensearchproject/opensearch:1.2.1
+      ports:
+        - 9200:9200
+      options: -e="discovery.type=single-node" -e "plugins.security.disabled=true"  -e "plugins.security.ssl.http.enabled=false" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+      
+    rabbitmq:
+      image: docker://rabbitmq:3.9-alpine
+      env:
+        RABBITMQ_DEFAULT_USER: "magento"
+        RABBITMQ_DEFAULT_PASS: "magento"
+        RABBITMQ_DEFAULT_VHOST: "/"
+      ports:
+        - 5672:5672
+
+  steps:
+    - uses: actions/checkout@v4
+    - name: 'launch magento2 integration test'
+      uses: MAD-I-T/magento-actions@v3.28
+      env:
+        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+      with:
+        process: 'integration-test'
 ```
 
 See all the other integration test [features here](https://forum.madit.fr/t/magento-integration-test/66).
