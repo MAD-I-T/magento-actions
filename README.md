@@ -200,14 +200,15 @@ For magento 2.3 and lower if  issues with the preceding sample use MAD-I-T/magen
      ``` 
  - `WRITE_USE_SUDO`: true or false, the deployer will exec commands as sudo on remote server
  
- The first deploy will fail, unless/then you must place a valid env.php under dir HOST_DEPLOY_PATH/shared/magento/app/etc/ on the deployment endpoint.
+ The first deploy will fail, unless/then you must place a valid **env.php** under dir $HOST_DEPLOY_PATH/shared/magento/app/etc/ on the deployment endpoint.
  
  A cleanup task must be launched if the deployment fails ([see here](https://github.com/seyuf/m2-dev-github-actions/blob/b711485a721ca07926140c7cdcfb79e2183cefee/.github/workflows/main.yml#L74))
 
  Also one can limit the release history by limiting or increasing the max number of tracked releases on the server ([with the keep_releases input arg](https://forum.madit.fr/t/magento-actions-limit-the-number-of-kept-releases-on-the-server/60))   
 
  **To achieve the deployment using gitlab-ci  ([follow this tutorial](https://github.com/MAD-I-T/gitlab-ci-magento/))**
-
+ 
+If the github repository contains the magento and pwa-studio directories/projects, one can deploy only one of them or deploy them on different servers (**magento-only: 1** or **pwa_studio_only: 1**) more in [complex startegies section](#complex-deploy-and-build-strategies) 
 
 
 ## Install magento action
@@ -391,9 +392,11 @@ For magento <= 2.3  ***if issues with preceding sample***
 
 - `php` : 7.1, 7.2, 7.3, 7.4, 8.1, 8.2 or 8.3
 
-Use langs input to build static content for languages other than en_US or for [multi-lang support see](https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25/2?u=madit).
+Use **langs** argument (e.g langs: 'nl_NL,en_US') to build static content for languages other than en_US or for [multi-lang support see](https://forum.madit.fr/t/build-magento-from-github-actions-static-deploy-with-multiple-languages/25/2?u=madit). 
 
-Use themes input to build static content for specific theme(s) only instead of all by default [more on multi-theme and hyva support](https://www.madit.fr/r/theme-builder-hyva).
+Use **themes** argument to build static content for specific theme(s) only instead of all by default [more on multi-theme and hyva support](https://www.madit.fr/r/theme-builder-hyva).
+
+When the github repo contains magento and pwa-studio directory, one can build only one of them (**magento-only: 1** or **pwa_studio_only: 1**) more in [complex startegies section](#complex-deploy-and-build-strategies) 
 
 ## Magento security scanners
 
