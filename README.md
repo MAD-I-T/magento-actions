@@ -634,6 +634,7 @@ For magento 2.3 & 2.4
  
 
 ## Complex deploy and build strategies 
+Use **magento_only** and **pwa_studio_only** args to :
 
 - Build magento only in a git repo containing magento and pwa-studio directory
 - Build pwa-studio only in a git repo containing magento and pwa-studio directory
