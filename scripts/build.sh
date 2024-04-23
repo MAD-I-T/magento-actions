@@ -10,7 +10,30 @@ echo "currently in $PROJECT_PATH"
 [ $INPUT_PWA_STUDIO_ONLY = 1 ] && rm -rf  $PROJECT_PATH/magento
 [ $INPUT_MAGENTO_ONLY = 1 ] && rm -rf  $PROJECT_PATH/pwa-studio
 
+
 echo "currently in $PROJECT_PATH"
+
+
+#launch pwa-strudio build if the directory exists
+if [ -d "$PROJECT_PATH/pwa-studio" ]
+then
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  nvm install $INPUT_NODE_VERSION
+  npm install --location=global yarn
+  yarn install && yarn add compression
+  yarn add  @magento/pwa-buildpack
+
+  cd pwa-studio
+  yarn install --update-checksums --frozen-lockfile
+  yarn run build
+
+  set -x
+  ls -talh
+fi
+cd $PROJECT_PATH
+
 
 if [ -d "$PROJECT_PATH/magento" ]
 then
@@ -90,25 +113,4 @@ then
     fi
 
     rm app/etc/env.php
-fi
-
-cd $PROJECT_PATH
-
-#launch pwa-strudio build if the directory exists
-if [ -d "$PROJECT_PATH/pwa-studio" ]
-then
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  nvm install $INPUT_NODE_VERSION
-  npm install --location=global yarn
-  yarn install && yarn add compression
-  yarn add  @magento/pwa-buildpack
-
-  cd pwa-studio
-  yarn install --update-checksums --frozen-lockfile
-  yarn run build
-
-  set -x
-  ls -talh
 fi

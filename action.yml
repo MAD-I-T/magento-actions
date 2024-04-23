@@ -79,7 +79,7 @@ inputs:
     description: 'path to file or directory to exec, scan, etc... (phpstan)'
   node_version:
     description: 'node version for pwa-studio and Hyvä theme builds'
-    default: 16
+    default: 15
   version:
    description: 'generic version to be compounded with other variables e.g pwa-studio-install to specify pwa version'
 

@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
 
-MAGE_VERSION=$(grep -ni '"version"' magento/composer.json | grep -o -E '\:\ .+' | cut -d' ' -f6 | cut -d',' -f1 | cut -d'"' -f2;);
+MAGE_VERSION_OS=$(grep -ni '"magento/product-community-edition"' magento/composer.json | cut -d ':' -f 3 | cut -d '"' -f 2;);
+MAGE_VERSION=$(grep -ni '"version"' magento/composer.json | cut -d ':' -f 3 | cut -d '"' -f 2;);
 
 
-if [ -z "$MAGE_VERSION" ]
+if [ "$MAGE_VERSION" != "$MAGE_VERSION_OS" ]
 then
-  MAGE_VERSION=$(grep -ni '"version"' ./magento/composer.json | grep -o -E '\:\ .+' | cut -d ' ' -f4 | cut -d',' -f1 | cut -d'"' -f2;);
+[ -n "$MAGE_VERSION_OS" ] && MAGE_VERSION="$MAGE_VERSION_OS"
 fi
+
 
 set -e
 echo "Current magento version is $MAGE_VERSION"
