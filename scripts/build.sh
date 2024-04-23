@@ -29,7 +29,7 @@ then
   yarn install --update-checksums --frozen-lockfile
   yarn run build
 
-  set -x
+  set -e
   ls -talh
 fi
 cd $PROJECT_PATH
