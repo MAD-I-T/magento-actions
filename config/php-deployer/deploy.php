@@ -27,11 +27,13 @@ set(
     'shared_files', [
         '{{magento_root}}/app/etc/env.php',
         '{{magento_root}}/var/.maintenance.ip',
+        '{{magento_root}}/pub/sitemap.xml'
     ]
 );
 set(
     'shared_dirs', [
-        '{{magento_root}}/pub/media'
+        '{{magento_root}}/pub/media',
+        '{{magento_root}}/pub/sitemap'
     ]
 );
 set(

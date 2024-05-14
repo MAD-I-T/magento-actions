@@ -58,7 +58,7 @@ Config sample when using magento v2.4.X
      - uses: actions/checkout@v4
      - name: 'this step will build an magento artifact'
        if: always()
-       uses: MAD-I-T/magento-actions@v3.27
+       uses: MAD-I-T/magento-actions@v3.28
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
        with:
@@ -97,7 +97,7 @@ jobs:
 
 To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
-If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.27** 
+If some issues are encountered on 2.3.X version, please use the **v2.0** of the action in place of **v3.28** 
 
 Also, in some custom cases it may be needed to force/specify the php version to use in the step. 
 This can be done by adding php input (after **with:** option).
@@ -409,7 +409,7 @@ For magento 2.4.x
 ```
 - name: 'This step will scan the files for security breach'
   if: always()
-  uses: MAD-I-T/magento-actions@v3.27
+  uses: MAD-I-T/magento-actions@v3.28
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
