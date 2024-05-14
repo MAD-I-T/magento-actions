@@ -26,8 +26,7 @@ set('magento_root', 'magento');
 set(
     'shared_files', [
         '{{magento_root}}/app/etc/env.php',
-        '{{magento_root}}/var/.maintenance.ip',
-        '{{magento_root}}/pub/sitemap.xml'
+        '{{magento_root}}/var/.maintenance.ip'   
     ]
 );
 set(
