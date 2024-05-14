@@ -34,6 +34,7 @@ fi
 
 # for compatibility with older versions
 cp /opt/scripts/deploy-production.sh /opt/scripts/deploy-prod.sh
+cp /opt/scripts/cleanup-prod.sh /opt/scripts/cleanup-production.sh
 
 
 bash /opt/scripts/${INPUT_PROCESS}.sh
