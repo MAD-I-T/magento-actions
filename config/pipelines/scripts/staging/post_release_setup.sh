@@ -15,9 +15,13 @@ echo "Check setup:upgrade status"
 # use --no-ansi to avoid color characters
 message=$(php bin/magento setup:db:status --no-ansi)
 
+#kill current consumers
+pgrep -u "$(whoami)" -f "[q]ueue:consumers:start" | tee /dev/stderr | awk '{print $1}' | xargs -r kill
+
 if [[ ${message:0:3} == "All" ]]; then
   echo "No setup upgrade - clear cache";
   php bin/magento cache:clean
+  php bin/magento queue:consumers:restart
 else
   echo "Run setup:upgrade - maintenance mode"
   php bin/magento maintenance:enable
