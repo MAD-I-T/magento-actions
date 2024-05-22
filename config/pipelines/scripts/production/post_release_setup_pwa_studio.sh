@@ -11,8 +11,9 @@ if isNpmPackageInstalled "pm2"
 then
   echo "pm2 is already installed"
 else
-  echo "::warning::pm2 is NOT installed please install it on the server and redeploy"
-  echo "::warning::use sudo yarn global add  pm2 \n or \n sudo npm install -g pm2"
+  echo "::notice::Please install pm2 if deploying pwa studio under node instead of php-upward"
+  echo "pm2 is NOT installed please install it on the server and redeploy"
+  echo "use sudo yarn global add  pm2 \n or \n sudo npm install -g pm2"
   #sudo yarn global add  pm2
   #npm install pm2
 fi
