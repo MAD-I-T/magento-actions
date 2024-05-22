@@ -47,7 +47,8 @@ bin/magento deploy:mode:set developer
 # copy allure config if m2 >= 2.4.6
 if [ "$INPUT_OPENSEARCH" = "1" ]
 then
-  echo "copying allure config from $PROJECT_PATH/magento/dev/tests/static/allure/"
+  echo "moving to $PROJECT_PATH/magento/dev/tests/static/"
+  cd $PROJECT_PATH/magento/dev/tests/static/
   $PROJECT_PATH/magento/vendor/bin/phpunit -c $PROJECT_PATH/magento/dev/tests/static/phpunit.xml.dist
 else
   ./vendor/bin/phpunit -c dev/tests/static/phpunit.xml.dist
