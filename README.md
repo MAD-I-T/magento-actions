@@ -57,7 +57,7 @@ Config sample when using magento v2.4.X
      steps:
      - uses: actions/checkout@v4
      - name: 'this step will build an magento artifact'
-       if: always()
+       if: (!cancelled())
        uses: MAD-I-T/magento-actions@v3.28
        env:
          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -87,7 +87,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2  
     - name: 'this step will build an magento artifact'
-      if: always()
+      if: (!cancelled())
       uses: MAD-I-T/magento-actions@v3.19
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -257,7 +257,6 @@ One can also download magento code source from the [mage-os](https://mage-os.org
 See [this repository](https://github.com/seyuf/mage-os-actions.git).
 ```
     - name: 'install fresh magento from mage-os'
-      #if: ${{false}}
       uses: MAD-I-T/magento-actions@v3.28
       with:
         process: 'install-mage-os'
@@ -292,22 +291,21 @@ One can also **install and deploy** a standalone PWA-studio website see the vide
 ```
       - name: 'install fresh pwa-studio project'
         uses: MAD-I-T/magento-actions@v3.28
-        if: ${{false}}
         with:
           process: 'pwa-studio-install'
           #no_push: 1
+          
       - name: 'launch magento2 build'
-        if: ${{false}}
-        #if: always()
+        if: (!cancelled())
         id: build
         uses: MAD-I-T/magento-actions@v3.28
         env:
           COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
         with:
           process: 'build'
+          
       - name: 'launch magento2 zero downtime deploy'
-        if: ${{false}}
-        #if: always()
+        if: steps.build.outcome == 'success'
         uses: MAD-I-T/magento-actions@v3.28
         env:
           BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -408,7 +406,6 @@ For magento 2.4.x
 
 ```
 - name: 'This step will scan the files for security breach'
-  if: always()
   uses: MAD-I-T/magento-actions@v3.28
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
@@ -424,12 +421,12 @@ For magento 2.4.x
 
 ```
 - name: 'This step will check all modules for security vulnerabilities'
-      if: always()
-      uses: MAD-I-T/magento-actions@v3.28
-      env:
-        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-      with:
-        process: 'security-scan-modules'
+    if: steps.build.outcome == 'success'
+    uses: MAD-I-T/magento-actions@v3.28
+    env:
+      COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+    with:
+      process: 'security-scan-modules'
 ```
 
 For magento 2.3 or lower use MAD-I-T/magento-actions@v2.0 and set php version php: '7.1'
