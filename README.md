@@ -24,7 +24,7 @@ To use this action your git repository must respect similar scaffolding to the f
 ├── magento # directory where you Magento source files should go 
 └── pwa-studio # optional pwa-studio directory for pwa src code
 ```
-Links to full usage samples using Magento official [latest release](https://github.com/seyuf/magento-actions-sample/blob/master/.github/workflows/main.yml) or  the current [develop branch here](https://github.com/seyuf/m2-dev-github-actions).
+Links to full usage samples using Magento official [latest release](https://github.com/seyuf/magento-actions-sample/blob/master/.github/workflows/main.yml) or  the current [develop branch here](https://github.com/seyuf/m2-dev-github-actions/blob/master/.github/workflows/main.yml).
 
 ##### main.yml
 
