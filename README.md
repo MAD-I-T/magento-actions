@@ -579,7 +579,6 @@ For magento 2.3 & 2.4
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
-    php: '7.2'
     process: 'static-test'
 ```
 
