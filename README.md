@@ -305,7 +305,7 @@ One can also **install and deploy** a standalone PWA-studio website see the vide
           process: 'build'
           
       - name: 'launch magento2 zero downtime deploy'
-        if: steps.build.outcome == 'success'
+        if: (steps.build.outcome == 'success') && (!cancelled())
         uses: MAD-I-T/magento-actions@v3.28
         env:
           BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -421,7 +421,7 @@ For magento 2.4.x
 
 ```
 - name: 'This step will check all modules for security vulnerabilities'
-    if: steps.build.outcome == 'success'
+    if: (steps.build.outcome == 'success') && (!cancelled())
     uses: MAD-I-T/magento-actions@v3.28
     env:
       COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
