@@ -1,11 +1,11 @@
-FROM debian:buster
+FROM debian:bullseye
 
 LABEL org.opencontainers.image.source="https://github.com/MAD-I-T/magento-actions"
 
 
 
-RUN echo 'deb  http://deb.debian.org/debian  buster contrib non-free' >> /etc/apt/sources.list
-RUN echo 'deb-src  http://deb.debian.org/debian  buster contrib non-free' >> /etc/apt/sources.list
+RUN echo 'deb  http://deb.debian.org/debian  bullseye contrib non-free' >> /etc/apt/sources.list
+RUN echo 'deb-src  http://deb.debian.org/debian  bullseye contrib non-free' >> /etc/apt/sources.list
 
 
 RUN apt-get -y update \
@@ -16,12 +16,12 @@ RUN apt-get -y update \
 
 
 RUN apt-get -yq install \
-    python-pip\
+    python3-pip\
     gcc\
     python-dev
 
 RUN wget -O "/etc/apt/trusted.gpg.d/php.gpg" "https://packages.sury.org/php/apt.gpg" \
-    && sh -c 'echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list'
+    && sh -c 'echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list'
 
 RUN apt-get install -f libgd3 -y
 
