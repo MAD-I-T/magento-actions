@@ -26,7 +26,7 @@ then
   npm install --location=global yarn
   npm install -g yarn
   yarn install && yarn add compression
-  yarn add  @magento/pwa-buildpack
+  #yarn add  @magento/pwa-buildpack
 
   cd pwa-studio
   yarn install --update-checksums --frozen-lockfile
