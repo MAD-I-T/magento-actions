@@ -73,6 +73,12 @@ then
     bash /opt/config/utils/pagebuilder-compatibility-checker.sh
     bash /opt/config/utils/common-magento-installer.sh
 
+    ## apply patches
+    if [ $INPUT_APPLY_PATCHES = 1 ]
+    then
+      bash /opt/config/utils/apply-ece-patches.sh
+    fi
+
     ## Build static contents
     bash /opt/config/utils/custom-theme-builder.sh
 

@@ -82,12 +82,14 @@ inputs:
     default: 15
   version:
    description: 'generic version to be compounded with other variables e.g pwa-studio-install to specify pwa version'
-
+  apply_patches:
+    description: 'apply patches in m2-hotfixes dir or in .magento.env.yaml'
+    default: 0
 
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.29'
+  image: 'docker://ghcr.io/mad-i-t/magento-actions:3.30'
 branding:
   icon: 'arrow-up-circle'
   color: 'blue'

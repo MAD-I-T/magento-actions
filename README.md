@@ -1,7 +1,7 @@
 # magento-actions
 Magento | Mage-os | PWA-Studio CI/CD using github actions: 
 
-- tests 
+- testing & patching
 - coding standard checks
 - build 
 - security checks
@@ -129,6 +129,7 @@ Example with M2 project using elasticsuite & elasticsearch [here](https://github
 - [Mess detector](#mess-detector)
 - [Static testing](#static-test)
 - [Zero-downtime deployment](#zero-downtime-deployment)
+- [Applying patches](#Applying patches)
 - [For local docker devbox](https://github.com/MAD-I-T/magento-devbox)
 - [Customize the action](#customize-the-action)
 - [Setting the secrets](#set-secrets)
@@ -581,6 +582,22 @@ For magento 2.3 & 2.4
   with:
     process: 'static-test'
 ```
+
+## Applying patches
+To apply specific magento patches and hotfixes:
+ 
+* put the .patch files in m2-hotfixes directory and/or use `.magento.env.yaml` file ([more info](https://experienceleague.adobe.com/en/docs/commerce-cloud-service/user-guide/develop/upgrade/apply-patches))
+* then enable the patcher by setting `apply-patches` to 1 during the build process as follow
+```
+- name: 'This step will build an magento artifact'
+  uses: MAD-I-T/magento-actions@master
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    process: 'build'
+    apply-patches: 1
+```
+
 
 ## Customize the action
 
