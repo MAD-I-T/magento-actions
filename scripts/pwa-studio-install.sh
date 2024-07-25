@@ -35,8 +35,7 @@ nvm install 16
 npm install --location=global yarn
 yarn install && yarn add compression
 
-yarn add @magento/pwa-buildpack
-yarn add @magento/pwa
+yarn add @magento/pwa-buildpack --ignore-engines
 
 npx -y ${INPUT_VERSION:+'--force'} @magento/pwa-buildpack create-project ./pwa-studio --name @madit/pwa-studio --template @magento/venia-concept${INPUT_VERSION:+"@"}$INPUT_VERSION --backend-url https://master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud --backend-edition MOS --braintree-token sandbox_8yrzsvtm_s2bg8fs563crhqzk --author Madit
 
