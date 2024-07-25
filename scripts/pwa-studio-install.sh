@@ -31,7 +31,7 @@ chown -R root:root .
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install 16
+nvm install $INPUT_NODE_VERSION
 npm install --location=global yarn
 yarn install && yarn add compression
 
