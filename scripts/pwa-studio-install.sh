@@ -32,7 +32,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | b
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install $INPUT_NODE_VERSION
-npm install --location=global yarn
+npm install -g yarn
 yarn install && yarn add compression
 
 yarn add @magento/pwa-buildpack --ignore-engines
