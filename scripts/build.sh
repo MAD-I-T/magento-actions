@@ -23,10 +23,8 @@ then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   nvm install $INPUT_NODE_VERSION
-  npm install --location=global yarn
   npm install -g yarn
   yarn install && yarn add compression
-  #yarn add  @magento/pwa-buildpack
 
   cd pwa-studio
   yarn install --update-checksums --frozen-lockfile
