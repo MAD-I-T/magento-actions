@@ -77,7 +77,7 @@ then
     ## apply patches
     if [ $INPUT_APPLY_PATCHES = 1 ]
     then
-      bash /opt/config/utils/apply-ece-patches.sh
+      bash /opt/config/utils/apply-composer-patches.sh
     fi
 
     ## Build static contents

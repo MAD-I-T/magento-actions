@@ -587,7 +587,8 @@ For magento 2.3 & 2.4
 To apply specific magento patches and hotfixes:
  
 * put the .patch files in m2-hotfixes directory and/or use `.magento.env.yaml` file ([more info](https://experienceleague.adobe.com/en/docs/commerce-cloud-service/user-guide/develop/upgrade/apply-patches))
-* then enable the patcher by setting `apply_patches` to 1 during the build process as follow
+* if `.magento.env.yaml` is present the patches are applied using magento qutality tools. Otherwise, the patch command line is used [see here](https://experienceleague.adobe.com/en/docs/commerce-knowledge-base/kb/how-to/how-to-apply-a-composer-patch-provided-by-magento)
+* then enable the patcher by setting `apply_patches` to 1 during the build process as follows : 
 ```
 - name: 'This step will build an magento artifact'
   uses: MAD-I-T/magento-actions@master
