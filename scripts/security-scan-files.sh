@@ -29,7 +29,7 @@ git clone https://github.com/seyuf/magento-malware-scanner
 
 cd magento-malware-scanner/
 
-pip install --upgrade yara-python psutil requests>=0.8.2
+pip install --upgrade yara-python psutil requests>=0.8.2 setuptools
 
 python setup.py install --record $PROJECT_PATH/files.txt
 
