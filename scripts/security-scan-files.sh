@@ -25,6 +25,9 @@ else
 fi
 
 
+wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+python get-pip.py
+
 git clone https://github.com/seyuf/magento-malware-scanner
 
 cd magento-malware-scanner/
@@ -36,6 +39,3 @@ python setup.py install --record $PROJECT_PATH/files.txt
 cd .. && rm -r magento-malware-scanner/
 
 mwscan --ruleset madit  .
-
-
-
