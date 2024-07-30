@@ -17,6 +17,7 @@ RUN apt-get -y update \
 
 RUN apt-get -yq install \
     python3-pip\
+    python3-setuptools\
     gcc\
     python-dev
 
