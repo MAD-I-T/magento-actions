@@ -591,7 +591,7 @@ To apply specific magento patches and hotfixes:
 * then enable the patcher by setting `apply_patches` to 1 during the build process as follows : 
 ```
 - name: 'This step will build an magento artifact'
-  uses: MAD-I-T/magento-actions@master
+  uses: MAD-I-T/magento-actions@v3.30
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
