@@ -110,7 +110,7 @@ This can be done by adding php input (after **with:** option).
 
 To use opensearch in place of elasticsearch [see following](https://forum.madit.fr/t/use-magento-actions-with-opensearch/63).
 
-Project using [smile elasticsuite](https://github.com/Smile-SA/elasticsuite) can use our custom [opensearch image](https://github.com/MAD-I-T/gitlab-ci-magento/pkgs/container/gitlab-ci-magento%2Fopensearch)  [see more](https://forum.madit.fr/t/elasticsuite-configuration-on-magento-actions/108)
+Project using [smile elasticsuite](https://github.com/Smile-SA/elasticsuite) can use our [custom opensearch](https://github.com/MAD-I-T/gitlab-ci-magento/pkgs/container/gitlab-ci-magento%2Fopensearch) image [see more](https://forum.madit.fr/t/elasticsuite-configuration-on-magento-actions/108)
 
 ![magento-actions-sample](https://user-images.githubusercontent.com/3765910/68416322-91bb9a00-0194-11ea-967d-9f139b901b9a.png)
 
