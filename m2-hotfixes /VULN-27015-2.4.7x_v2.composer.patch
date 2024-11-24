@@ -1,0 +1,55 @@
+diff --git a/vendor/magento/theme-adminhtml-backend/i18n/en_US.csv b/vendor/magento/theme-adminhtml-backend/i18n/en_US.csv
+index 2708988e731..885d0056d4b 100644
+--- a/vendor/magento/theme-adminhtml-backend/i18n/en_US.csv
++++ b/vendor/magento/theme-adminhtml-backend/i18n/en_US.csv
+@@ -547,3 +547,4 @@ Dashboard,Dashboard
+ "Web Section","Web Section"
+ "Store Email Addresses Section","Store Email Addresses Section"
+ "Email to a Friend","Email to a Friend"
++"Invalid data type","Invalid data type"
+diff --git a/vendor/magento/theme-frontend-blank/i18n/en_US.csv b/vendor/magento/theme-frontend-blank/i18n/en_US.csv
+index 025866f654d..cc02ab5ac90 100644
+--- a/vendor/magento/theme-frontend-blank/i18n/en_US.csv
++++ b/vendor/magento/theme-frontend-blank/i18n/en_US.csv
+@@ -439,3 +439,4 @@ Summary,Summary
+ Test,Test
+ test,test
+ Two,Two
++"Invalid data type","Invalid data type"
+diff --git a/vendor/magento/theme-frontend-luma/i18n/en_US.csv b/vendor/magento/theme-frontend-luma/i18n/en_US.csv
+index e80cb58e679..3d0e8ab2650 100644
+--- a/vendor/magento/theme-frontend-luma/i18n/en_US.csv
++++ b/vendor/magento/theme-frontend-luma/i18n/en_US.csv
+@@ -489,3 +489,4 @@ Remove,Remove
+ Test,Test
+ test,test
+ Two,Two
++"Invalid data type","Invalid data type"
+diff --git a/vendor/magento/framework/Webapi/ServiceInputProcessor.php b/vendor/magento/framework/Webapi/ServiceInputProcessor.php
+index cd7960409e1..df31058ff32 100644
+--- a/vendor/magento/framework/Webapi/ServiceInputProcessor.php
++++ b/vendor/magento/framework/Webapi/ServiceInputProcessor.php
+@@ -278,6 +278,12 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
+         // convert to string directly to avoid situations when $className is object
+         // which implements __toString method like \ReflectionObject
+         $className = (string) $className;
++        if (is_subclass_of($className, \SimpleXMLElement::class)
++            || is_subclass_of($className, \DOMElement::class)) {
++            throw new SerializationException(
++                new Phrase('Invalid data type')
++            );
++        }
+         $class = new ClassReflection($className);
+         if (is_subclass_of($className, self::EXTENSION_ATTRIBUTES_TYPE)) {
+             $className = substr($className, 0, -strlen('Interface'));
+diff --git a/vendor/magento/module-jwt-user-token/Model/SecretBasedJwksFactory.php b/vendor/magento/module-jwt-user-token/Model/SecretBasedJwksFactory.php
+--- a/vendor/magento/module-jwt-user-token/Model/SecretBasedJwksFactory.php	(revision 022e64b08a88658667bc2d6b922eada2b7910965)
++++ b/vendor/magento/module-jwt-user-token/Model/SecretBasedJwksFactory.php	(revision 8d2b0c1c6b421cdcd7f62a48a5edc9b0211d92a2)
+@@ -35,6 +35,7 @@
+     public function __construct(DeploymentConfig $deploymentConfig, JwkFactory $jwkFactory)
+     {
+         $this->keys = preg_split('/\s+/s', trim((string)$deploymentConfig->get('crypt/key')));
++        $this->keys = [end($this->keys)];
+         //Making sure keys are large enough.
+         foreach ($this->keys as &$key) {
+             $key = str_pad($key, 2048, '&', STR_PAD_BOTH);
