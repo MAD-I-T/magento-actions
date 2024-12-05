@@ -121,7 +121,7 @@ Project using [smile elasticsuite](https://github.com/Smile-SA/elasticsuite) can
 - [deploy pwa-studio to prod](#deploy-pwa-studio-action)
 - [Coding standard check](#coding-standard-check)
 - [Magento build](#build-an-artifact)
-- [Magento security scanners](#magento-security-scanners)
+- [Magento security scanners (modules, files, audit)](#magento-security-scanners)
 - [Unit testing](#unit-testing)
 - [Test your magento custom marketplace extensions](https://www.madit.fr/r/test-magento-extensions)
 - [Integration tests](#integration-testing)
@@ -437,6 +437,20 @@ Example of an output:
 ![security-risk-amasty](https://user-images.githubusercontent.com/3765910/117654360-f0047700-b195-11eb-8aff-ef05c2c3c231.png)
 
 
+
+
+To run an composer audit on your magento project
+For magento 2.4.x only
+
+```
+- name: 'This step will check vulnerabilities in composer packages.'
+  uses: MAD-I-T/magento-actions@v3.30
+  env:
+    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+  with:
+    process: 'security-composer-audit'
+```
+
 ## unit testing
 See code sample of testing your magento project [here](https://github.com/seyuf/m2-dev-github-actions/blob/49c3d996d65f93fe438c5a245e4dd798e4c7d422/.github/workflows/main.yml#L64)
 
@@ -599,6 +613,9 @@ To apply specific magento patches and hotfixes:
     apply_patches: 1
 ```
 
+<div align="center">
+  <a href="https://youtu.be/JR-es_Tlt1g"><img src="https://github.com/user-attachments/assets/db75c9cd-0b33-4a68-9576-e2550f654bc5" alt="applying patches to magento code before deployment"></a> <h6>Video tutorial applying pacthes in magento</h6>
+</div>
 
 ## Customize the action
 
