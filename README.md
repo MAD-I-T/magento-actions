@@ -659,6 +659,7 @@ To apply specific magento patches and hotfixes:
    - Do not forget to set or replace the `env.php` file in the `shared` directory
    - Adding the ssh user to the `http-user` group ex. `www-data` , also check php pool user and group setting rights
    - Set `WRITE_USE_SUDO` env if you want to launch the deployment script in sudo mode (not necessary in most cases)
+   - After running `cron:install` make sure to correct the path in the crontab from `/releases/X` to `/current/` [read more about this](https://forum.madit.fr/t/when-using-magento-actions-fix-crontab/114) 
    - integration test when using magento 2.4
      - you will need to set mysql 8 docker with the options arg as such `        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5 -e MYSQL_ROOT_PASSWORD=magento -e MYSQL_USER=magento -e MYSQL_PASSWORD=magento -e MYSQL_DATABASE=magento --entrypoint sh mysql:8 -c "exec docker-entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password"
 `
