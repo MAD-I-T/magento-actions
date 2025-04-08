@@ -46,7 +46,7 @@ then
            echo "switching search engine to elasticsearch if needed";
            [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
-        0|1|2|3)
+    0|1|2|3)
            echo "switching search engine to elasticsearch if needed";
            [ -z "$INPUT_OPENSEARCH"  -a  -z  "$INPUT_ELASTICSEARCH" ] && echo $'INPUT_ELASTICSEARCH=1 \nINPUT_OPENSEARCH=0' >> /etc/environment;
            ;;
