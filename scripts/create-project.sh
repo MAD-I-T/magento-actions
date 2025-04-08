@@ -53,8 +53,9 @@ then
     4)case "$minorVersion" in
           8)
            php7.2 /usr/local/bin/composer self-update --2
-           update-alternatives --set php /usr/bin/php8.4
+           update-alternatives --set php /usr/bin/php8.3
            composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=${INPUT_MAGENTO_VERSION}
+           ;;
         6|7)
            php7.2 /usr/local/bin/composer self-update --2
            update-alternatives --set php /usr/bin/php8.2
