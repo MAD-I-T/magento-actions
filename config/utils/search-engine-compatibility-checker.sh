@@ -38,7 +38,7 @@ then
       esac ;;
     4)
       case "$minorVersion" in
-        6|7)
+        6|7|8)
            echo "switching search engine to opensearch";
            echo $'INPUT_ELASTICSEARCH=0 \nINPUT_OPENSEARCH=1' >> /etc/environment;
            ;;
