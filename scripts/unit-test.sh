@@ -51,8 +51,11 @@ fi
 if [ -n "$INPUT_UNIT_TEST_SUBSET_PATH" ]
 then
   ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG "$INPUT_UNIT_TEST_SUBSET_PATH"
-else
+elif [ -n "$INPUT_TESTSUITE" ]
+then
   ./vendor/bin/phpunit -c $INPUT_UNIT_TEST_CONFIG ${INPUT_TESTSUITE:+'--testsuite'} ${INPUT_TESTSUITE:+"$INPUT_TESTSUITE"}
+else
+  bin/magento dev:test:run unit
 fi
 
 
