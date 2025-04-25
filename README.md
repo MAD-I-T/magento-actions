@@ -65,35 +65,7 @@ Config sample when using magento v2.4.X
          process: 'build'
  ```
 
- Config Example when under magento 2.3 & lower
- 
-```
-name: m2-actions-test
-on: [push]
-
-jobs:
-  magento2-build:
-    runs-on: ubuntu-latest
-    name: 'm2 unit tests & build'
-    services:
-      mysql:
-        image: docker://mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: magento
-          MYSQL_DATABASE: magento
-        ports:
-          - 3106:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    steps:
-    - uses: actions/checkout@v2  
-    - name: 'this step will build an magento artifact'
-      if: (!cancelled())
-      uses: MAD-I-T/magento-actions@v3.19
-      env:
-        COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-      with:
-        process: 'build'
-```
+ Config Example when under magento 2.3 & lower ([see archives](https://web.archive.org/web/20250000000000*/https://github.com/MAD-I-T/magento-actions)) 
 
 To use the latest experimental version of the module set the following : (`uses: MAD-I-T/magento-actions@master`)
 
@@ -146,7 +118,7 @@ One can follow this [tutorial](https://www.madit.fr/r/1PP).
 
 **This step must come after a mandatory build step.**
 
-For magento 2.4 & 2.3
+For magento 2.4.X
 
 ```
 - name: 'this step will deploy your build to deployment server - zero downtime'
@@ -346,7 +318,7 @@ To check some magento module or some code against Magento conding Standard, usef
   <a href="https://www.youtube.com/watch?v=4kyj4Rerm9s"><img src="https://user-images.githubusercontent.com/3765910/132560118-50110b43-57a5-4fb2-9725-7994e79451d8.png" alt="check code against magento coding standard using github actions"></a>
 </div>
 
-For magento 2.4 and 2.3
+For magento 2.4.x
 
 ```
 - name: 'test some specific module code quality'
@@ -374,18 +346,6 @@ For magento 2.4.x (**remove elasticsearch: 1 when building with 2.3.X**)
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
-    process: 'build'
-```
-
-For magento <= 2.3  ***if issues with preceding sample***
-
-```
-- name: 'This step will build an magento artifact'
-  uses: MAD-I-T/magento-actions@v2.0
-  env:
-    COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-  with:
-    php: '7.1'
     process: 'build'
 ```
 
@@ -587,7 +547,7 @@ Also see standalone third party module use case [here](https://github.com/MAD-I-
 
 ## static-test
 
-For magento 2.3 & 2.4 
+For magento 2.4.X
 ```
 - name: 'This step starts static testing the code'
   uses: MAD-I-T/magento-actions@v3.32
