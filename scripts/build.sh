@@ -8,7 +8,7 @@ PROJECT_PATH="$(pwd)"
 
 echo "currently in $PROJECT_PATH"
 [ $INPUT_PWA_STUDIO_ONLY = 1 ] && rm -rf  $PROJECT_PATH/magento
-[ $INPUT_MAGENTO_ONLY = 1 ] && rm -rf  $PROJECT_PATH/pwa-studio
+[ $INPUT_MAGENTO_ONLY = 1 ] && rm -rf  $PROJECT_PATH/pwa-studio*
 
 
 echo "currently in $PROJECT_PATH"
@@ -26,11 +26,19 @@ then
   npm install -g yarn
   yarn install && yarn add compression
 
-  cd pwa-studio
-  yarn install --update-checksums --frozen-lockfile
-  yarn run build
+
+  for dir in *pwa-studio*
+  do
+    echo "Entering $dir ..."
+
+    cd $dir
+    yarn install --update-checksums --frozen-lockfile
+    yarn run build
+    ls -talh
+    cd ..
+  done
+
   set +e
-  ls -talh
 fi
 cd $PROJECT_PATH
 
@@ -97,14 +105,14 @@ then
       if [ -n "$languages"  ]
       then
         for locale in $languages; do
-          for theme in "${magento_themes_array[@]}" 
+          for theme in "${magento_themes_array[@]}"
           do
             echo "bin/magento setup:static-content:deploy -t $theme $locale"
             bin/magento setup:static-content:deploy -t $theme $locale
 	  done
         done
       else
-          for theme in "${magento_themes_array[@]}" 
+          for theme in "${magento_themes_array[@]}"
           do
             echo "bin/magento setup:static-content:deploy $theme"
             bin/magento setup:static-content:deploy $theme

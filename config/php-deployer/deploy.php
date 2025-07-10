@@ -32,7 +32,8 @@ set(
 set(
     'shared_dirs', [
         '{{magento_root}}/pub/media',
-        '{{magento_root}}/pub/sitemap'
+        '{{magento_root}}/pub/sitemap',
+        '{{magento_root}}/pub/sitemap.xml'
     ]
 );
 set(
@@ -65,7 +66,7 @@ task(
 
         if (test('[ -d temp/pwa-studio ]')) {
             info('releasing pwa-studio');
-            run('cp -rf temp/pwa-studio {{release_path}}');
+            run('cp -rf temp/pwa-studio* {{release_path}}');
         }else info('pwa-studio release skipped');
 
         if (test('[ -d temp/deployer ]')) {
