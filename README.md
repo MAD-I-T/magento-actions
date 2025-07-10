@@ -22,7 +22,8 @@ To use this action your git repository must respect similar scaffolding to the f
 │   └── workflows # directory where the workflows are found, see below for an example of main.yml 
 ├── README.md 
 ├── magento # directory where you Magento source files should go 
-└── pwa-studio # optional pwa-studio directory for pwa src code
+├── pwa-studio #  optional pwa-studio directory for pwa src code 
+└── pwa-studio-second # optional second pwa-studio directory unlimited number for pwa store front supported
 ```
 Links to full usage samples using Magento official [latest release](https://github.com/seyuf/magento-actions-sample/blob/master/.github/workflows/main.yml) or  the current [develop branch here](https://github.com/seyuf/m2-dev-github-actions/blob/master/.github/workflows/main.yml).
 
