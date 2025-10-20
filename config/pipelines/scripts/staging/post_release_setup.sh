@@ -16,7 +16,27 @@ echo "Check setup:upgrade status"
 message=$(php bin/magento setup:db:status --no-ansi)
 
 #kill current consumers
-pgrep -u "$(whoami)" -f "[q]ueue:consumers:start" | tee /dev/stderr | awk '{print $1}' | xargs -r kill
+echo "killing consumers linked to this backend - path is : "
+pwd -P
+CUR_PATH="$(pwd -P)/bin/magento"
+PREVIOUS=$(cat "$(pwd -P)/../../../.dep/latest_release")
+
+if [[ $CUR_PATH =~ (releases/)([0-9]+)(/magento) ]]; then
+    prefix=${BASH_REMATCH[1]}       # 'start_'
+    num=${BASH_REMATCH[2]}          # '42'
+    suffix=${BASH_REMATCH[3]}       # '_end'
+    ((num--))
+    # rebuild the string
+    CUR_PATH="${CUR_PATH/${BASH_REMATCH[0]}/${prefix}.*?${suffix}}"
+    echo "Current release is : $PREVIOUS"
+    echo "Previous release is : ${num}"
+fi
+
+echo "Clearing all consumers associated with this backend : "
+#echo "$CUR_PATH"
+pgrep -u "$(whoami)" -af "$CUR_PATH [q]ueue:consumers:start" | tee /dev/stderr | awk '{print $1}' | xargs -r kill
+
+
 
 if [[ ${message:0:3} == "All" ]]; then
   echo "No setup upgrade - clear cache";
