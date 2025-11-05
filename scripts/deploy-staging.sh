@@ -29,13 +29,14 @@ echo 'creating bucket dir'
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "mkdir -p $HOST_DEPLOY_PATH_BUCKET"
 
 ARCHIVES="deployer/scripts/staging"
-
-for dir in *pwa-studio*
-do
-  echo "archiving $dir ..."
-  ARCHIVES="$ARCHIVES $dir"
-
-done
+if [ -d $PROJECT_PATH/*pwa-studio* ]
+then
+  for dir in *pwa-studio*
+  do
+    echo "archiving $dir ..."
+    ARCHIVES="$ARCHIVES $dir"
+  done
+fi
 
 [ -d "magento" ] && ARCHIVES="$ARCHIVES magento"
 
