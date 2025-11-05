@@ -32,12 +32,15 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "mkd
 
 ARCHIVES="deployer/scripts/production"
 
-for dir in *pwa-studio*
-do
-  echo "archiving $dir ..."
-  ARCHIVES="$ARCHIVES $dir"
+if [ -d $PROJECT_PATH/*pwa-studio* ]
+then
+  for dir in *pwa-studio*
+  do
+    echo "archiving $dir ..."
+    ARCHIVES="$ARCHIVES $dir"
+  done
+fi
 
-done
 
 
 [ -d "magento" ] && ARCHIVES="$ARCHIVES magento"
