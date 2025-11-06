@@ -29,7 +29,8 @@ echo 'creating bucket dir'
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  staging "mkdir -p $HOST_DEPLOY_PATH_BUCKET"
 
 ARCHIVES="deployer/scripts/staging"
-if [ -d $PROJECT_PATH/*pwa-studio* ]
+dirs=( *pwa-studio*/ )
+if [ -d "${dirs[0]}" ]
 then
   for dir in *pwa-studio*
   do
