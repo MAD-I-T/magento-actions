@@ -15,7 +15,8 @@ echo "currently in $PROJECT_PATH"
 
 
 #launch pwa-strudio build if the directory exists
-if [ -d $PROJECT_PATH/*pwa-studio* ]
+dirs=( *pwa-studio*/ )
+if [ -d "${dirs[0]}" ]
 then
   set -e
 
