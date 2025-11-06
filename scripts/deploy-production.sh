@@ -32,7 +32,8 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  production "mkd
 
 ARCHIVES="deployer/scripts/production"
 
-if [ -d $PROJECT_PATH/*pwa-studio* ]
+dirs=( *pwa-studio*/ )
+if [ -d "${dirs[0]}" ]
 then
   for dir in *pwa-studio*
   do
