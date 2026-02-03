@@ -59,6 +59,6 @@ else
   fi
 fi
 
-cd dev/tests/integration && ../../../vendor/bin/phpunit ${INPUT_TESTSUITE:+'--testsuite'} ${INPUT_TESTSUITE:+"$INPUT_TESTSUITE"} ${INPUT_INTEGRATION_FILTER:+'--filter'} ${INPUT_INTEGRATION_FILTER:+"$INPUT_INTEGRATION_FILTER"} ${INPUT_INTEGRATION_CLASS:+"$INPUT_INTEGRATION_CLASS"}
+cd dev/tests/integration && ../../../vendor/bin/phpunit --no-extensions --no-coverage ${INPUT_TESTSUITE:+'--testsuite'} ${INPUT_TESTSUITE:+"$INPUT_TESTSUITE"} ${INPUT_INTEGRATION_FILTER:+'--filter'} ${INPUT_INTEGRATION_FILTER:+"$INPUT_INTEGRATION_FILTER"} ${INPUT_INTEGRATION_CLASS:+"$INPUT_INTEGRATION_CLASS"}
 
 

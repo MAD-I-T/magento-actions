@@ -49,9 +49,9 @@ if [ "$INPUT_OPENSEARCH" = "1" ]
 then
   echo "moving to $PROJECT_PATH/magento/dev/tests/static/"
   cd $PROJECT_PATH/magento/dev/tests/static/
-  $PROJECT_PATH/magento/vendor/bin/phpunit -c $PROJECT_PATH/magento/dev/tests/static/phpunit.xml.dist
+  $PROJECT_PATH/magento/vendor/bin/phpunit  --no-extensions --no-coverage -c $PROJECT_PATH/magento/dev/tests/static/phpunit.xml.dist
 else
-  ./vendor/bin/phpunit -c dev/tests/static/phpunit.xml.dist
+  ./vendor/bin/phpunit  --no-extensions --no-coverage -c dev/tests/static/phpunit.xml.dist
 fi
 
 
