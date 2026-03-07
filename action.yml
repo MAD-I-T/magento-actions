@@ -10,6 +10,9 @@ inputs:
     default: 'build'
   themes:
     description: 'specify themes to build multiple values must be comma separated e.g (Magento/blank or Magento/blank,Magento/luma)'
+  static_versioning:
+    description: 'specify or not if static versioning should be enabled'
+    default: 0
   langs:
     description: 'specify build languages multiple values must be comma separated e.g (fr_FR or fr_FR,nl_NL)'
   keep_releases:

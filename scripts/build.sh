@@ -90,6 +90,8 @@ then
     ## Build static contents
     bash /opt/config/utils/hyva-builder.sh
 
+    [ "$INPUT_STATIC_VERSIONING" -ne 0 ] && bin/magento config:set dev/static/sign 1
+
     if [ -z "$INPUT_LANGS"  ] && [ -z "$INPUT_THEMES"  ]
     then
 	
@@ -125,7 +127,7 @@ then
             echo "bin/magento setup:static-content:deploy $theme"
             bin/magento setup:static-content:deploy $theme
 	    done
-		
+
       fi
       composer dump-autoload -o
     fi
