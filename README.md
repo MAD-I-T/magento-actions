@@ -358,6 +358,10 @@ Use **langs** argument (e.g langs: 'nl_NL,en_US') to build static content for la
 
 Use **themes** argument to build static content for specific theme(s) only instead of all by default [more on multi-theme and hyva support](https://www.madit.fr/r/theme-builder-hyva).
 
+Use **static_versioning_** argument to enable static content signing (set it to 1 or true), if not set in config.php [more on this here](https://forum.madit.fr/t/).
+
+Use **static_deploy_jobs** argument set to speed up the static content generation process, possible values 1 to 8 (i.e: --jobs argument of  setup:static-content:deploy --jobs 8).
+
 It is highly recommended to build your Hyva theme with blank and or luma as follows :
 <br/> **`themes: 'Vendor/MyHyvaTheme,Magento/luma,Magento/blank'`** as many default magento modules only support luma/blank at the time.
 
