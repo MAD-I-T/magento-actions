@@ -99,7 +99,7 @@ then
       if [ -n "$INPUT_STATIC_DEPLOY_JOBS" ]; then
         php bin/magento deploy:mode:set production --skip-compilation
 
-        echo "bin/magento setup:static-content:deploy -f --jobs="$INPUT_STATIC_DEPLOY_JOBS"
+        echo "bin/magento setup:static-content:deploy -f --jobs=$INPUT_STATIC_DEPLOY_JOBS"
         php bin/magento setup:static-content:deploy -f --jobs="$INPUT_STATIC_DEPLOY_JOBS"
       else
         php bin/magento deploy:mode:set production
