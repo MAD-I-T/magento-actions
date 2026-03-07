@@ -13,6 +13,8 @@ inputs:
   static_versioning:
     description: 'specify or not if static versioning should be enabled'
     default: 0
+  static_deploy_jobs:
+    description: 'jobs in  setup:static-content:deploy -f  -t Madit/default -t Magento/luma --jobs=8'
   langs:
     description: 'specify build languages multiple values must be comma separated e.g (fr_FR or fr_FR,nl_NL)'
   keep_releases:
