@@ -98,6 +98,8 @@ then
       ## the switch to production will build static content for all languages declared in config.php
       if [ -n "$INPUT_STATIC_DEPLOY_JOBS" ]; then
         php bin/magento deploy:mode:set production --skip-compilation
+
+        echo "bin/magento setup:static-content:deploy -f --jobs="$INPUT_STATIC_DEPLOY_JOBS"
         php bin/magento setup:static-content:deploy -f --jobs="$INPUT_STATIC_DEPLOY_JOBS"
       else
         php bin/magento deploy:mode:set production
@@ -121,7 +123,7 @@ then
         for locale in $languages; do
           for theme in "${magento_themes_array[@]}"
           do
-            echo "bin/magento setup:static-content:deploy -t $theme $locale"
+            echo "bin/magento setup:static-content:deploy -t $theme $locale $jobs"
             bin/magento setup:static-content:deploy -t $theme $locale $jobs
 	      done
         done
@@ -130,7 +132,7 @@ then
 	  
         for theme in "${magento_themes_array[@]}"
         do
-            echo "bin/magento setup:static-content:deploy $theme"
+            echo "bin/magento setup:static-content:deploy $theme $jobs"
             bin/magento setup:static-content:deploy $theme $jobs
 	    done
 
