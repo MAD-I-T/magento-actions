@@ -35,37 +35,62 @@ Choose elastic search or opensearch depending on your magento version:
 
 Config sample when using magento v2.4.X
  ```
- name: m2-actions-test
- on: [push]
  
- jobs:
-   magento2-build:
-     runs-on: ubuntu-latest
-     name: 'm2 unit tests & build'
-     services:
-       mysql:
-         image: docker://mysql:8.0
-         env:
-           MYSQL_ROOT_PASSWORD: magento
-           MYSQL_DATABASE: magento
-         ports:
-           - 3306:3306
-         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-       opensearch:
-         image: opensearchproject/opensearch:1.2.1
-         ports:
-           - 9200:9200
-         options: -e="discovery.type=single-node" -e "plugins.security.disabled=true"  -e "plugins.security.ssl.http.enabled=false" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
+name: install and build magento 2.4.9
+on: [push]
+jobs:
+  magento2-build:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: magento
+          MYSQL_DATABASE: magento
+          MYSQL_USER: magento
+          MYSQL_PASSWORD: magento
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pmagento"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=20
+
+      opensearch:
+        image: opensearchproject/opensearch:2.5.0
+        env:
+          discovery.type: single-node
+          plugins.security.disabled: "true"
+          OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+          #OPENSEARCH_INITIAL_ADMIN_PASSWORD: "123Opensearch314-!"
+        ports:
+          - 9200:9200
+        options: >-
+          --health-cmd="curl -fs http://localhost:9200/_cluster/health || exit 1"
+          --health-interval=15s
+          --health-timeout=10s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
       
-     steps:
-     - uses: actions/checkout@v4
-     - name: 'this step will build an magento artifact'
-       if: (!cancelled())
-       uses: MAD-I-T/magento-actions@v3.35
-       env:
-         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
-       with:
-         process: 'build'
+      - name: 'install fresh magento repo'
+        #if: ${{false}}
+        uses: MAD-I-T/magento-actions@master
+        env:
+          COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
+        with:
+          process: 'create-project'
+          no_push: 1
+          magento_version: 2.4.9
+
+      - name: Magento Build
+        uses: MAD-I-T/magento-actions@master
+        env:
+          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+        with:
+          process: build
  ```
 
  Config Example when under magento 2.3 & lower ([see archives](https://web.archive.org/web/20250000000000*/https://github.com/MAD-I-T/magento-actions)) 
@@ -78,7 +103,7 @@ Also, in some custom cases it may be needed to force/specify the php version to 
 This can be done by adding php input (after **with:** option).
 
 ##### options
-- `php:` [Optional] possible values (7.1, 7.2, 7.3, 7.4, 8.1, 8.2, 8.3, 8.4)
+- `php:` [Optional] possible values (7.1, 7.2, 7.3, 7.4, 8.1, 8.2, 8.3, 8.4, 8.5)
 - `composer_version:` [Optional] possible values (1, 2)
 - `process:` option [possible values](#other-processes) ('security-scan-files','static-test', 'integration-test', 'build', etc...)
 - see all available args in the inputs section in [actions.yml](https://github.com/MAD-I-T/magento-actions/blob/master/action.yml) 
