@@ -152,6 +152,21 @@ RUN apt-get -y update \
     php8.4-xdebug \
     php8.4-soap \
     php8.4-bcmath \
+    php8.5 \
+    php8.5-common \
+    php8.5-cli \
+    php8.5-curl \
+    php8.5-dev \
+    php8.5-gd \
+    php8.5-intl \
+    php8.5-mysql \
+    php8.5-mbstring \
+    php8.5-xml \
+    php8.5-xsl \
+    php8.5-zip \
+    php8.5-xdebug \
+    php8.5-soap \
+    php8.5-bcmath \
     zip \
     default-mysql-client \
     && apt-get clean \
