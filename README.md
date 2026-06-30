@@ -77,7 +77,7 @@ jobs:
       
       - name: 'install fresh magento repo'
         #if: ${{false}}
-        uses: MAD-I-T/magento-actions@master
+        uses: MAD-I-T/magento-actions@v4.0
         env:
           COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
         with:
@@ -86,7 +86,7 @@ jobs:
           magento_version: 2.4.9
 
       - name: Magento Build
-        uses: MAD-I-T/magento-actions@master
+        uses: MAD-I-T/magento-actions@v4.0
         env:
           COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
         with:
@@ -150,7 +150,7 @@ For magento 2.4.X
 
 ```
 - name: 'this step will deploy your build to deployment server - zero downtime'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -167,7 +167,7 @@ For magento 2.4.X
 
 - name: 'unlock php deployer if the deployment fails'
   if: failure() || cancelled()
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
@@ -230,7 +230,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: 'install fresh magento and copy to repo'
-      uses: MAD-I-T/magento-actions@v3.35
+      uses: MAD-I-T/magento-actions@v4.0
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -258,7 +258,7 @@ One can also download magento code source from the [mage-os](https://mage-os.org
 See [this repository](https://github.com/seyuf/mage-os-actions.git).
 ```
     - name: 'install fresh magento from mage-os'
-      uses: MAD-I-T/magento-actions@v3.35
+      uses: MAD-I-T/magento-actions@v4.0
       with:
         process: 'install-mage-os'
         magento_version: 2.4.5  #e.g: 2.4.0, 2.4.3, 2.4.4 nightly
@@ -282,7 +282,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: 'install fresh  pwa studio code and copy to repo'
-      uses: MAD-I-T/magento-actions@v3.35
+      uses: MAD-I-T/magento-actions@v4.0
       with:
         process: 'pwa-studio-install'
         #no_push: 1 //uncomment this to prevent files from getting pushed to repo
@@ -291,7 +291,7 @@ jobs:
 One can also **install and deploy** a standalone PWA-studio website see the video below:
 ```
       - name: 'install fresh pwa-studio project'
-        uses: MAD-I-T/magento-actions@v3.35
+        uses: MAD-I-T/magento-actions@v4.0
         with:
           process: 'pwa-studio-install'
           #no_push: 1
@@ -299,7 +299,7 @@ One can also **install and deploy** a standalone PWA-studio website see the vide
       - name: 'launch magento2 build'
         if: (!cancelled())
         id: build
-        uses: MAD-I-T/magento-actions@v3.35
+        uses: MAD-I-T/magento-actions@v4.0
         env:
           COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
         with:
@@ -307,7 +307,7 @@ One can also **install and deploy** a standalone PWA-studio website see the vide
           
       - name: 'launch magento2 zero downtime deploy'
         if: (steps.build.outcome == 'success') && (!cancelled())
-        uses: MAD-I-T/magento-actions@v3.35
+        uses: MAD-I-T/magento-actions@v4.0
         env:
           BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
           HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
@@ -322,7 +322,7 @@ One can also **install and deploy** a standalone PWA-studio website see the vide
       - name: 'unlock deployer if failure'
         if: ${{false}}
         #if: failure()
-        uses: MAD-I-T/magento-actions@v3.35
+        uses: MAD-I-T/magento-actions@v4.0
         env:
           BUCKET_COMMIT: bucket-commit-${{github.sha}}.tar.gz
           HOST_DEPLOY_PATH: ${{secrets.STAGE_HOST_DEPLOY_PATH}}
@@ -350,7 +350,7 @@ For magento 2.4.x
 
 ```
 - name: 'test some specific module code quality'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -370,7 +370,7 @@ For magento 2.4.x (**remove elasticsearch: 1 when building with 2.3.X**)
 
 ```
 - name: 'This step will build an magento artifact'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -402,7 +402,7 @@ For magento 2.4.x
 
 ```
 - name: 'This step will scan the files for security breach'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -418,7 +418,7 @@ For magento 2.4.x
 ```
 - name: 'This step will check all modules for security vulnerabilities'
     if: (steps.build.outcome == 'success') && (!cancelled())
-    uses: MAD-I-T/magento-actions@v3.35
+    uses: MAD-I-T/magento-actions@v4.0
     env:
       COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
     with:
@@ -439,7 +439,7 @@ For magento 2.4.x only
 
 ```
 - name: 'This step will check vulnerabilities in composer packages.'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -456,7 +456,7 @@ See code sample to unit test your custom or a thrid party magento2 module [here]
 For magento 2.4.x  
 ```
 - name: 'This step will execute all the unit tests available'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -466,7 +466,7 @@ For magento 2.4.x
 Run all unit test of the magento email module
 ```
 - name: 'This step will execute specific unit tests in the path dir'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -533,7 +533,7 @@ magento2-integration-test:
   steps:
     - uses: actions/checkout@v4
     - name: 'launch magento2 integration test'
-      uses: MAD-I-T/magento-actions@v3.35
+      uses: MAD-I-T/magento-actions@v4.0
       env:
         COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
       with:
@@ -552,7 +552,7 @@ This feature utilizes the popular [bitExpert/phpstan-magento](https://github.com
 
 ```
   - name: 'phpstan analyzer'
-    uses: MAD-I-T/magento-actions@v3.35
+    uses: MAD-I-T/magento-actions@v4.0
     with:
       process: 'phpstan'
       exec_path: 'vendor/magento/module-email/' # i.e when standalone third party module github repo ../Madit/Module
@@ -570,7 +570,7 @@ Mess detection on magento2 using github actions.
 
 ```
   - name: 'mess detector'
-    uses: MAD-I-T/magento-actions@v3.35
+    uses: MAD-I-T/magento-actions@v4.0
     with:
       process: 'mess-detector'
       md_src_path: 'app/code/Madit/Sips2/'
@@ -585,7 +585,7 @@ Also see standalone third party module use case [here](https://github.com/MAD-I-
 For magento 2.4.X
 ```
 - name: 'This step starts static testing the code'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
@@ -600,7 +600,7 @@ To apply specific magento patches and hotfixes:
 * then enable the patcher by setting `apply_patches` to 1 during the build process as follows : 
 ```
 - name: 'This step will build an magento artifact'
-  uses: MAD-I-T/magento-actions@v3.35
+  uses: MAD-I-T/magento-actions@v4.0
   env:
     COMPOSER_AUTH: ${{secrets.COMPOSER_AUTH}}
   with:
