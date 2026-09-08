@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 LABEL org.opencontainers.image.source="https://github.com/MAD-I-T/magento-actions"
 
