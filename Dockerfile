@@ -18,6 +18,7 @@ RUN apt-get -y update \
         python3-pip \
         python3-setuptools \
         python3-dev \
+        python-is-python3 \
         gcc \
     && rm -rf /var/lib/apt/lists/*
 
